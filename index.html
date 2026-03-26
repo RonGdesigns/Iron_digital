@@ -20,9 +20,21 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* New Dynamic Gradient: Dark Navy down to a Lighter Tech Blue */
-            background: linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
-            background-attachment: fixed; /* Keeps the gradient locked in place while you scroll */
+            
+            /* NEW LAYERED BACKGROUND (Ref: image_57.png) */
+            /* 1. Subtle, desaturated Detroit landmark shadow-pattern overlay */
+            /* 2. Base Dark Navy down to Tech Blue Gradient */
+            background-image: 
+                url('detroit-landmark-shadow.png'),
+                linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
+            
+            /* Background Settings to Blend Perfectly */
+            background-blend-mode: multiply; /* Blends the shadow landmark into the dark colors */
+            background-size: cover; /* Landmark takes up the whole background without repeating jarringly */
+            background-position: center; /* Landmark is centered */
+            background-attachment: fixed; /* Landmark stays in place as you scroll */
+            background-repeat: no-repeat;
+            
             color: var(--text-main);
             line-height: 1.6;
             scroll-behavior: smooth;
