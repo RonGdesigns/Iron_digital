@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ron's Web Design | Detroit</title>
+    <style>
+        /* Sleek Tech Blue Theme Variables */
+        :root {
+            --bg-dark: #070e1a;
+            --bg-panel: #112240;
+            --bg-panel-hover: #1a365d;
+            --accent-blue: #00d4ff;
+            --text-main: #e6f1ff;
+            --text-muted: #8892b0;
+        }
+
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(7, 14, 26, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #112240;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            background: linear-gradient(180deg, #0a192f 0%, #070e1a 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--accent-blue);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        .cta-button {
+            background-color: var(--accent-blue);
+            color: #000;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #00b3d6;
+            transform: translateY(-2px);
+        }
+
+        /* Section Containers */
+        .section-container {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+
+        /* Templates Grid (6 Items) - RESTORED TO INDIVIDUAL CARDS */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .template-card {
+            background-color: var(--bg-panel);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #1a365d;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .template-image-link {
+            display: block;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid #1a365d;
+        }
+
+        .template-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Keeps aspect ratio while filling */
+            transition: transform 0.3s;
+        }
+
+        .template-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .template-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .template-info h3 {
+            margin: 0 0 10px 0;
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .template-info p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Pricing Grid (4 Tiers) */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .pricing-card {
+            background-color: var(--bg-panel);
+            border-radius: 35px;
+            padding: 40px 20px;
+            text-align: center;
+            border: 1px solid #1a365d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--accent-blue);
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        .pricing-card h3 {
+            margin-top: 0;
+            color: var(--text-main);
+            font-size: 1.5rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #1a365d;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            background-color: var(--bg-panel);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #1a365d;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .contact-form label {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: #0a192f;
+            border: 1px solid #1a365d;
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-blue);
+            color: #000;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #050a13;
+            color: var(--text-muted);
+            border-top: 1px solid #112240;
+            font-size: 0.9rem;
+        }
+
+        /* AI Chat Widget */
+        .ai-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+            z-index: 1000;
+        }
+
+        .ai-widget svg {
+            fill: #000;
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row { flex-direction: column; }
+            .hero h1 { font-size: 2.5rem; }
+            nav { flex-direction: column; gap: 15px; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Ron's Web Design</div>
+        <ul>
+            <li><a href="#templates">Templates</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Elevating Your<br><span>Digital Presence</span></h1>
+        <p>Custom, modern websites tailored for business growth. Clean, responsive, and professional.</p>
+        <a href="#contact" class="cta-button">Get A Quote &rarr;</a>
+    </section>
+
+    <section id="templates" class="section-container">
+        <h2 class="section-title">Design Inspiration</h2>
+        <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
+        
+        <div class="templates-grid">
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_1.png" alt="Creative Portfolio Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Creative Portfolio</h3>
+                    <p>Bold typography and dynamic masonry image grids.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_2.png" alt="Clean E-Commerce Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Clean E-Commerce</h3>
+                    <p>Sleek product grids and seamless checkout flow.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_3.png" alt="Corporate Landing Page Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Corporate Landing</h3>
+                    <p>Trust-building layout focused on professional B2B services.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_4.png" alt="Local Business Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Local Business</h3>
+                    <p>Clear service menus and built-in booking/map integration.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_5.png" alt="Tech SaaS Startup Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Tech SaaS Startup</h3>
+                    <p>Feature highlights and high-converting trial funnels.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_6.png" alt="Elegant Publication Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Elegant Publication</h3>
+                    <p>Readability-focused article feeds for modern blogs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section-container">
+        <h2 class="section-title">Pricing Plans</h2>
+        <p class="section-subtitle">Transparent pricing designed for scale.</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter Build</h3>
+                <div class="price">One-Time</div>
+                <ul class="pricing-features">
+                    <li>Custom Website Design</li>
+                    <li>Mobile Responsive Build</li>
+                    <li>Basic SEO Setup</li>
+                    <li><strong style="color: #ff4d4d;">No Hosting</strong></li>
+                    <li><strong style="color: #ff4d4d;">No Maintenance</strong></li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>Standard</h3>
+                <div class="price">Monthly</div>
+                <ul class="pricing-features">
+                    <li>Custom Website Design</li>
+                    <li><strong>Includes Premium Hosting</strong></li>
+                    <li><strong>Up to 5 Changes/mo</strong></li>
+                    <li>Basic SEO Setup</li>
+                    <li>Standard Support</li>
+                </ul>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Growth</h3>
+                <div class="price">Monthly</div>
+                <ul class="pricing-features">
+                    <li>Custom Website Design</li>
+                    <li><strong>Includes Premium Hosting</strong></li>
+                    <li><strong>Up to 15 Changes/mo</strong></li>
+                    <li>Advanced SEO Setup</li>
+                    <li>Standard Support</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="price">Monthly</div>
+                <ul class="pricing-features">
+                    <li>Complex Custom Design</li>
+                    <li><strong>Includes Premium Hosting</strong></li>
+                    <li><strong>Unlimited Content Changes</strong></li>
+                    <li>E-Commerce Capabilities</li>
+                    <li><strong>Priority Support</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-container">
+        <h2 class="section-title">Start Your Project</h2>
+        <p class="section-subtitle">Fill out the form below to get a custom quote.</p>
+        <div class="contact-container">
+            <form class="contact-form" action="#" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your business..." required></textarea>
+                </div>
+                <div class="form-group file-upload">
+                    <label for="reference-file">Upload Reference Image (Optional)</label>
+                    <input type="file" id="reference-file" name="reference-file" accept="image/*">
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ron's Web Design. | Based in Detroit.</p>
+    </footer>
+
+    <div class="ai-widget" title="AI Support Chat">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
+            <path d="M6 9h12v2H6zm0-3h12v2H6zm0 6h8v2H6z"/>
+        </svg>
+    </div>
+
+</body>
+</html>
