@@ -126,7 +126,7 @@
             margin-bottom: 50px;
         }
 
-        /* Templates Grid (6 Items) - RESTORED TO INDIVIDUAL CARDS */
+        /* Templates Grid */
         .templates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -157,7 +157,7 @@
         .template-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Keeps aspect ratio while filling */
+            object-fit: cover;
             transition: transform 0.3s;
         }
 
@@ -187,7 +187,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            padding: 20px 0;
+            padding: 30px 0; /* Added a bit more padding for the badge */
         }
 
         .pricing-card {
@@ -198,6 +198,7 @@
             border: 1px solid #1a365d;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; /* Needed to anchor the badge */
         }
 
         .pricing-card:hover {
@@ -205,10 +206,35 @@
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.1);
         }
 
+        /* Featured Card Fixes */
         .pricing-card.featured {
             border: 2px solid var(--accent-blue);
             transform: scale(1.03);
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        /* Brings back the pop-out hover effect for the featured card */
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.25);
+        }
+
+        /* New Recommended Badge */
+        .recommended-badge {
+            position: absolute;
+            top: -15px; /* Pulls it up halfway out of the border */
+            left: 50%;
+            transform: translateX(-50%); /* Centers it perfectly */
+            background-color: var(--accent-blue);
+            color: #000;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
+            z-index: 10;
         }
 
         .pricing-card h3 {
@@ -447,6 +473,7 @@
                 </ul>
             </div>
             <div class="pricing-card featured">
+                <div class="recommended-badge">Recommended</div>
                 <h3>Growth</h3>
                 <div class="price">Monthly</div>
                 <ul class="pricing-features">
