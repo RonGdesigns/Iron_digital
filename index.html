@@ -38,7 +38,20 @@
             border-bottom: 1px solid #112240;
         }
         
-        nav .logo {
+        /* Logo Wrapper & Image Sizing */
+        nav .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        nav .logo-img {
+            height: 45px; /* Sizes the new logo perfectly for the header */
+            width: auto;
+            display: block;
+        }
+
+        nav .logo-text {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--text-main);
@@ -187,7 +200,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            padding: 30px 0; /* Added a bit more padding for the badge */
+            padding: 30px 0;
         }
 
         .pricing-card {
@@ -198,7 +211,7 @@
             border: 1px solid #1a365d;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative; /* Needed to anchor the badge */
+            position: relative;
         }
 
         .pricing-card:hover {
@@ -206,25 +219,22 @@
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.1);
         }
 
-        /* Featured Card Fixes */
         .pricing-card.featured {
             border: 2px solid var(--accent-blue);
             transform: scale(1.03);
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.15);
         }
 
-        /* Brings back the pop-out hover effect for the featured card */
         .pricing-card.featured:hover {
             transform: scale(1.03) translateY(-5px);
             box-shadow: 0 20px 50px rgba(0, 212, 255, 0.25);
         }
 
-        /* New Recommended Badge */
         .recommended-badge {
             position: absolute;
-            top: -15px; /* Pulls it up halfway out of the border */
+            top: -15px;
             left: 50%;
-            transform: translateX(-50%); /* Centers it perfectly */
+            transform: translateX(-50%);
             background-color: var(--accent-blue);
             color: #000;
             padding: 6px 20px;
@@ -264,20 +274,27 @@
             color: var(--text-muted);
         }
 
-        /* Contact Section */
-        .contact-container {
-            background-color: var(--bg-panel);
-            padding: 50px;
-            border-radius: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #1a365d;
+        /* NEW LIGHT THEME CONTACT SECTION */
+        .contact-wrapper {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 80px 0;
         }
 
-        .contact-form {
+        .contact-wrapper .section-title {
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+
+        .light-contact-form {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
 
         .form-row {
@@ -292,37 +309,68 @@
             gap: 8px;
         }
 
-        .contact-form label {
-            font-size: 0.9rem;
-            color: var(--accent-blue);
-            font-weight: bold;
+        .light-contact-form label {
+            font-size: 0.85rem;
+            color: #000000;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form select,
-        .contact-form textarea {
+        .light-contact-form input[type="text"],
+        .light-contact-form input[type="email"],
+        .light-contact-form select {
             width: 100%;
-            padding: 15px;
-            background-color: #0a192f;
-            border: 1px solid #1a365d;
-            border-radius: 8px;
-            color: var(--text-main);
+            padding: 15px 20px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 30px; 
+            color: #000000;
             font-family: inherit;
+            font-size: 1rem;
             box-sizing: border-box;
+            transition: border-color 0.3s;
         }
 
-        .submit-btn {
-            background-color: var(--accent-blue);
-            color: #000;
-            padding: 15px;
+        .light-contact-form textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 15px; 
+            color: #000000;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            min-height: 120px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .light-contact-form input:focus,
+        .light-contact-form select:focus,
+        .light-contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .light-contact-form .submit-btn {
+            background-color: #12c2e9; 
+            color: #ffffff;
+            padding: 18px;
             border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            border-radius: 40px;
+            font-size: 1.2rem;
             font-weight: bold;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: transform 0.2s, background-color 0.3s;
+            width: 100%;
             margin-top: 10px;
+        }
+
+        .light-contact-form .submit-btn:hover {
+            background-color: #0fb2d8;
+            transform: translateY(-2px);
         }
 
         /* Footer */
@@ -363,13 +411,17 @@
             .form-row { flex-direction: column; }
             .hero h1 { font-size: 2.5rem; }
             nav { flex-direction: column; gap: 15px; padding: 15px; }
+            nav .logo-wrapper { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Ron's Web Design</div>
+        <div class="logo-wrapper">
+            <img src="logo.png" alt="Ron's Web Design Logo" class="logo-img">
+            <div class="logo-text">Ron's Web Design</div>
+        </div>
         <ul>
             <li><a href="#templates">Templates</a></li>
             <li><a href="#pricing">Pricing</a></li>
@@ -498,33 +550,42 @@
         </div>
     </section>
 
-    <section id="contact" class="section-container">
-        <h2 class="section-title">Start Your Project</h2>
-        <p class="section-subtitle">Fill out the form below to get a custom quote.</p>
-        <div class="contact-container">
-            <form class="contact-form" action="#" method="POST" enctype="multipart/form-data">
+    <div class="contact-wrapper" id="contact">
+        <div class="section-container" style="padding: 0 20px;">
+            <h2 class="section-title">Submit Your Project Request</h2>
+            
+            <form class="light-contact-form" action="#" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="message">Project Details</label>
-                    <textarea id="message" name="message" placeholder="Tell me about your business..." required></textarea>
+                    <label for="project-type">Project Type</label>
+                    <select id="project-type" name="project-type">
+                        <option value="" disabled selected>Project Type</option>
+                        <option value="starter">Starter Build</option>
+                        <option value="standard">Standard Subscription</option>
+                        <option value="growth">Growth Subscription</option>
+                        <option value="premium">Premium Subscription</option>
+                    </select>
                 </div>
-                <div class="form-group file-upload">
-                    <label for="reference-file">Upload Reference Image (Optional)</label>
-                    <input type="file" id="reference-file" name="reference-file" accept="image/*">
+
+                <div class="form-group">
+                    <label for="message">Additional Details (Message)</label>
+                    <textarea id="message" name="message" required></textarea>
                 </div>
+
                 <button type="submit" class="submit-btn">Submit Request</button>
             </form>
         </div>
-    </section>
+    </div>
 
     <footer>
         <p>&copy; 2026 Ron's Web Design. | Based in Detroit.</p>
