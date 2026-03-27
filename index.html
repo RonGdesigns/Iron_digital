@@ -20,19 +20,14 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            
-            /* NEW LAYERED BACKGROUND */
             background-image: 
                 url('detroit-landmark-shadow.png'),
                 linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
-            
-            /* Background Settings to Blend Perfectly */
             background-blend-mode: multiply; 
             background-size: cover; 
             background-position: center; 
             background-attachment: fixed; 
             background-repeat: no-repeat;
-            
             color: var(--text-main);
             line-height: 1.6;
             scroll-behavior: smooth;
@@ -51,69 +46,18 @@
             border-bottom: 1px solid #112240;
         }
         
-        /* Logo Wrapper & Image Sizing */
-        nav .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        nav .logo-img {
-            height: 45px; 
-            width: auto;
-            display: block;
-        }
-
-        nav .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-main);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--accent-blue);
-        }
+        nav .logo-wrapper { display: flex; align-items: center; gap: 15px; }
+        nav .logo-img { height: 45px; width: auto; display: block; }
+        nav .logo-text { font-size: 1.5rem; font-weight: bold; color: var(--text-main); }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 1rem; transition: color 0.3s; }
+        nav a:hover { color: var(--accent-blue); }
 
         /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 120px 20px;
-            background: transparent; 
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 span {
-            color: var(--accent-blue);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-        }
-
+        .hero { text-align: center; padding: 120px 20px; background: transparent; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
+        .hero h1 span { color: var(--accent-blue); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; }
         .cta-button {
             background-color: var(--accent-blue);
             color: #000;
@@ -126,517 +70,157 @@
             display: inline-block;
             transition: background-color 0.3s, transform 0.2s;
         }
-
-        .cta-button:hover {
-            background-color: #00b3d6;
-            transform: translateY(-2px);
-        }
+        .cta-button:hover { background-color: #00b3d6; transform: translateY(-2px); }
 
         /* Section Containers */
-        .section-container {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .section-container { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 10px; color: var(--text-main); }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 50px;
-        }
-
-        /* Digital Growth Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .service-card {
-            background-color: var(--bg-panel);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: left;
-            border: 1px solid #1a365d;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #00d4ff, #0fb2d8);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            background: rgba(0, 212, 255, 0.1);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .service-card h3 {
-            color: var(--text-main);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            margin-top: 0;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Templates Grid */
-        .templates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .template-card {
-            background-color: var(--bg-panel);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #1a365d;
-        }
-
-        .template-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
-        }
-
-        .template-image-link {
-            display: block;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-bottom: 1px solid #1a365d;
-        }
-
-        .template-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top; /* NEW: Anchors the image so the top isn't cut off */
-            transition: transform 0.3s;
-        }
-
-        .template-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .template-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .template-info h3 {
-            margin: 0 0 10px 0;
-            color: var(--accent-blue);
-            font-size: 1.2rem;
-        }
-
-        .template-info p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Pricing Grid (4 Tiers) */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 30px 0;
-        }
-
-        .pricing-card {
-            background-color: var(--bg-panel);
-            border-radius: 35px;
-            padding: 40px 20px;
-            text-align: center;
-            border: 1px solid #1a365d;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.1);
-        }
-
-        .pricing-card.featured {
-            border: 2px solid var(--accent-blue);
-            transform: scale(1.03);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.15);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.03) translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.25);
-        }
-
-        .recommended-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--accent-blue);
-            color: #000;
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
-            z-index: 10;
-        }
-
-        .pricing-card h3 {
-            margin-top: 0;
-            color: var(--text-main);
-            font-size: 1.5rem;
-        }
-
-        .price {
-            font-size: 2rem;
-            color: var(--accent-blue);
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .pricing-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 30px 0;
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .pricing-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #1a365d;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-         
-        /* About Section */
-        /* FIND AND UPDATE: About Section Container */
+        /* About Section (Detroit Blueprint) */
         .about-container {
             background-color: var(--bg-panel);
             border-radius: 20px;
             padding: 40px;
             border: 1px solid #1a365d;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            /* NEW: Increased max-width slightly to allow larger scaling */
-            max-width: 900px; 
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
         }
-         
         .about-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
             background: linear-gradient(180deg, #00d4ff, #0fb2d8);
         }
-
-        .about-text p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-
+        .about-content-wrapper { display: flex; align-items: center; gap: 40px; }
+        .about-text { flex: 1; }
+        .about-text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px; }
+        .about-text p:last-child { margin-bottom: 0; }
         .about-highlight {
-            font-size: 1.2rem !important;
-            color: var(--text-main) !important;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            padding-bottom: 15px;
-            margin-bottom: 25px !important;
+            font-size: 1.2rem !important; color: var(--text-main) !important; font-weight: bold;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2); padding-bottom: 15px; margin-bottom: 25px !important;
         }
-         /* Make the container a two-column layout */
-        .about-content-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        /* Style the new image */
-        .about-image {
-            flex: 1.5;
-            min-width: 300px; /* Keeps the image from getting too skinny */
-        }
-
+        .about-image { flex: 1.5; min-width: 300px; }
         .about-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
+            width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.3);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
+        
+        /* NEW: Clickable Image Hover Effect */
+        .clickable-img { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .clickable-img:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2); }
 
-        .about-text {
-            flex: 1; /* Gives the text slightly more breathing room */
+        /* NEW: Fullscreen Image Modal (Lightbox) */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
         }
+        .modal-content { max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
+        .close-modal {
+            position: absolute; top: 20px; right: 40px; color: #fff; font-size: 45px;
+            font-weight: bold; cursor: pointer; transition: color 0.3s;
+        }
+        .close-modal:hover { color: var(--accent-blue); }
+
+        /* Templates Grid */
+        .templates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .template-card {
+            background-color: var(--bg-panel); border-radius: 12px; overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #1a365d;
+        }
+        .template-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1); }
+        .template-image-link {
+            display: block; width: 100%; height: 250px; overflow: hidden;
+            border-bottom: 1px solid #1a365d; background-color: #070e1a; /* Dark background behind image */
+        }
+        
+        /* FIXED: object-fit contain stops images from being cut off */
+        .template-card img {
+            width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s;
+        }
+        .template-card:hover img { transform: scale(1.05); }
+        .template-info { padding: 20px; text-align: center; }
+        .template-info h3 { margin: 0 0 10px 0; color: var(--accent-blue); font-size: 1.2rem; }
+        .template-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Pricing Grid */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 30px 0; }
+        .pricing-card {
+            background-color: var(--bg-panel); border-radius: 35px; padding: 40px 20px; text-align: center;
+            border: 1px solid #1a365d; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: transform 0.3s; position: relative; display: flex; flex-direction: column;
+        }
+        .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.1); }
+        .pricing-card.featured { border: 2px solid var(--accent-blue); transform: scale(1.03); }
+        .pricing-card.featured:hover { transform: scale(1.03) translateY(-5px); }
+        .recommended-badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background-color: var(--accent-blue); color: #000; padding: 6px 20px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: bold; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3); z-index: 10;
+        }
+        .pricing-card h3 { margin-top: 0; color: var(--text-main); font-size: 1.5rem; }
+        .price { font-size: 2rem; color: var(--accent-blue); font-weight: bold; margin: 20px 0; }
+        .pricing-features { list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; flex-grow: 1; }
+        .pricing-features li { padding: 10px 0; border-bottom: 1px solid #1a365d; font-size: 0.95rem; color: var(--text-muted); }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .service-card {
+            background-color: var(--bg-panel); border-radius: 20px; padding: 40px 30px; text-align: left;
+            border: 1px solid #1a365d; transition: transform 0.3s; position: relative; overflow: hidden;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #0fb2d8); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+        }
+        .service-card:hover { transform: translateY(-5px); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon { font-size: 2.5rem; margin-bottom: 20px; display: inline-block; background: rgba(0, 212, 255, 0.1); padding: 15px; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2); }
+        .service-card h3 { color: var(--text-main); font-size: 1.3rem; margin-bottom: 15px; margin-top: 0; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
         /* FAQ Section */
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .faq-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background-color: var(--bg-panel); border: 1px solid #1a365d; border-radius: 12px; overflow: hidden; }
+        .faq-item summary { padding: 20px; font-size: 1.1rem; font-weight: bold; color: var(--text-main); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after { content: '+'; color: var(--accent-blue); font-size: 1.5rem; transition: transform 0.3s; }
+        .faq-item[open] summary::after { transform: rotate(45deg); }
+        .faq-content { padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
 
-        .faq-item {
-            background-color: var(--bg-panel);
-            border: 1px solid #1a365d;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: box-shadow 0.3s;
-        }
-
-        .faq-item:hover {
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.05);
-        }
-
-        .faq-item summary {
-            padding: 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--text-main);
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-item summary::-webkit-details-marker {
-            display: none; /* Hides default browser arrow */
-        }
-
-        .faq-item summary::after {
-            content: '+';
-            color: var(--accent-blue);
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .faq-item[open] summary::after {
-            transform: rotate(45deg);
-        }
-
-        .faq-content {
-            padding: 0 20px 20px 20px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* NEW LIGHT THEME CONTACT SECTION */
-        .contact-wrapper {
-            background-color: #ffffff;
-            width: 100%;
-            padding: 80px 0;
-        }
-
-        .contact-wrapper .section-title {
-            color: #000000;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-        }
-
-        .light-contact-form {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .light-contact-form label {
-            font-size: 0.85rem;
-            color: #000000;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .light-contact-form input[type="text"],
-        .light-contact-form input[type="email"],
-        .light-contact-form select {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 30px; 
-            color: #000000;
-            font-family: inherit;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-
-        .light-contact-form textarea {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 15px; 
-            color: #000000;
-            font-family: inherit;
-            font-size: 1rem;
-            box-sizing: border-box;
-            min-height: 120px;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-
-        .light-contact-form input:focus,
-        .light-contact-form select:focus,
-        .light-contact-form textarea:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
-
-        .light-contact-form .submit-btn {
-            background-color: #12c2e9; 
-            color: #ffffff;
-            padding: 18px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.3s;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .light-contact-form .submit-btn:hover {
-            background-color: #0fb2d8;
-            transform: translateY(-2px);
-        }
+        /* Contact Section */
+        .contact-wrapper { background-color: #ffffff; width: 100%; padding: 80px 0; }
+        .contact-wrapper .section-title { color: #000000; text-transform: uppercase; font-size: 2.2rem; margin-bottom: 40px; }
+        .light-contact-form { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+        .form-row { display: flex; gap: 20px; }
+        .form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .light-contact-form label { font-size: 0.85rem; color: #000000; font-weight: 700; text-transform: uppercase; }
+        .light-contact-form input, .light-contact-form select { width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 30px; font-size: 1rem; box-sizing: border-box; }
+        .light-contact-form textarea { width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 15px; font-size: 1rem; box-sizing: border-box; min-height: 120px; resize: vertical; }
+        .light-contact-form input:focus, .light-contact-form select:focus, .light-contact-form textarea:focus { outline: none; border-color: var(--accent-blue); }
+        .light-contact-form .submit-btn { background-color: #12c2e9; color: #ffffff; padding: 18px; border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s; width: 100%; margin-top: 10px; }
+        .light-contact-form .submit-btn:hover { background-color: #0fb2d8; transform: translateY(-2px); }
 
         /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            background-color: #050a13;
-            color: var(--text-muted);
-            border-top: 1px solid #112240;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 30px; background-color: #050a13; color: var(--text-muted); border-top: 1px solid #112240; font-size: 0.9rem; }
 
         /* AI Chat Widget */
-        .ai-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--accent-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
-            z-index: 1000;
-        }
+        .ai-widget { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); z-index: 1000; }
+        .ai-widget svg { fill: #000; width: 30px; height: 30px; }
 
-        .ai-widget svg {
-            fill: #000;
-            width: 30px;
-            height: 30px;
-        }
-
-      /* Responsive */
+        /* Responsive */
         @media (max-width: 768px) {
             .form-row { flex-direction: column; }
             .hero h1 { font-size: 2.5rem; }
             nav { flex-direction: column; gap: 15px; padding: 15px; }
             nav .logo-wrapper { flex-direction: column; gap: 5px; }
-            
-            /* Keeps templates from being cut off on mobile */
-            .template-image-link { height: 280px; } 
-
-            /* Keeps the column stacking correctly */
             .about-content-wrapper { flex-direction: column; }
-
-            /* NEW: Force image container to be larger/full width when stacked on phone */
-            .about-image {
-                width: 100%;
-                min-width: 100%; /* Overrides the desktop min-width */
-                margin-top: 20px; /* Space above the image when stacked */
-            }
-
-            /* NEW: Ensures the image itself fills the now-larger container */
-            .about-image img {
-                width: 100%;
-                height: auto;
-            }
+            
+            /* Stacks the skyline image cleanly under text on mobile */
+            .about-image { width: 100%; margin-top: 15px; }
+            .about-image img { width: 100%; height: auto; }
+            
+            .template-image-link { height: auto; padding: 10px 0; }
         }
     </style>
 </head>
@@ -664,6 +248,11 @@
         <a href="#contact" class="cta-button">Get A Quote &rarr;</a>
     </section>
 
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
     <section id="about" class="section-container">
         <h2 class="section-title">The Detroit Blueprint</h2>
         <p class="section-subtitle">No gatekeeping. Just tools for your success.</p>
@@ -672,16 +261,13 @@
             <div class="about-content-wrapper">
                 <div class="about-text">
                     <p class="about-highlight">"I'm here to help you succeed. Whatever tools I can provide to see that come true—that's what I'm here for."</p>
-                    
                     <p>I learned the definition of the hustle early on. Growing up on the outskirts of Detroit and living with my grandma, I used to stand outside the grocery store and help people carry bags to their cars just to earn enough to buy my favorite video games. Even back then, taking the bus downtown, smelling the aromas of the city, and hearing the bustling streets left a permanent mark on me. You quickly learn that getting what you want in life means putting in the work.</p>
-                    
                     <p>Today, I operate Iron Digital right here in downtown Detroit. My mission is to take that exact same ground-up hustle and push it out to global markets, helping businesses and individuals worldwide get their foot in the door.</p>
-                    
                     <p>Beyond writing code and optimizing search rankings, my foundation is deeply rooted in visual media, filmmaking, and video creation. I approach digital ecosystems with a cinematic eye, ensuring your brand doesn't just function perfectly, but tells a compelling visual story. If I can help you set up the blueprint for your success, everybody wins.</p>
                 </div>
                 
                 <div class="about-image">
-                    <img src="detroit-skyline.JPG" alt="Detroit Skyline">
+                    <img src="detroit-skyline.JPG" alt="Detroit Skyline" class="clickable-img" onclick="openModal(this.src)" title="Click to enlarge">
                 </div>
             </div>
         </div>
@@ -807,7 +393,6 @@
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
             </div>
         </div>
-        
         <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 20px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
     </section>
     
@@ -837,23 +422,19 @@
     <section id="faq" class="section-container">
         <h2 class="section-title">Frequently Asked Questions</h2>
         <p class="section-subtitle">Everything you need to know about working with Iron Digital.</p>
-        
         <div class="faq-container">
             <details class="faq-item">
                 <summary>How long does a standard website build take?</summary>
                 <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks, depending on the scope of the project and how quickly we can finalize your content and media.</div>
             </details>
-            
             <details class="faq-item">
                 <summary>Who owns the website and the design?</summary>
                 <div class="faq-content">You fully own your website and your domain name. However, Iron Digital retains the rights to our custom design structures unless you have provided an original, exact template (not a screenshot of an existing site) that we followed perfectly.</div>
             </details>
-            
             <details class="faq-item">
                 <summary>What happens if I need changes after the site is live?</summary>
                 <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments. Additionally, all websites are protected by our Emergency Maintenance Warranty. This covers broken links, website crashes, and emergency takedowns for 6 months after your last subscription payment, or 3 months after a standard plan payment.</div>
             </details>
-            
             <details class="faq-item">
                 <summary>Do you only work with businesses in Detroit?</summary>
                 <div class="faq-content">Not at all. While we are incredibly proud of our Detroit roots and local hustle, we build digital ecosystems for businesses, brands, and individuals worldwide, including international clients.</div>
@@ -864,7 +445,6 @@
     <div class="contact-wrapper" id="contact">
         <div class="section-container" style="padding: 0 20px;">
             <h2 class="section-title">Submit Your Project Request</h2>
-            
             <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
                 <div class="form-row">
                     <div class="form-group">
@@ -876,7 +456,6 @@
                         <input type="email" id="email" name="email" required>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label for="project-type">Project Type</label>
                     <select id="project-type" name="project-type">
@@ -887,12 +466,10 @@
                         <option value="premium">Premium Subscription</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="message">Additional Details (Message)</label>
                     <textarea id="message" name="message" required></textarea>
                 </div>
-
                 <button type="submit" class="submit-btn">Submit Request</button>
             </form>
         </div>
@@ -908,8 +485,24 @@
     </footer>
 
     <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+        function openModal(src) {
+            document.getElementById("imageModal").style.display = "flex";
+            document.getElementById("expandedImg").src = src;
+        }
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+        window.onclick = function(event) {
+            var modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
 
 </body>
 </html>
