@@ -357,18 +357,20 @@
         }
          
         /* About Section */
+        /* FIND AND UPDATE: About Section Container */
         .about-container {
             background-color: var(--bg-panel);
             border-radius: 20px;
             padding: 40px;
             border: 1px solid #1a365d;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
+            /* NEW: Increased max-width slightly to allow larger scaling */
+            max-width: 900px; 
             margin: 0 auto;
             position: relative;
             overflow: hidden;
         }
-
+         
         .about-container::before {
             content: '';
             position: absolute;
@@ -407,7 +409,7 @@
 
         /* Style the new image */
         .about-image {
-            flex: 1;
+            flex: 1.5;
             min-width: 300px; /* Keeps the image from getting too skinny */
         }
 
@@ -420,7 +422,7 @@
         }
 
         .about-text {
-            flex: 1.2; /* Gives the text slightly more breathing room */
+            flex: 1; /* Gives the text slightly more breathing room */
         }
 
         /* FAQ Section */
@@ -610,16 +612,31 @@
             height: 30px;
         }
 
-        /* Responsive */
+      /* Responsive */
         @media (max-width: 768px) {
             .form-row { flex-direction: column; }
             .hero h1 { font-size: 2.5rem; }
             nav { flex-direction: column; gap: 15px; padding: 15px; }
             nav .logo-wrapper { flex-direction: column; gap: 5px; }
-            .about-content-wrapper { flex-direction: column; }
             
-            /* NEW: Makes the template images taller on mobile */
+            /* Keeps templates from being cut off on mobile */
             .template-image-link { height: 280px; } 
+
+            /* Keeps the column stacking correctly */
+            .about-content-wrapper { flex-direction: column; }
+
+            /* NEW: Force image container to be larger/full width when stacked on phone */
+            .about-image {
+                width: 100%;
+                min-width: 100%; /* Overrides the desktop min-width */
+                margin-top: 20px; /* Space above the image when stacked */
+            }
+
+            /* NEW: Ensures the image itself fills the now-larger container */
+            .about-image img {
+                width: 100%;
+                height: auto;
+            }
         }
     </style>
 </head>
