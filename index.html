@@ -249,6 +249,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top; /* NEW: Anchors the image so the top isn't cut off */
             transition: transform 0.3s;
         }
 
@@ -616,6 +617,9 @@
             nav { flex-direction: column; gap: 15px; padding: 15px; }
             nav .logo-wrapper { flex-direction: column; gap: 5px; }
             .about-content-wrapper { flex-direction: column; }
+            
+            /* NEW: Makes the template images taller on mobile */
+            .template-image-link { height: 280px; } 
         }
     </style>
 </head>
