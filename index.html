@@ -46,7 +46,7 @@
             border-bottom: 1px solid #112240;
         }
         
-        nav .logo-wrapper { display: flex; align-items: center; gap: 15px; }
+        nav .logo-wrapper { display: flex; align-items: center; gap: 15px; text-decoration: none; }
         nav .logo-img { height: 45px; width: auto; display: block; }
         nav .logo-text { font-size: 1.5rem; font-weight: bold; color: var(--text-main); }
         nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
@@ -107,11 +107,11 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
         
-        /* NEW: Clickable Image Hover Effect */
+        /* Clickable Image Hover Effect */
         .clickable-img { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .clickable-img:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2); }
 
-        /* NEW: Fullscreen Image Modal (Lightbox) */
+        /* Fullscreen Image Modal (Lightbox) */
         .modal {
             display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
@@ -132,10 +132,8 @@
         .template-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1); }
         .template-image-link {
             display: block; width: 100%; height: 250px; overflow: hidden;
-            border-bottom: 1px solid #1a365d; background-color: #070e1a; /* Dark background behind image */
+            border-bottom: 1px solid #1a365d; background-color: #070e1a;
         }
-        
-        /* FIXED: object-fit contain stops images from being cut off */
         .template-card img {
             width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s;
         }
@@ -214,13 +212,16 @@
             .hero h1 { font-size: 2.5rem; }
             nav { flex-direction: column; gap: 15px; padding: 15px; }
             nav .logo-wrapper { flex-direction: column; gap: 5px; }
+            
+            /* Keeps the column stacking correctly */
             .about-content-wrapper { flex-direction: column; }
             
             /* Stacks the skyline image cleanly under text on mobile */
-            .about-image { width: 100%; margin-top: 15px; }
+            .about-image { width: 100%; min-width: 100%; margin-top: 20px; }
             .about-image img { width: 100%; height: auto; }
             
-            .template-image-link { height: auto; padding: 10px 0; }
+            /* Templates height fix for mobile */
+            .template-image-link { height: 280px; padding: 10px 0; }
         }
     </style>
 </head>
@@ -228,13 +229,13 @@
 <body>
 
     <nav>
-        <div class="logo-wrapper">
+        <a href="index.html" class="logo-wrapper">
             <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
             <div class="logo-text">
                 <span>IRON</span> 
                 <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
             </div>
-        </div>
+        </a>
         <ul>
             <li><a href="#templates">Templates</a></li>
             <li><a href="#pricing">Pricing</a></li>
@@ -343,7 +344,10 @@
             <div class="pricing-card">
                 <h3>Starter Build</h3>
                 <div class="price">$1,000</div>
-                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">One-Time Fee</div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    One-Time Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Deposit Required</span>
+                </div>
                 <ul class="pricing-features">
                     <li>Custom Website Design</li>
                     <li>Mobile Responsive Build</li>
@@ -352,10 +356,14 @@
                     <li><strong style="color: #ff4d4d;">No Maintenance</strong></li>
                 </ul>
             </div>
+            
             <div class="pricing-card">
                 <h3>Standard</h3>
                 <div class="price">$99<span style="font-size: 1.2rem;">/mo</span></div>
-                <div style="font-size: 0.9rem; color: var(--accent-blue); font-weight: bold; margin-bottom: 20px;">+ $1,000 Upfront Build Fee</div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    + $1,000 Upfront Build Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Deposit Required</span>
+                </div>
                 <ul class="pricing-features">
                     <li>Custom Website Design</li>
                     <li><strong>Includes Premium Hosting</strong></li>
@@ -365,11 +373,15 @@
                 </ul>
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
             </div>
+            
             <div class="pricing-card featured">
                 <div class="recommended-badge">Recommended</div>
                 <h3>Growth</h3>
                 <div class="price">$199<span style="font-size: 1.2rem;">/mo</span></div>
-                <div style="font-size: 0.9rem; color: var(--accent-blue); font-weight: bold; margin-bottom: 20px;">+ $1,000 Upfront Build Fee</div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    + $1,000 Upfront Build Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Deposit Required</span>
+                </div>
                 <ul class="pricing-features">
                     <li>Custom Website Design</li>
                     <li><strong>Includes Premium Hosting</strong></li>
@@ -379,10 +391,14 @@
                 </ul>
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
             </div>
+            
             <div class="pricing-card">
                 <h3>Premium</h3>
                 <div class="price">$399<span style="font-size: 1.2rem;">/mo</span></div>
-                <div style="font-size: 0.9rem; color: var(--accent-blue); font-weight: bold; margin-bottom: 20px;">+ $1,000 Upfront Build Fee</div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    + $1,000 Upfront Build Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Deposit Required</span>
+                </div>
                 <ul class="pricing-features">
                     <li>Complex Custom Design</li>
                     <li><strong>Includes Premium Hosting</strong></li>
