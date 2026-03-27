@@ -131,6 +131,22 @@
             background-color: #00b3d6;
             transform: translateY(-2px);
         }
+         <section id="about" class="section-container">
+        <h2 class="section-title">The Detroit Blueprint</h2>
+        <p class="section-subtitle">No gatekeeping. Just tools for your success.</p>
+        
+        <div class="about-container">
+            <div class="about-text">
+                <p class="about-highlight">"I'm here to help you succeed. Whatever tools I can provide to see that come true—that's what I'm here for."</p>
+                
+                <p>I learned the definition of the hustle early on. Growing up on the outskirts of Detroit and living with my grandma, I used to stand outside the grocery store and help people carry bags to their cars just to earn enough to buy my favorite video games. Even back then, taking the bus downtown, smelling the aromas of the city, and hearing the bustling streets left a permanent mark on me. You quickly learn that getting what you want in life means putting in the work.</p>
+                
+                <p>Today, I operate Iron Digital right here in downtown Detroit. My mission is to take that exact same ground-up hustle and push it out to global markets, helping businesses and individuals worldwide get their foot in the door.</p>
+                
+                <p>Beyond writing code and optimizing search rankings, my foundation is deeply rooted in visual media, filmmaking, and video creation. I approach digital ecosystems with a cinematic eye, ensuring your brand doesn't just function perfectly, but tells a compelling visual story. If I can help you set up the blueprint for your success, everybody wins.</p>
+            </div>
+        </div>
+    </section>
 
         /* Section Containers */
         .section-container {
@@ -354,7 +370,104 @@
             font-size: 0.95rem;
             color: var(--text-muted);
         }
+         
+/* About Section */
+        .about-container {
+            background-color: var(--bg-panel);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #1a365d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .about-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00d4ff, #0fb2d8);
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-highlight {
+            font-size: 1.2rem !important;
+            color: var(--text-main) !important;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 25px !important;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background-color: var(--bg-panel);
+            border: 1px solid #1a365d;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.05);
+        }
+
+        .faq-item summary {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text-main);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none; /* Hides default browser arrow */
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 20px 20px 20px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
         /* NEW LIGHT THEME CONTACT SECTION */
         .contact-wrapper {
             background-color: #ffffff;
@@ -664,6 +777,33 @@
                 <h3>Ecosystem Integration</h3>
                 <p>We connect the dots. By linking your high-converting website directly to your optimized social channels and search profiles, we create a unified funnel that drives continuous leads.</p>
             </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about working with Iron Digital.</p>
+        
+        <div class="faq-container">
+            <details class="faq-item">
+                <summary>How long does a standard website build take?</summary>
+                <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks, depending on the scope of the project and how quickly we can finalize your content and media.</div>
+            </details>
+            
+            <details class="faq-item">
+                <summary>Who owns the website and the design?</summary>
+                <div class="faq-content">You fully own your website and your domain name. However, Iron Digital retains the rights to our custom design structures unless you have provided an original, exact template (not a screenshot of an existing site) that we followed perfectly.</div>
+            </details>
+            
+            <details class="faq-item">
+                <summary>What happens if I need changes after the site is live?</summary>
+                <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments. Additionally, all websites are protected by our Emergency Maintenance Warranty. This covers broken links, website crashes, and emergency takedowns for 6 months after your last subscription payment, or 3 months after a standard plan payment.</div>
+            </details>
+            
+            <details class="faq-item">
+                <summary>Do you only work with businesses in Detroit?</summary>
+                <div class="faq-content">Not at all. While we are incredibly proud of our Detroit roots and local hustle, we build digital ecosystems for businesses, brands, and individuals worldwide, including international clients.</div>
+            </details>
         </div>
     </section>
 
