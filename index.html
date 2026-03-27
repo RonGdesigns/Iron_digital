@@ -397,6 +397,30 @@
             padding-bottom: 15px;
             margin-bottom: 25px !important;
         }
+         /* Make the container a two-column layout */
+        .about-content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Style the new image */
+        .about-image {
+            flex: 1;
+            min-width: 300px; /* Keeps the image from getting too skinny */
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-text {
+            flex: 1.2; /* Gives the text slightly more breathing room */
+        }
 
         /* FAQ Section */
         .faq-container {
@@ -591,6 +615,7 @@
             .hero h1 { font-size: 2.5rem; }
             nav { flex-direction: column; gap: 15px; padding: 15px; }
             nav .logo-wrapper { flex-direction: column; gap: 5px; }
+            .about-content-wrapper { flex-direction: column; }
         }
     </style>
 </head>
@@ -623,14 +648,20 @@
         <p class="section-subtitle">No gatekeeping. Just tools for your success.</p>
         
         <div class="about-container">
-            <div class="about-text">
-                <p class="about-highlight">"I'm here to help you succeed. Whatever tools I can provide to see that come true—that's what I'm here for."</p>
+            <div class="about-content-wrapper">
+                <div class="about-text">
+                    <p class="about-highlight">"I'm here to help you succeed. Whatever tools I can provide to see that come true—that's what I'm here for."</p>
+                    
+                    <p>I learned the definition of the hustle early on. Growing up on the outskirts of Detroit and living with my grandma, I used to stand outside the grocery store and help people carry bags to their cars just to earn enough to buy my favorite video games. Even back then, taking the bus downtown, smelling the aromas of the city, and hearing the bustling streets left a permanent mark on me. You quickly learn that getting what you want in life means putting in the work.</p>
+                    
+                    <p>Today, I operate Iron Digital right here in downtown Detroit. My mission is to take that exact same ground-up hustle and push it out to global markets, helping businesses and individuals worldwide get their foot in the door.</p>
+                    
+                    <p>Beyond writing code and optimizing search rankings, my foundation is deeply rooted in visual media, filmmaking, and video creation. I approach digital ecosystems with a cinematic eye, ensuring your brand doesn't just function perfectly, but tells a compelling visual story. If I can help you set up the blueprint for your success, everybody wins.</p>
+                </div>
                 
-                <p>I learned the definition of the hustle early on. Growing up on the outskirts of Detroit and living with my grandma, I used to stand outside the grocery store and help people carry bags to their cars just to earn enough to buy my favorite video games. Even back then, taking the bus downtown, smelling the aromas of the city, and hearing the bustling streets left a permanent mark on me. You quickly learn that getting what you want in life means putting in the work.</p>
-                
-                <p>Today, I operate Iron Digital right here in downtown Detroit. My mission is to take that exact same ground-up hustle and push it out to global markets, helping businesses and individuals worldwide get their foot in the door.</p>
-                
-                <p>Beyond writing code and optimizing search rankings, my foundation is deeply rooted in visual media, filmmaking, and video creation. I approach digital ecosystems with a cinematic eye, ensuring your brand doesn't just function perfectly, but tells a compelling visual story. If I can help you set up the blueprint for your success, everybody wins.</p>
+                <div class="about-image">
+                    <img src="detroit-skyline.jpg" alt="Detroit Skyline">
+                </div>
             </div>
         </div>
     </section>
