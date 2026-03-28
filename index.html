@@ -193,10 +193,18 @@
         .form-row { display: flex; gap: 20px; }
         .form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
         .light-contact-form label { font-size: 0.85rem; color: #000000; font-weight: 700; text-transform: uppercase; }
-        .light-contact-form input, .light-contact-form select { width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 30px; font-size: 1rem; box-sizing: border-box; }
-        .light-contact-form textarea { width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 15px; font-size: 1rem; box-sizing: border-box; min-height: 120px; resize: vertical; }
+        
+        /* Cleaned up Input CSS */
+        .light-contact-form input[type="text"], 
+        .light-contact-form input[type="email"], 
+        .light-contact-form select { 
+            width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 30px; font-size: 1rem; box-sizing: border-box; font-family: inherit; 
+        }
+        .light-contact-form textarea { 
+            width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 15px; font-size: 1rem; box-sizing: border-box; min-height: 120px; resize: vertical; font-family: inherit; 
+        }
         .light-contact-form input:focus, .light-contact-form select:focus, .light-contact-form textarea:focus { outline: none; border-color: var(--accent-blue); }
-        .light-contact-form .submit-btn { background-color: #12c2e9; color: #ffffff; padding: 18px; border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s; width: 100%; margin-top: 10px; }
+        .light-contact-form .submit-btn { background-color: #12c2e9; color: #ffffff; padding: 18px; border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s, transform 0.2s; width: 100%; margin-top: 10px; }
         .light-contact-form .submit-btn:hover { background-color: #0fb2d8; transform: translateY(-2px); }
 
         /* Footer */
@@ -212,15 +220,9 @@
             .hero h1 { font-size: 2.5rem; }
             nav { flex-direction: column; gap: 15px; padding: 15px; }
             nav .logo-wrapper { flex-direction: column; gap: 5px; }
-            
-            /* Keeps the column stacking correctly */
             .about-content-wrapper { flex-direction: column; }
-            
-            /* Stacks the skyline image cleanly under text on mobile */
             .about-image { width: 100%; min-width: 100%; margin-top: 20px; }
             .about-image img { width: 100%; height: auto; }
-            
-            /* Templates height fix for mobile */
             .template-image-link { height: 280px; padding: 10px 0; }
         }
     </style>
@@ -474,8 +476,8 @@
                 </div>
                 <div class="form-group">
                     <label for="project-type">Project Type</label>
-                    <select id="project-type" name="project-type">
-                        <option value="" disabled selected>Project Type</option>
+                    <select id="project-type" name="project-type" required>
+                        <option value="" disabled selected>Select an Option</option>
                         <option value="starter">Starter Build</option>
                         <option value="standard">Standard Subscription</option>
                         <option value="growth">Growth Subscription</option>
@@ -483,9 +485,14 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="message">Additional Details (Message)</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" placeholder="Tell us a bit about your business and goals..." required></textarea>
                 </div>
+                
+                <p style="font-size: 0.85rem; color: #555; margin: 0; font-style: italic; text-align: center;">
+                    *Have photos or design inspiration? We will grab those from you via email after you submit your request!
+                </p>
+
                 <button type="submit" class="submit-btn">Submit Request</button>
             </form>
         </div>
