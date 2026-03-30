@@ -1,7 +1,7 @@
 /* Sleek Tech Blue Theme Variables */
 :root {
     --bg-dark: #070e1a;
-    --bg-panel: #112240; /* We keep this as the *base* color, but apply it with opacity in CSS */
+    --bg-panel: #112240; 
     --bg-panel-hover: #1a365d;
     --accent-blue: #00d4ff;
     --text-main: #e6f1ff;
@@ -12,26 +12,18 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Reverted to the clean skyline + gradient blend */
+    background-image: 
+        url('detroit-landmark-shadow.png'),
+        linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
+    background-blend-mode: multiply; 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
     color: var(--text-main);
     line-height: 1.6;
     scroll-behavior: smooth;
-    background-attachment: fixed;
-    background-color: var(--bg-dark); /* Fallback */
-
-    /* UPDATED: Multiple Background Layers for Gritty Sophistication */
-    background-image: 
-        /* Top Layer: The subtle brick texture from image_65.png */
-        url('dark-brick-texture.png'), 
-        /* Middle Layer: Your original Detroit silhouette, blended */
-        url('detroit-landmark-shadow.png'),
-        /* Bottom Layer: The original tech gradient base */
-        linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
-
-    /* How the layers interact */
-    background-blend-mode: multiply, multiply; /* Brick, skyline multiply onto the gradient, making everything look textured but deep. */
-    background-size: repeat, cover, cover; /* Brick repeats horizontally/vertically; skyline/gradient cover */
-    background-position: top left, center, center;
-    background-repeat: repeat, no-repeat, no-repeat;
 }
 
 /* Navigation */
@@ -53,6 +45,20 @@ nav .logo-text { font-size: 1.5rem; font-weight: bold; color: var(--text-main); 
 nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
 nav a { color: var(--text-main); text-decoration: none; font-size: 1rem; transition: color 0.3s; }
 nav a:hover { color: var(--accent-blue); }
+
+/* Nav Bar CTA Button */
+.nav-cta-button {
+    background-color: var(--accent-blue);
+    color: #000 !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.nav-cta-button:hover {
+    background-color: #0fb2d8;
+    transform: translateY(-2px);
+}
 
 /* Hero Section */
 .hero { text-align: center; padding: 120px 20px; background: transparent; }
@@ -148,30 +154,21 @@ nav a:hover { color: var(--accent-blue); }
 
 /* THE GLOSSY GLASS UPDATE (Glassmorphism) */
 .pricing-card {
-    /* Base Color: We now use RGBA to make it translucent (approx 60% opaque #112240) */
     background: 
-        /* Top Layer: A subtle diagonal gradient that simulates a 'glossy highlight' reflection */
         linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%),
-        /* Bottom Layer: The translucent panel color, now set directly with opacity */
         rgba(17, 34, 64, 0.6); 
     
-    /* The core Glass effect: Blurs the background (bricks/skyline) behind the card. 
-       Note: backdrop-filter is supported in modern browsers. Fallback is simply translucent background. */
     backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    -webkit-backdrop-filter: blur(10px); 
     
     border-radius: 35px; padding: 40px 20px; text-align: center; 
-    
-    /* Brighter, slightly white border to simulate the glass edge */
     border: 1px solid rgba(255, 255, 255, 0.15); 
-    
-    /* Subtle, soft cyan shadow instead of harsh black */
     box-shadow: 0 8px 32px 0 rgba(0, 212, 255, 0.1); 
 
     transition: transform 0.3s, background-color 0.3s; position: relative; display: flex; flex-direction: column;
 }
 
-.pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); background-color: rgba(17, 34, 64, 0.8); /* Darkens slightly on hover */ }
+.pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); background-color: rgba(17, 34, 64, 0.8); }
 .pricing-card.featured { border: 2px solid var(--accent-blue); transform: scale(1.03); }
 .pricing-card.featured:hover { transform: scale(1.03) translateY(-5px); }
 .recommended-badge {
