@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Project | Iron Digital</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific tweaks for the standalone form page */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .standalone-form-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+        .form-box {
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-box h2 {
+            color: #000000;
+            margin-top: 0;
+            font-size: 2rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        @media (max-width: 768px) {
+            .form-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-wrapper">
+            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
+            <div class="logo-text">
+                <span>IRON</span> 
+                <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
+            </div>
+        </a>
+        <ul>
+            <li><a href="index.html" style="font-weight: bold;">&larr; Back to Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="standalone-form-container">
+        <div class="form-box">
+            <h2>Project Request</h2>
+            <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
+                
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-row" style="margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="project-type">Select Your Plan</label>
+                    <select id="project-type" name="project-type" required>
+                        <option value="" disabled selected>Select an Option...</option>
+                        <option value="starter">Starter Build ($1,000)</option>
+                        <option value="standard">Standard Subscription ($99/mo)</option>
+                        <option value="growth">Growth Subscription ($199/mo)</option>
+                        <option value="premium">Premium Subscription ($399/mo)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="business-desc">Business Description & Goals</label>
+                    <textarea id="business-desc" name="business-desc" placeholder="Tell us about your business, your target audience, and what you want this website to achieve..." required></textarea>
+                </div>
+                
+                <p style="font-size: 0.85rem; color: #555; margin: 0 0 15px 0; font-style: italic; text-align: center;">
+                    *Upon submission, we will reach out to schedule your Discovery Call.
+                </p>
+
+                <button type="submit" class="submit-btn">Start My Project</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
+    </footer>
+
+</body>
+</html>
