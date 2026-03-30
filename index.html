@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iron Digital | Detroit Digital Ecosystem</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,6 +19,7 @@
             </div>
         </a>
         <ul>
+            <li><a href="about.html">About</a></li>
             <li><a href="#templates">Templates</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="start.html" class="nav-cta-button" style="background-color: #00d4ff; color: #000; padding: 10px 20px; border-radius: 25px; font-weight: bold; text-decoration: none;">Start a Project</a></li>
@@ -30,31 +30,6 @@
         <h1>Elevating Your<br><span>Digital Presence</span></h1>
         <p>Custom, modern websites tailored for business growth. Clean, responsive, and professional.</p>
         <a href="start.html" class="cta-button">Get A Quote &rarr;</a>
-    </section>
-
-    <div id="imageModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="expandedImg">
-    </div>
-
-    <section id="about" class="section-container">
-        <h2 class="section-title">The Detroit Blueprint</h2>
-        <p class="section-subtitle">No gatekeeping. Just tools for your success.</p>
-        
-        <div class="about-container">
-            <div class="about-content-wrapper">
-                <div class="about-text">
-                    <p class="about-highlight">"I'm here to help you succeed. Whatever tools I can provide to see that come true—that's what I'm here for."</p>
-                    <p>I learned the definition of the hustle early on. Growing up on the outskirts of Detroit and living with my grandma, I used to stand outside the grocery store and help people carry bags to their cars just to earn enough to buy my favorite video games. Even back then, taking the bus downtown, smelling the aromas of the city, and hearing the bustling streets left a permanent mark on me. You quickly learn that getting what you want in life means putting in the work.</p>
-                    <p>Today, I operate Iron Digital right here in downtown Detroit. My mission is to take that exact same ground-up hustle and push it out to global markets, helping businesses and individuals worldwide get their foot in the door.</p>
-                    <p>Beyond writing code and optimizing search rankings, my foundation is deeply rooted in visual media, filmmaking, and video creation. I approach digital ecosystems with a cinematic eye, ensuring your brand doesn't just function perfectly, but tells a compelling visual story. If I can help you set up the blueprint for your success, everybody wins.</p>
-                </div>
-                
-                <div class="about-image">
-                    <img src="detroit-skyline.JPG" alt="Detroit Skyline" class="clickable-img" onclick="openModal(this.src)" title="Click to enlarge">
-                </div>
-            </div>
-        </div>
     </section>
 
     <section id="templates" class="section-container">
@@ -287,22 +262,6 @@
         </div>
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
-
-    <script>
-        function openModal(src) {
-            document.getElementById("imageModal").style.display = "flex";
-            document.getElementById("expandedImg").src = src;
-        }
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-        window.onclick = function(event) {
-            var modal = document.getElementById("imageModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 
     <script>
         (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
