@@ -300,3 +300,60 @@ footer { text-align: center; padding: 30px; background-color: #050a13; color: va
 .video-hover-card:hover .hover-vid {
     transform: scale(1.05);
 }
+/* --- Video Modal Styles --- */
+.video-hover-card {
+    cursor: pointer; /* Changes cursor to a pointer so users know they can click */
+}
+
+.video-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 3000; /* Ensures it sits above your sticky nav */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark background */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Class added by JavaScript to show the modal */
+.video-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px; /* Forces the video to be massive (approx 4x card size) */
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+    background-color: #000;
+}
+
+.video-modal-content video {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    cursor: pointer; /* Indicates they can click the video itself to close */
+}
+
+.video-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.video-close:hover {
+    color: var(--accent-blue);
+}
