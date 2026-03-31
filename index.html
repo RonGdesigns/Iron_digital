@@ -202,25 +202,55 @@
     </footer>
 
     <script>
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-    </script>
-    <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Find the specific card and the video inside it
+        // Hover Logic for the Card
         const videoCard = document.querySelector(".video-hover-card");
-        const video = videoCard.querySelector(".hover-vid");
+        const hoverVideo = videoCard ? videoCard.querySelector(".hover-vid") : null;
 
-        // Play the video when hovering over the card
-        videoCard.addEventListener("mouseenter", function() {
-            video.play();
-        });
+        // Modal Logic
+        const videoModal = document.getElementById("videoModal");
+        const modalVideo = document.getElementById("modalVideo");
+        const closeBtn = document.querySelector(".video-close");
 
-        // Pause and reset the video when the mouse leaves
-        videoCard.addEventListener("mouseleave", function() {
-            video.pause();
-            video.currentTime = 0; // Rewinds back to the beginning
-        });
+        if (videoCard && hoverVideo && videoModal && modalVideo) {
+            
+            // 1. Play small video on hover
+            videoCard.addEventListener("mouseenter", function() {
+                hoverVideo.play();
+            });
+
+            // 2. Pause small video when mouse leaves
+            videoCard.addEventListener("mouseleave", function() {
+                hoverVideo.pause();
+                hoverVideo.currentTime = 0; 
+            });
+
+            // 3. Open Modal and play BIG video on click
+            videoCard.addEventListener("click", function(e) {
+                e.preventDefault(); // Prevents any default link behavior
+                videoModal.classList.add("show");
+                
+                // Pause the tiny background hover video
+                hoverVideo.pause(); 
+                
+                // Play the large modal video
+                modalVideo.play();
+            });
+
+            // 4. Close Modal logic
+            videoModal.addEventListener("click", function(e) {
+                // If they click the background, the close button, or the video itself
+                if (e.target === videoModal || e.target === modalVideo || e.target === closeBtn) {
+                    videoModal.classList.remove("show");
+                    modalVideo.pause();
+                    modalVideo.currentTime = 0; // Rewind the video
+                }
+            });
+        }
     });
+
+    // Chatbase Script
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
 </body>
 </html>
