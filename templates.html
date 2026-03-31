@@ -100,12 +100,7 @@
             <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
         </div>
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
-        <div id="videoModal" class="video-modal">
-        <div class="video-modal-content">
-            <span class="video-close">&times;</span>
-            <video id="modalVideo" src="template_5.mp4" controls playsinline></video>
-        </div>
-    </div>
+        
     </footer>
 
     <script>
@@ -114,12 +109,7 @@
             const videoCard = document.querySelector(".video-hover-card");
             const hoverVideo = videoCard ? videoCard.querySelector(".hover-vid") : null;
 
-            // Modal Logic
-            const videoModal = document.getElementById("videoModal");
-            const modalVideo = document.getElementById("modalVideo");
-            const closeBtn = document.querySelector(".video-close");
-
-            if (videoCard && hoverVideo && videoModal && modalVideo) {
+            if (videoCard && hoverVideo) {
                 
                 // 1. Play small video on hover
                 videoCard.addEventListener("mouseenter", function() {
@@ -132,26 +122,9 @@
                     hoverVideo.currentTime = 0; 
                 });
 
-                // 3. Open Modal and play BIG video on click
-                videoCard.addEventListener("click", function(e) {
-                    e.preventDefault(); // Prevents any default link behavior
-                    videoModal.classList.add("show");
-                    
-                    // Pause the tiny background hover video
-                    hoverVideo.pause(); 
-                    
-                    // Play the large modal video
-                    modalVideo.play();
-                });
-
-                // 4. Close Modal logic
-                videoModal.addEventListener("click", function(e) {
-                    // If they click the background, the close button, or the video itself
-                    if (e.target === videoModal || e.target === modalVideo || e.target === closeBtn) {
-                        videoModal.classList.remove("show");
-                        modalVideo.pause();
-                        modalVideo.currentTime = 0; // Rewind the video
-                    }
+                // 3. Redirect to the new page on click
+                videoCard.addEventListener("click", function() {
+                    window.location.href = "template5.html";
                 });
             }
         });
