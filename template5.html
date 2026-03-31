@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaTech Solutions | Austin AI & Cloud Infrastructure</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <style>
+        /* =========================================
+           NOVATECH - MAIN STYLESHEET
+           ========================================= */
+
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-panel: #161621; 
+            --bg-panel-hover: #222236;
+            --accent-primary: #8a2be2; /* Neon Purple */
+            --accent-secondary: #00ff88; /* Electric Green */
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+        }
+
+        /* --- 2. GLOBAL STYLES & BACKGROUND IMAGE --- */
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            
+            background-color: var(--bg-dark); 
+            
+            /* The Austin Skyline with a dark purple overlay */
+            background-image: 
+                linear-gradient(to bottom, rgba(10, 10, 15, 0.85) 0%, rgba(10, 10, 15, 0.98) 100%),
+                url('austin-skyline-tech.png'); /* Update this image link */
+            background-size: cover;
+            background-position: center bottom;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
+        main {
+            position: relative;
+            z-index: 10; 
+        }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            gap: 30px; 
+            margin: 0; 
+            padding: 0; 
+            align-items: center; 
+        }
+
+        nav a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            transition: color 0.3s; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover { color: var(--accent-primary); }
+
+        .nav-cta-button {
+            background-color: var(--accent-secondary) !important;
+            color: #000 !important;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap; 
+        }
+
+        .nav-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        /* --- 4. HERO SECTION --- */
+        .hero h1 span {
+            color: var(--accent-primary);
+            background: rgba(10, 10, 15, 0.85);
+            padding: 5px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2); 
+            margin-top: 10px;
+        }
+
+        .cta-button {
+            transition: all 0.2s ease;
+        }
+
+        .cta-button:hover { 
+            transform: translateY(-3px) !important; 
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4); 
+        }
+
+        /* --- 5. SOLUTIONS SECTION (Formerly Templates) --- */
+        .templates-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .template-card {
+            background: rgba(22, 22, 33, 0.8);
+            border-radius: 8px; 
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s; 
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .template-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2); 
+        }
+
+        .template-image-link {
+            display: block; 
+            width: 100%; 
+            height: 200px; 
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            background-color: #0a0a0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .template-info { padding: 25px; text-align: left; }
+
+        /* --- 6. GSAP 3D PRICING CARDS --- */
+        .sticky-section {
+            width: 100%;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px 0;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            perspective: 1500px;
+            width: 100%; 
+            height: 380px; 
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; 
+            -webkit-backface-visibility: hidden; 
+            border-radius: 8px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .card-front {
+            background: linear-gradient(
+                135deg, 
+                rgba(34, 34, 54, 0.95) 0%, 
+                rgba(10, 10, 15, 0.98) 100%
+            ) !important;
+            backdrop-filter: blur(20px) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;  
+        }
+
+        .card-back {
+            transform: rotateY(180deg); 
+            background: #050508 !important; 
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+
+        .card-back li {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+        }
+
+        /* --- 7. SERVICES & FAQ SECTION --- */
+        .service-card {
+            background: rgba(22, 22, 33, 0.8) !important;
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s;
+            border-radius: 8px !important;
+        }
+
+        .service-card:hover { transform: translateY(-5px); }
+
+        .faq-item {
+            background: rgba(22, 22, 33, 0.8) !important;
+            backdrop-filter: blur(15px);
+            border-radius: 4px !important;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after { content: '+'; color: var(--accent-secondary); font-size: 1.5rem; transition: transform 0.3s; }
+        .faq-item[open] summary::after { transform: rotate(45deg); }
+
+        /* --- 8. CONTACT FORM --- */
+        .light-contact-form input, 
+        .light-contact-form select, 
+        .light-contact-form textarea {
+            border: 1px solid rgba(138, 43, 226, 0.5) !important; 
+            background-color: rgba(10, 10, 15, 0.9) !important;
+            color: #fff !important; 
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .light-contact-form input:focus, 
+        .light-contact-form select:focus, 
+        .light-contact-form textarea:focus {
+            border-color: var(--accent-secondary) !important;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+            outline: none;
+        }
+
+        .light-contact-form .submit-btn {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .light-contact-form .submit-btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        /* --- 9. MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .card-container { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 15px; padding: 15px 10px; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 12px; }
+            nav a { font-size: 0.9rem; }
+            .nav-cta-button { padding: 8px 16px; font-size: 0.9rem; }
+            .hero { padding: 60px 20px 40px 20px; } 
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .light-contact-form .form-group { width: 100%; }
+        }
+    </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <nav>
+        <a href="index.html" class="logo-wrapper" style="text-decoration: none;">
+            <div class="logo-text" style="font-weight: 800; font-size: 1.4rem; color: white; letter-spacing: 2px;">
+                NOVA<span style="color: #8a2be2; font-weight: 400;">TECH</span>
+            </div>
+        </a>
+        <ul>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#infrastructure">Infrastructure</a></li>
+            <li><a href="#pricing">Compute Pricing</a></li>
+            <li><a href="#contact" class="nav-cta-button">Deploy Now</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        
+        <section class="hero section-container" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <h1 style="font-size: 4rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;">Architecting the <br><span style="color: #8a2be2;">Neural Future</span></h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin-bottom: 40px; color: var(--text-muted);">Scalable AI infrastructure and secure cloud computing tailored for enterprise-level deployment. Fast, reliable, and secure.</p>
+            <a href="#contact" class="cta-button" style="background-color: var(--accent-secondary); color: #000; padding: 15px 35px; border-radius: 4px; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;">Request Sandbox Access &rarr;</a>
+        </section>
+
+        <section id="solutions" class="section-container" style="padding: 100px 20px;">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem;">Enterprise Solutions</h2>
+            <p class="section-subtitle" style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">Cutting-edge technologies engineered for scale and speed.</p>
+            
+            <div class="templates-grid">
+                <div class="template-card">
+                    <div class="template-image-link">
+                        🤖
+                    </div>
+                    <div class="template-info">
+                        <h3 style="margin: 0 0 10px 0; color: #fff;">Machine Learning APIs</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Pre-trained LLMs and custom model fine-tuning with dedicated GPU clusters.</p>
+                    </div>
+                </div>
+                <div class="template-card">
+                    <div class="template-image-link">
+                        ☁️
+                    </div>
+                    <div class="template-info">
+                        <h3 style="margin: 0 0 10px 0; color: #fff;">Cloud Migration</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Zero-downtime transition to our high-availability quantum-encrypted servers.</p>
+                    </div>
+                </div>
+                <div class="template-card">
+                    <div class="template-image-link">
+                        🔐
+                    </div>
+                    <div class="template-info">
+                        <h3 style="margin: 0 0 10px 0; color: #fff;">Zero-Trust Security</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Military-grade threat detection utilizing continuous AI behavioral monitoring.</p>
+                    </div>
+                </div>
+                <div class="template-card">
+                    <div class="template-image-link">
+                        📊
+                    </div>
+                    <div class="template-info">
+                        <h3 style="margin: 0 0 10px 0; color: #fff;">Big Data Analytics</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time processing pipelines to turn your raw data into actionable intelligence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="sticky-section section-container" style="background-color: transparent; color: white;">
+            <div class="sticky-header" style="text-align: center; margin-bottom: 50px;">
+                <h2 class="section-title" style="font-size: 2.5rem;">Compute Tiers</h2>
+                <p class="section-subtitle" style="color: var(--accent-primary);">Transparent pricing designed for scale. Keep scrolling to reveal details.</p>
+            </div>
+
+            <div class="card-container pricing-grid">
+                
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3 style="margin: 0; color: var(--text-main);">Startup Node</h3>
+                            <div class="price" style="font-size: 2.5rem; font-weight: bold; margin: 15px 0;">$499<span style="font-size: 1.2rem;">/mo</span></div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Shared Resources<br><span style="color: var(--accent-primary);">Cancel Anytime</span></div>
+                        </div>
+                        <div class="card-back">
+                            <ul class="pricing-features" style="text-align: left; list-style: none; padding: 0; width: 100%;">
+                                <li>500GB NVMe Storage</li>
+                                <li>1M API Requests/mo</li>
+                                <li>Standard DDoS Protection</li>
+                                <li style="color: #ff4d4d;">No Dedicated GPUs</li>
+                                <li style="color: #ff4d4d;">Community Support</li>
+                            </ul>
+                            <a href="#contact" class="cta-button" style="background-color: var(--accent-secondary); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 15px;">Initialize</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3 style="margin: 0; color: var(--text-main);">Scale Cluster</h3>
+                            <div class="price" style="font-size: 2.5rem; font-weight: bold; margin: 15px 0;">$1,200<span style="font-size: 1.2rem;">/mo</span></div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Dedicated Environment<br><span style="color: var(--accent-primary);">SLA Guaranteed</span></div>
+                        </div>
+                        <div class="card-back">
+                            <ul class="pricing-features" style="text-align: left; list-style: none; padding: 0; width: 100%;">
+                                <li>5TB NVMe Storage</li>
+                                <li><strong>10M API Requests/mo</strong></li>
+                                <li><strong>2x Dedicated A100 GPUs</strong></li>
+                                <li>Advanced Traffic Routing</li>
+                                <li>Priority 24/7 Support</li>
+                            </ul>
+                            <a href="#contact" class="cta-button" style="background-color: var(--accent-secondary); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 15px;">Initialize</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front" style="border-color: var(--accent-secondary); box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);">
+                            <div class="recommended-badge" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent-secondary); color: #000; padding: 5px 15px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase;">Most Deployed</div>
+                            <h3 style="margin: 0; color: var(--text-main);">Enterprise Matrix</h3>
+                            <div class="price" style="font-size: 2.5rem; font-weight: bold; margin: 15px 0;">$4,500<span style="font-size: 1.2rem;">/mo</span></div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Private Infrastructure<br><span style="color: var(--accent-primary);">Custom Contracts Available</span></div>
+                        </div>
+                        <div class="card-back" style="border-color: var(--accent-secondary);">
+                            <ul class="pricing-features" style="text-align: left; list-style: none; padding: 0; width: 100%;">
+                                <li>Unlimited Storage</li>
+                                <li><strong>Unmetered API Access</strong></li>
+                                <li><strong>8x Dedicated A100 GPUs</strong></li>
+                                <li>Custom AI Model Hosting</li>
+                                <li>Dedicated DevOps Engineer</li>
+                            </ul>
+                            <a href="#contact" class="cta-button" style="background-color: var(--accent-secondary); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 15px;">Initialize</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3 style="margin: 0; color: var(--text-main);">Quantum Access</h3>
+                            <div class="price" style="font-size: 2.5rem; font-weight: bold; margin: 15px 0;">Custom</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">For Governmental & Global Scale<br><span style="color: var(--accent-primary);">NDA Required</span></div>
+                        </div>
+                        <div class="card-back">
+                            <ul class="pricing-features" style="text-align: left; list-style: none; padding: 0; width: 100%;">
+                                <li>Multi-Region Deployment</li>
+                                <li><strong>On-Premises Hybrid Options</strong></li>
+                                <li><strong>Quantum Security Protocols</strong></li>
+                                <li>Full Compliance (SOC2, HIPAA)</li>
+                                <li><strong>C-Suite Direct Support</strong></li>
+                            </ul>
+                            <a href="#contact" class="cta-button" style="background-color: var(--accent-secondary); color: #000; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 15px;">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section id="infrastructure" class="section-container" style="padding: 100px 20px;">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem;">Beyond Standard Hosting</h2>
+            <p class="section-subtitle" style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">We engineer the invisible architecture that powers the next generation of software.</p>
+            
+            <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+                <div class="service-card" style="padding: 30px; text-align: center; border: 1px solid rgba(138,43,226,0.2);">
+                    <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 15px;">⚡</div>
+                    <h3 style="color: #fff;">Ultra-Low Latency</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Edge computing nodes deployed globally ensure your applications respond in milliseconds, no matter where your users are located.</p>
+                </div>
+                <div class="service-card" style="padding: 30px; text-align: center; border: 1px solid rgba(138,43,226,0.2);">
+                    <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 15px;">🧬</div>
+                    <h3 style="color: #fff;">Auto-Scaling Ecosystems</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Spike in traffic? Our Kubernetes-based infrastructure automatically allocates resources in real-time to prevent bottlenecks.</p>
+                </div>
+                <div class="service-card" style="padding: 30px; text-align: center; border: 1px solid rgba(138,43,226,0.2);">
+                    <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 15px;">🛡️</div>
+                    <h3 style="color: #fff;">Air-Gapped Vaults</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Protect your most sensitive training data with our offline, physically secured server vaults integrated directly into our Austin HQ.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-container" style="padding: 100px 20px; max-width: 800px; margin: 0 auto;">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem;">System Documentation</h2>
+            <p class="section-subtitle" style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">Frequently asked questions regarding integration and deployment.</p>
+            <div class="faq-container">
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid rgba(138,43,226,0.2);">
+                    <summary style="padding: 20px; cursor: pointer; font-weight: bold; outline: none; color: #fff;">How fast can we deploy a new cluster?</summary>
+                    <div class="faq-content" style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">For Standard and Scale tiers, automated provisioning takes less than 5 minutes. Enterprise Matrix deployments require a brief consultation to map your architecture but are usually live within 24 hours.</div>
+                </details>
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid rgba(138,43,226,0.2);">
+                    <summary style="padding: 20px; cursor: pointer; font-weight: bold; outline: none; color: #fff;">Who owns the data passing through the network?</summary>
+                    <div class="faq-content" style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">You retain 100% ownership and IP rights. NovaTech operates strictly as a zero-knowledge infrastructure provider. We do not use your data to train our own internal models.</div>
+                </details>
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid rgba(138,43,226,0.2);">
+                    <summary style="padding: 20px; cursor: pointer; font-weight: bold; outline: none; color: #fff;">What is your uptime guarantee?</summary>
+                    <div class="faq-content" style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">We offer an industry-leading 99.999% uptime SLA for Enterprise and Quantum tiers, backed by financially significant credits for any downtime.</div>
+                </details>
+                <details class="faq-item" style="margin-bottom: 15px; border: 1px solid rgba(138,43,226,0.2);">
+                    <summary style="padding: 20px; cursor: pointer; font-weight: bold; outline: none; color: #fff;">Do you only host companies in Austin, Texas?</summary>
+                    <div class="faq-content" style="padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6;">No. While our primary data centers and headquarters are located in Austin, we operate Edge compute nodes globally and serve multinational enterprise clients across all continents.</div>
+                </details>
+            </div>
+        </section>
+
+        <div class="contact-wrapper" id="contact" style="padding: 100px 20px; text-align: center;">
+            <div class="section-container" style="max-width: 600px; margin: 0 auto; background: rgba(22, 22, 33, 0.5); padding: 40px; border-radius: 8px; border: 1px solid rgba(138,43,226,0.3);">
+                <h2 class="section-title" style="margin-bottom: 30px; color: #fff;">Initialize Deployment</h2>
+                <form class="light-contact-form" action="#" method="POST" style="display: flex; flex-direction: column; gap: 20px; text-align: left;">
+                    <div class="form-group">
+                        <label for="name" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; display: block;">Engineer / Contact Name</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; display: block;">Corporate Email</label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-type" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; display: block;">Compute Tier Required</label>
+                        <select id="project-type" name="project-type" required style="width: 100%; padding: 12px; border-radius: 4px; box-sizing: border-box;">
+                            <option value="" disabled selected>Select an Option</option>
+                            <option value="startup">Startup Node</option>
+                            <option value="scale">Scale Cluster</option>
+                            <option value="enterprise">Enterprise Matrix</option>
+                            <option value="quantum">Quantum Access (Custom)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; display: block;">Architecture Details</label>
+                        <textarea id="message" name="message" placeholder="Briefly describe your stack, storage needs, and expected API load..." required style="width: 100%; padding: 12px; border-radius: 4px; min-height: 120px; box-sizing: border-box;"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="background-color: var(--accent-secondary); color: #000; padding: 15px; border-radius: 4px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; letter-spacing: 1px;">Request API Keys</button>
+                </form>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px;">
+            <div style="margin-bottom: 15px;">
+                <a href="#" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;">Privacy Policy</a>
+                <span style="color: rgba(255,255,255,0.1);">|</span>
+                <a href="#" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;">Service Level Agreement</a>
+            </div>
+            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 NovaTech Solutions. | Based in Austin, TX.</p>
+        </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const stickySection = document.querySelector("#pricing");
+            const cards = gsap.utils.toArray("#pricing .card-inner");
+
+            // Create the ScrollTrigger to pin the section
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: stickySection,
+                    start: "center center", 
+                    end: "+=1200",          
+                    pin: true,              
+                    scrub: 1,               
+                    anticipatePin: 1
+                }
+            });
+
+            // Animate the cards flipping
+            tl.to(cards, {
+                rotateY: 180,               
+                duration: 1,
+                stagger: 0.25,              
+                ease: "power1.inOut"
+            });
+        });
+    </script>
+
+    <script>
+        // 1. Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // Alpha true allows the dark CSS background to show through
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.querySelector('#bg-canvas'), 
+            alpha: true,
+            antialias: true 
+        });
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        camera.position.z = 10;
+
+        // 2. Add Objects (Data Nodes / Icosahedrons instead of letters)
+        // This shape looks like a technological network node
+        const geometry = new THREE.IcosahedronGeometry(2, 0); 
+        
+        // Neon Purple wireframe material
+        const material = new THREE.MeshBasicMaterial({ color: 0x8a2be2, wireframe: true, transparent: true, opacity: 0.4 });
+
+        // Build a floating field of data nodes
+        const nodes = [];
+        for(let i = 0; i < 25; i++) {
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            // Randomize positions to create a "cloud" of data
+            mesh.position.x = (Math.random() - 0.5) * 30;
+            mesh.position.y = (Math.random() - 0.5) * 30;
+            mesh.position.z = (Math.random() - 0.5) * -40; 
+            
+            // Random rotation speed for each node
+            mesh.rotationData = {
+                x: (Math.random() - 0.5) * 0.01,
+                y: (Math.random() - 0.5) * 0.01,
+                z: (Math.random() - 0.5) * 0.01
+            };
+
+            scene.add(mesh);
+            nodes.push(mesh);
+        }
+
+        // 3. The Scroll Magic
+        function moveCamera() {
+            const t = document.body.getBoundingClientRect().top;
+            
+            // Move the camera slowly through the data nodes
+            camera.position.z = 10 + (t * -0.01);
+            camera.rotation.z = t * -0.0002;
+        }
+
+        document.body.onscroll = moveCamera;
+        moveCamera(); 
+
+        // 4. Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Slowly tumble all the nodes
+            nodes.forEach(mesh => {
+                mesh.rotation.x += mesh.rotationData.x;
+                mesh.rotation.y += mesh.rotationData.y;
+                mesh.rotation.z += mesh.rotationData.z;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // 5. Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+
+</body>
+</html>
