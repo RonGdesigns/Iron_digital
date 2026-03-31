@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        /* --- GLOBAL & COLOR SCHEME --- */
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #f4f4f4;
+            --accent: #333333;
+            --brand-color: #FF3D4A;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { text-transform: uppercase; font-weight: 800; }
+
+        /* --- HEADER & NAVIGATION --- */
+        #main-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5vw;
+            z-index: 9999;
+            background: rgba(13, 13, 13, 0.7); 
+            backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; cursor: pointer; color: #fff; text-decoration: none; }
+        
+        .desktop-nav { display: flex; gap: 40px; align-items: center; }
+        .desktop-nav a { 
+            color: #aaa; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            transition: color 0.3s; 
+        }
+        .desktop-nav a:hover { color: #fff; }
+
+        .cta-button {
+            background-color: var(--brand-color);
+            color: #fff !important;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 61, 74, 0.4);
+        }
+
+        /* Mobile Menu Elements */
+        .hamburger { display: none; font-size: 1.8rem; cursor: pointer; color: #fff; z-index: 10000; }
+        
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--bg-color);
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        }
+        
+        .mobile-nav-overlay.active { transform: translateY(0); }
+        
+        .mobile-nav-overlay a {
+            font-size: 2rem;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        /* --- BACKGROUND FLOATING SHAPES --- */
+        .floating-shape { position: absolute; z-index: 0; opacity: 0.15; pointer-events: none; }
+        .shape-circle-outline { border: 3px solid var(--brand-color); border-radius: 50%; }
+        .shape-square-outline { border: 3px solid var(--brand-color); }
+        .shape-glow { background: radial-gradient(circle, rgba(255,61,74,0.15) 0%, rgba(255,61,74,0) 70%); border-radius: 50%; }
+
+        /* --- 1. HERO & MESH EFFECT --- */
+        #hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        canvas#meshCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.9; }
+        .hero-content { z-index: 2; text-align: center; pointer-events: none; padding: 0 20px; }
+        .hero-content h1 { font-size: 5rem; letter-spacing: 5px; text-shadow: 0 5px 20px rgba(0,0,0,0.8); }
+        .hero-content p { font-size: 1.2rem; letter-spacing: 2px; color: #ccc; margin-top: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+
+        /* --- 2. AWARDS (2x4 CARD GRID) --- */
+        #awards { padding: 150px 5vw 100px 5vw; min-height: 50vh; position: relative; z-index: 5; background: var(--bg-color); overflow: hidden; }
+        .section-title-wrapper { position: relative; display: inline-block; margin-bottom: 50px; }
+        .section-title { font-size: 3rem; }
+        .title-underline { content: ''; position: absolute; left: 0; bottom: -10px; width: 0%; height: 6px; background-color: var(--brand-color); }
+        .awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; position: relative; z-index: 2; }
+        .award-card { background: rgba(20, 20, 20, 0.85); border: 1px solid var(--accent); padding: 40px 20px; border-radius: 12px; cursor: pointer; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; position: relative; backdrop-filter: blur(5px); }
+        .award-card:hover { transform: translateY(-8px); border-color: var(--brand-color); box-shadow: 0 10px 30px rgba(255, 61, 74, 0.15); }
+        .award-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: #fff; letter-spacing: 1px; }
+        .award-card p { color: #888; font-size: 0.85rem; line-height: 1.4; }
+        .emoji-pop { position: fixed; pointer-events: none; font-size: 2.5rem; z-index: 100; animation: floatUp 1s ease-out forwards; }
+        @keyframes floatUp { 0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); } 100% { opacity: 0; transform: translate(-50%, -150px) scale(1.5); } }
+
+        /* --- 3. WORK SECTION (RED CIRCLE REVEAL) --- */
+        #work-intro { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background: var(--bg-color); z-index: 10; }
+        .work-text { font-size: 12vw; position: relative; z-index: 2; }
+        .circle-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--brand-color); clip-path: circle(0% at 50% 50%); z-index: 1; }
+        #gallery { height: 100vh; display: flex; flex-wrap: nowrap; overflow: hidden; background: #111; position: relative; z-index: 5; }
+        .panel { min-width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 5vw; }
+        .photo-placeholder { width: 80%; height: 75%; background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+
+        /* --- 4. EXPERIENCE & BIO SECTION --- */
+        #experience { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--bg-color); padding: 100px 5vw; position: relative; z-index: 5; overflow: hidden; }
+        
+        .experience-container { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+        .exp-text { font-size: 4rem; line-height: 1.2; }
+        .exp-highlight { color: var(--brand-color); display: block; font-size: 2rem; margin-top: 10px; }
+        
+        /* Bio Block */
+        .bio-block { margin-top: 50px; padding-top: 50px; border-top: 1px solid var(--accent); }
+        .bio-block p { font-size: 1.2rem; line-height: 1.8; color: #bbb; font-weight: 300; margin-bottom: 20px; }
+
+        /* --- 5. PORTFOLIO / PROJECTS SECTION --- */
+        #portfolio { padding: 100px 5vw 150px 5vw; background: #0a0a0a; position: relative; z-index: 5; }
+        .projects-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .project-card { height: 60vh; background-size: cover; background-position: center; border-radius: 12px; position: relative; overflow: hidden; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%); opacity: 0; transition: opacity 0.4s ease; }
+        .project-card:hover::before { opacity: 1; }
+        .project-info { position: absolute; bottom: -50px; left: 30px; opacity: 0; transition: all 0.4s ease; z-index: 2; }
+        .project-card:hover .project-info { bottom: 30px; opacity: 1; }
+        .project-info h3 { font-size: 2.2rem; color: #fff; margin-bottom: 5px; }
+        .project-info p { color: var(--brand-color); font-size: 1rem; font-weight: bold; letter-spacing: 2px; }
+
+        /* --- MOBILE OPTIMIZATIONS (MEDIA QUERIES) --- */
+        @media (max-width: 1024px) { 
+            .awards-grid { grid-template-columns: repeat(2, 1fr); } 
+            .projects-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            /* Header adjustments */
+            .desktop-nav { display: none; }
+            .hamburger { display: block; }
+            #main-header { padding: 15px 5vw; }
+
+            .hero-content h1 { font-size: 3rem; letter-spacing: 2px; }
+            .hero-content p { font-size: 0.9rem; }
+            .section-title { font-size: 2.2rem; }
+            .awards-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .exp-text { font-size: 2.2rem; }
+            .exp-highlight { font-size: 1.2rem; }
+            .bio-block p { font-size: 1.05rem; text-align: left; }
+            .projects-container { grid-template-columns: 1fr; }
+            
+            .project-card { height: 40vh; }
+            .project-card::before { opacity: 0.8; }
+            .project-info { opacity: 1; bottom: 20px; left: 20px; }
+            .project-info h3 { font-size: 1.8rem; }
+
+            /* Gallery changes to vertical stack on mobile */
+            #gallery {
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+            }
+            .panel {
+                min-height: 100vh;
+                height: auto;
+                padding: 15vw 5vw;
+            }
+            .photo-placeholder { 
+                width: 90%; 
+                height: 65vh; 
+                will-change: transform, opacity; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <a href="#hero" class="logo">J. DOE</a>
+        
+        <nav class="desktop-nav">
+            <a href="#awards">Awards</a>
+            <a href="#work-intro">My Work</a>
+            <a href="#experience">About</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#book-now" class="cta-button">BOOK ME NOW</a>
+        </nav>
+
+        <div class="hamburger" id="hamburger-btn">☰</div>
+    </header>
+
+    <div class="mobile-nav-overlay" id="mobile-nav">
+        <a href="#awards" class="mob-link">Awards</a>
+        <a href="#work-intro" class="mob-link">My Work</a>
+        <a href="#experience" class="mob-link">About</a>
+        <a href="#portfolio" class="mob-link">Portfolio</a>
+        <a href="#book-now" class="mob-link cta-button" style="font-size: 1.2rem; margin-top: 20px;">BOOK ME NOW</a>
+    </div>
+
+    <section id="hero">
+        <canvas id="meshCanvas"></canvas>
+        <div class="hero-content">
+            <h1>J. DOE</h1>
+            <p>VISUAL STORYTELLER & PHOTOGRAPHER</p>
+        </div>
+    </section>
+
+    <section id="awards">
+        <div class="floating-shape shape-circle-outline shape-a" style="width: 400px; height: 400px; top: -100px; right: -100px;"></div>
+        <div class="floating-shape shape-square-outline shape-b" style="width: 250px; height: 250px; bottom: 100px; left: 50px; transform: rotate(15deg);"></div>
+
+        <div class="section-title-wrapper">
+            <h2 class="section-title">Recognition</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="awards-grid">
+            <div class="award-card" data-emoji="📸">
+                <h3>NatGeo Photo of the Year</h3>
+                <p>2023 Grand Prize Winner</p>
+            </div>
+            <div class="award-card" data-emoji="✨">
+                <h3>Sony World Photography</h3>
+                <p>Professional Landscape Finalist</p>
+            </div>
+            <div class="award-card" data-emoji="🏆">
+                <h3>Vogue Editorial</h3>
+                <p>Best Visual Narrative 2022</p>
+            </div>
+            <div class="award-card" data-emoji="🖤">
+                <h3>Monochrome Visionary</h3>
+                <p>Black and White Masterclass</p>
+            </div>
+            <div class="award-card" data-emoji="🌍">
+                <h3>International Lens</h3>
+                <p>Global Documentary Category</p>
+            </div>
+            <div class="award-card" data-emoji="🔥">
+                <h3>Creative Arts Guild</h3>
+                <p>Photographer of the Year 2021</p>
+            </div>
+            <div class="award-card" data-emoji="👁️">
+                <h3>The Aperture Grant</h3>
+                <p>Recipient for Emerging Talent</p>
+            </div>
+            <div class="award-card" data-emoji="⭐">
+                <h3>Magnum Photos</h3>
+                <p>Nominee & Featured Artist</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work-intro">
+        <h2 class="work-text">WORK</h2>
+        <div class="circle-mask"></div>
+    </section>
+
+    <section id="gallery">
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1551316679-9c6ae9dec224?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1516802273409-68526ee1bdd6?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1453728018264-1c888e7a02db?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop');"></div></div>
+        <div class="panel"><div class="photo-placeholder" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2000&auto=format&fit=crop');"></div></div>
+    </section>
+
+    <section id="experience">
+        <div class="floating-shape shape-glow shape-c" style="width: 800px; height: 800px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        
+        <div class="experience-container">
+            <h2 class="exp-text">
+                12 YEARS <br>
+                <span class="exp-highlight">OF CAPTURING FLEETING MOMENTS</span>
+            </h2>
+
+            <div class="bio-block">
+                <p>Hello, I'm J. Doe, a visual storyteller based in the city. I believe that the most powerful images are the ones that capture genuine emotion—the split-second glances, the natural light filtering through the trees, and the raw energy of an event.</p>
+                <p>Over the last decade, I have traveled the globe working with incredible brands, beautiful couples, and inspiring artists. My approach is entirely unobtrusive, blending documentary-style candid photography with fine-art portraiture to create images that endure long after the moment has passed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="section-title-wrapper">
+            <h2 class="section-title">Portfolio</h2>
+            <div class="title-underline"></div>
+        </div>
+        <div class="projects-container">
+            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2000&auto=format&fit=crop');">
+                <div class="project-info">
+                    <h3>Neon Horizons</h3>
+                    <p>CITYSCAPE PROJECT</p>
+                </div>
+            </div>
+            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop');">
+                <div class="project-info">
+                    <h3>Eternity & A Day</h3>
+                    <p>WEDDING EVENT</p>
+                </div>
+            </div>
+            <div class="project-card" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop');">
+                <div class="project-info">
+                    <h3>From the Clouds</h3>
+                    <p>AERIAL EVENT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- 0. MOBILE MENU TOGGLE LOGIC ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobLinks = document.querySelectorAll('.mob-link');
+
+        hamburgerBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            hamburgerBtn.innerText = mobileNav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when a link is clicked
+        mobLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                hamburgerBtn.innerText = '☰';
+            });
+        });
+
+        // --- 1. MESH EFFECT (DENSE & RED) ---
+        const canvas = document.getElementById('meshCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        function initMesh() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            
+            for(let i = 0; i < 400; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    radius: Math.random() * 2
+                });
+            }
+        }
+
+        let mouse = { x: null, y: null };
+        
+        // Mouse Support
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY + window.scrollY; 
+        });
+
+        // Touch Screen Support for Mobile
+        window.addEventListener('touchmove', (e) => {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY + window.scrollY;
+        });
+
+        window.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function drawMesh() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if(p.x < 0 || p.x > width) p.vx *= -1;
+                if(p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#FF3D4A';
+                ctx.fill();
+
+                for(let j = index + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if(dist < 75) { 
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(255, 61, 74, ${0.5 - dist/150})`;
+                        ctx.stroke();
+                    }
+                }
+
+                if(mouse.x != null) {
+                    let mouseDist = Math.hypot(p.x - mouse.x, p.y - (mouse.y - window.scrollY));
+                    if(mouseDist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y - window.scrollY);
+                        ctx.strokeStyle = `rgba(255, 61, 74, ${0.8 - mouseDist/150})`;
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(drawMesh);
+        }
+
+        initMesh();
+        drawMesh();
+        window.addEventListener('resize', initMesh);
+
+        // --- 2. EMOJI HOVER EFFECT ---
+        const awardCards = document.querySelectorAll('.award-card');
+        let lastEmojiSpawn = 0;
+
+        awardCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const now = Date.now();
+                if (now - lastEmojiSpawn > 80) { 
+                    lastEmojiSpawn = now;
+                    
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji-pop';
+                    emoji.innerText = card.getAttribute('data-emoji');
+                    
+                    emoji.style.left = e.clientX + 'px';
+                    emoji.style.top = e.clientY + 'px';
+                    
+                    document.body.appendChild(emoji);
+                    
+                    setTimeout(() => { emoji.remove(); }, 1000);
+                }
+            });
+        });
+
+        // --- 3. GSAP SCROLL ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // A. Floating Geometric Shapes Parallax
+        gsap.to(".shape-a", {
+            y: 200, rotation: 45, ease: "none",
+            scrollTrigger: { trigger: "#awards", scrub: true }
+        });
+
+        gsap.to(".shape-b", {
+            y: -150, rotation: 90, ease: "none",
+            scrollTrigger: { trigger: "#awards", scrub: true }
+        });
+
+        gsap.to(".shape-c", {
+            scale: 1.5, opacity: 0.3, ease: "none",
+            scrollTrigger: { trigger: "#experience", scrub: true }
+        });
+
+        // B. Title Underline Animation
+        gsap.utils.toArray(".section-title-wrapper").forEach(wrapper => {
+            let underline = wrapper.querySelector(".title-underline");
+            gsap.to(underline, {
+                width: "100%",
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: "top 80%", 
+                }
+            });
+        });
+
+        // C. "WORK" scales and Circle Expands
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#work-intro",
+                start: "top top",
+                end: "+=100%", 
+                scrub: true,   
+                pin: true
+            }
+        });
+
+        tl.to(".work-text", { scale: 5, opacity: 0, duration: 1 }, 0);
+        tl.to(".circle-mask", { clipPath: "circle(150% at 50% 50%)", duration: 1 }, 0);
+
+        // D. Gallery Scroll Logic (Responsive)
+        let mm = gsap.matchMedia();
+
+        // --- DESKTOP: Horizontal Scroll ---
+        mm.add("(min-width: 769px)", () => {
+            const panels = gsap.utils.toArray("#gallery .panel");
+            gsap.to(panels, {
+                xPercent: -100 * (panels.length - 1),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#gallery",
+                    pin: true,
+                    scrub: 1,
+                    end: () => "+=" + document.querySelector("#gallery").offsetWidth
+                }
+            });
+        });
+
+        // --- MOBILE: Vertical Parallax (Gravitate Up & Drop Down) ---
+        mm.add("(max-width: 768px)", () => {
+            const panels = gsap.utils.toArray("#gallery .panel");
+            
+            panels.forEach((panel) => {
+                const photo = panel.querySelector(".photo-placeholder");
+                
+                // Create a timeline that links directly to the user's scroll position
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: panel,
+                        start: "top 90%",   // Start when panel enters the bottom of screen
+                        end: "bottom 10%",  // End when panel leaves the top of screen
+                        scrub: 1            // Smoothly links animation to scroll speed
+                    }
+                });
+
+                // The Animation: Start low, gravitate to top, pop back down
+                tl.fromTo(photo, 
+                    { y: 150, opacity: 0.2, scale: 0.9 }, // Starting state (popped down)
+                    { y: -40, opacity: 1, scale: 1, duration: 1, ease: "power2.out" } // Gravitate to top
+                )
+                .to(photo, 
+                    { y: 150, opacity: 0.2, scale: 0.9, duration: 1, ease: "power2.in" } // Pop back down at the end
+                );
+            });
+        });
+
+    </script>
+</body>
+</html>g
