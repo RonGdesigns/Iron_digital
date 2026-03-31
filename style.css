@@ -1,275 +1,272 @@
-/* Sleek Tech Blue Theme Variables */
-:root {
-    --bg-dark: #070e1a;
-    --bg-panel: #112240; 
-    --bg-panel-hover: #1a365d;
-    --accent-blue: #00d4ff;
-    --text-main: #e6f1ff;
-    --text-muted: #8892b0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Digital | Detroit Digital Ecosystem</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
 
-/* Global Styles */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: 
-        url('detroit-landmark-shadow.png'),
-        linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
-    background-blend-mode: multiply; 
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-    background-repeat: no-repeat;
-    color: var(--text-main);
-    line-height: 1.6;
-    scroll-behavior: smooth;
-}
+<body>
 
-/* Navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background-color: rgba(7, 14, 26, 0.95);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid #112240;
-}
+    <nav>
+        <a href="index.html" class="logo-wrapper">
+            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
+            <div class="logo-text">
+                <span>IRON</span> 
+                <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
+            </div>
+        </a>
+        <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#templates">Templates</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="start.html" class="nav-cta-button" style="background-color: #00d4ff; color: #000; padding: 10px 20px; border-radius: 25px; font-weight: bold; text-decoration: none;">Start a Project</a></li>
+        </ul>
+    </nav>
 
-nav .logo-wrapper { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-nav .logo-img { height: 45px; width: auto; display: block; }
-nav .logo-text { font-size: 1.5rem; font-weight: bold; color: var(--text-main); }
-nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; align-items: center; }
-nav a { color: var(--text-main); text-decoration: none; font-size: 1rem; transition: color 0.3s; }
-nav a:hover { color: var(--accent-blue); }
+    <section class="hero">
+        <h1>Elevating Your<br><span>Digital Presence</span></h1>
+        <p>Custom, modern websites tailored for business growth. Clean, responsive, and professional.</p>
+        <a href="start.html" class="cta-button">Get A Quote &rarr;</a>
+    </section>
 
-/* Nav Bar CTA Button */
-.nav-cta-button {
-    background-color: var(--accent-blue);
-    color: #000 !important;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.2s;
-    white-space: nowrap; /* Forces the text to stay on one line */
-}
-.nav-cta-button:hover {
-    background-color: #0fb2d8;
-    transform: translateY(-2px);
-}
+    <section id="templates" class="section-container">
+        <h2 class="section-title">Design Inspiration</h2>
+        <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
+        
+        <div class="templates-grid">
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_1.png" alt="Creative Portfolio Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Creative Portfolio</h3>
+                    <p>Bold typography and dynamic masonry image grids.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_2.png" alt="Clean E-Commerce Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Clean E-Commerce</h3>
+                    <p>Sleek product grids and seamless checkout flow.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_3.png" alt="Corporate Landing Page Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Corporate Landing</h3>
+                    <p>Trust-building layout focused on professional B2B services.</p>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_4.png" alt="Local Business Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Local Business</h3>
+                    <p>Clear service menus and built-in booking/map integration.</p>
+                </div>
+            </div>
+            <div class="template-card video-hover-card">
+    <div class="template-image-link" style="position: relative;">
+        <img src="template_5.png" alt="Tech SaaS Startup Website Template" class="static-img">
+        <video src="template_5.mp4" muted loop playsinline class="hover-vid"></video>
+    </div>
+    <div class="template-info">
+        <h3>Tech SaaS Startup</h3>
+        <p>Feature highlights and high-converting trial funnels.</p>
+    </div>
+</div>
+            <div class="template-card">
+                <div class="template-image-link">
+                    <img src="template_6.png" alt="Elegant Publication Website Template">
+                </div>
+                <div class="template-info">
+                    <h3>Elegant Publication</h3>
+                    <p>Readability-focused article feeds for modern blogs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* Hero Section */
-.hero { text-align: center; padding: 120px 20px; background: transparent; }
-.hero h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
-.hero h1 span { color: var(--accent-blue); }
-.hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; }
-.cta-button {
-    background-color: var(--accent-blue);
-    color: #000;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s, transform 0.2s;
-}
-.cta-button:hover { background-color: #00b3d6; transform: translateY(-2px); }
+    <section id="pricing" class="section-container">
+        <h2 class="section-title">Pricing Plans</h2>
+        <p class="section-subtitle">Transparent pricing designed for scale.</p>
 
-/* Section Containers */
-.section-container { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-.section-title { text-align: center; font-size: 2.5rem; margin-bottom: 10px; color: var(--text-main); }
-.section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; }
-
-/* About Section (Detroit Blueprint) */
-.about-container {
-    background-color: var(--bg-panel);
-    border-radius: 20px;
-    padding: 40px;
-    border: 1px solid #1a365d;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-.about-container::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-    background: linear-gradient(180deg, #00d4ff, #0fb2d8);
-}
-.about-content-wrapper { display: flex; align-items: center; gap: 40px; }
-.about-text { flex: 1; }
-.about-text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px; }
-.about-text p:last-child { margin-bottom: 0; }
-.about-highlight {
-    font-size: 1.2rem !important; color: var(--text-main) !important; font-weight: bold;
-    border-bottom: 1px solid rgba(0, 212, 255, 0.2); padding-bottom: 15px; margin-bottom: 25px !important;
-}
-.about-image { flex: 1.5; min-width: 300px; }
-.about-image img {
-    width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.3);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-/* Clickable Image Hover Effect */
-.clickable-img { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.clickable-img:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2); }
-
-/* Fullscreen Image Modal (Lightbox) */
-.modal {
-    display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
-}
-.modal-content { max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
-.close-modal {
-    position: absolute; top: 20px; right: 40px; color: #fff; font-size: 45px;
-    font-weight: bold; cursor: pointer; transition: color 0.3s;
-}
-.close-modal:hover { color: var(--accent-blue); }
-
-/* Templates Grid */
-.templates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.template-card {
-    background-color: var(--bg-panel); border-radius: 12px; overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #1a365d;
-}
-.template-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1); }
-.template-image-link {
-    display: block; width: 100%; height: 250px; overflow: hidden;
-    border-bottom: 1px solid #1a365d; background-color: #070e1a;
-}
-.template-card img {
-    width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s;
-}
-.template-card:hover img { transform: scale(1.05); }
-.template-info { padding: 20px; text-align: center; }
-.template-info h3 { margin: 0 0 10px 0; color: var(--accent-blue); font-size: 1.2rem; }
-.template-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
-
-/* Pricing Grid */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 30px 0; }
-
-/* THE GLOSSY GLASS UPDATE (Glassmorphism with Shifting Scroll Reflection) */
-.pricing-card {
-    background-color: rgba(17, 34, 64, 0.6); 
-    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
-    background-attachment: fixed; /* Locks the highlight to the screen */
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter Build</h3>
+                <div class="price">$1,000</div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    One-Time Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Custom Website Design</li>
+                    <li>Mobile Responsive Build</li>
+                    <li>Basic SEO Setup</li>
+                    <li><strong style="color: #ff4d4d;">No Hosting</strong></li>
+                    <li><strong style="color: #ff4d4d;">No Maintenance</strong></li>
+                </ul>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Standard</h3>
+                <div class="price">$99<span style="font-size: 1.2rem;">/mo</span></div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    + $1,000 Upfront Build Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Custom Website Design</li>
+                    <li><strong>Includes Premium Hosting</strong></li>
+                    <li><strong>Up to 5 Changes/mo</strong></li>
+                    <li>Basic SEO Setup</li>
+                    <li>Standard Support</li>
+                </ul>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="recommended-badge">Recommended</div>
+                <h3>Growth</h3>
+                <div class="price">$199<span style="font-size: 1.2rem;">/mo</span></div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    + $1,000 Upfront Build Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Custom Website Design</li>
+                    <li><strong>Includes Premium Hosting</strong></li>
+                    <li><strong>Up to 15 Changes/mo</strong></li>
+                    <li>Advanced SEO Setup</li>
+                    <li>Standard Support</li>
+                </ul>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="price">$399<span style="font-size: 1.2rem;">/mo</span></div>
+                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                    + $1,000 Upfront Build Fee<br>
+                    <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>Complex Custom Design</li>
+                    <li><strong>Includes Premium Hosting</strong></li>
+                    <li><strong>Unlimited Content Changes</strong></li>
+                    <li>E-Commerce Capabilities</li>
+                    <li><strong>Priority Support</strong></li>
+                </ul>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 20px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
+    </section>
     
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); 
-    
-    border-radius: 35px; 
-    padding: 40px 20px; 
-    text-align: center; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    box-shadow: 0 8px 32px 0 rgba(0, 212, 255, 0.1); 
+    <section id="services" class="section-container">
+        <h2 class="section-title">Beyond Web Design</h2>
+        <p class="section-subtitle">We don't just build websites; we engineer your complete digital footprint to maximize visibility, trust, and conversions.</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Google Business Optimization</h3>
+                <p>Dominate local search. We fully optimize your Google Business Profile so you show up first on Google Maps and local search results when customers are looking for your services.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Social Media Branding</h3>
+                <p>First impressions matter. We optimize and brand your social media profiles (Facebook, Instagram, LinkedIn) to create a cohesive, professional look that builds instant credibility.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Ecosystem Integration</h3>
+                <p>We connect the dots. By linking your high-converting website directly to your optimized social channels and search profiles, we create a unified funnel that drives continuous leads.</p>
+            </div>
+        </div>
+    </section>
 
-    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; 
-    position: relative; 
-    display: flex; 
-    flex-direction: column;
-}
+    <section id="faq" class="section-container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about working with Iron Digital.</p>
+        <div class="faq-container">
+            <details class="faq-item">
+                <summary>How long does a standard website build take?</summary>
+                <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks, depending on the scope of the project and how quickly we can finalize your content and media.</div>
+            </details>
+            <details class="faq-item">
+                <summary>Who owns the website and the design?</summary>
+                <div class="faq-content">You fully own your website and your domain name. However, Iron Digital retains the rights to our custom design structures unless you have provided an original, exact template (not a screenshot of an existing site) that we followed perfectly.</div>
+            </details>
+            <details class="faq-item">
+                <summary>What happens if I need changes after the site is live?</summary>
+                <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments. Additionally, all websites are protected by our Emergency Maintenance Warranty. This covers broken links, website crashes, and emergency takedowns for 6 months after your last subscription payment, or 3 months after a standard plan payment.</div>
+            </details>
+            <details class="faq-item">
+                <summary>Do you only work with businesses in Detroit?</summary>
+                <div class="faq-content">Not at all. While we are incredibly proud of our Detroit roots and local hustle, we build digital ecosystems for businesses, brands, and individuals worldwide, including international clients.</div>
+            </details>
+        </div>
+    </section>
 
-.pricing-card:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); 
-    background-color: rgba(17, 34, 64, 0.8); 
-}
+    <div class="contact-wrapper" id="contact">
+        <div class="section-container" style="padding: 0 20px;">
+            <h2 class="section-title">Submit Your Project Request</h2>
+            <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="project-type">Project Type</label>
+                    <select id="project-type" name="project-type" required>
+                        <option value="" disabled selected>Select an Option</option>
+                        <option value="starter">Starter Build</option>
+                        <option value="standard">Standard Subscription</option>
+                        <option value="growth">Growth Subscription</option>
+                        <option value="premium">Premium Subscription</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" placeholder="Tell us a bit about your business and goals..." required></textarea>
+                </div>
+                
+                <p style="font-size: 0.85rem; color: #555; margin: 0; font-style: italic; text-align: center;">
+                    *Have photos or design inspiration? We will grab those from you via email after you submit your request!
+                </p>
 
-.pricing-card.featured { border: 2px solid var(--accent-blue); transform: scale(1.03); }
-.pricing-card.featured:hover { transform: scale(1.03) translateY(-5px); }
-.recommended-badge {
-    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-    background-color: var(--accent-blue); color: #000; padding: 6px 20px; border-radius: 20px;
-    font-size: 0.85rem; font-weight: bold; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3); z-index: 10;
-}
-.pricing-card h3 { margin-top: 0; color: var(--text-main); font-size: 1.5rem; }
-.price { font-size: 2rem; color: var(--accent-blue); font-weight: bold; margin: 20px 0; }
-.pricing-features { list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; flex-grow: 1; }
-.pricing-features li { padding: 10px 0; border-bottom: 1px solid rgba(26, 54, 93, 0.5); font-size: 0.95rem; color: var(--text-muted); }
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
 
-/* Services Grid */
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px; }
-.service-card {
-    background-color: var(--bg-panel); border-radius: 20px; padding: 40px 30px; text-align: left;
-    border: 1px solid #1a365d; transition: transform 0.3s; position: relative; overflow: hidden;
-}
-.service-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-    background: linear-gradient(90deg, #00d4ff, #0fb2d8); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
-}
-.service-card:hover { transform: translateY(-5px); }
-.service-card:hover::before { transform: scaleX(1); }
-.service-icon { font-size: 2.5rem; margin-bottom: 20px; display: inline-block; background: rgba(0, 212, 255, 0.1); padding: 15px; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.2); }
-.service-card h3 { color: var(--text-main); font-size: 1.3rem; margin-bottom: 15px; margin-top: 0; }
-.service-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+    <footer>
+        <div style="margin-bottom: 15px;">
+            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+            <span style="color: #1a365d;">|</span>
+            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+        </div>
+        <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
+    </footer>
 
-/* FAQ Section */
-.faq-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
-.faq-item { background-color: var(--bg-panel); border: 1px solid #1a365d; border-radius: 12px; overflow: hidden; }
-.faq-item summary { padding: 20px; font-size: 1.1rem; font-weight: bold; color: var(--text-main); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after { content: '+'; color: var(--accent-blue); font-size: 1.5rem; transition: transform 0.3s; }
-.faq-item[open] summary::after { transform: rotate(45deg); }
-.faq-content { padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
 
-/* Contact Section */
-.contact-wrapper { background-color: #ffffff; width: 100%; padding: 80px 0; }
-.contact-wrapper .section-title { color: #000000; text-transform: uppercase; font-size: 2.2rem; margin-bottom: 40px; }
-.light-contact-form { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
-.form-row { display: flex; gap: 20px; }
-.form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.light-contact-form label { font-size: 0.85rem; color: #000000; font-weight: 700; text-transform: uppercase; }
-
-/* Cleaned up Input CSS */
-.light-contact-form input[type="text"], 
-.light-contact-form input[type="email"], 
-.light-contact-form select { 
-    width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 30px; font-size: 1rem; box-sizing: border-box; font-family: inherit; 
-}
-.light-contact-form textarea { 
-    width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 15px; font-size: 1rem; box-sizing: border-box; min-height: 120px; resize: vertical; font-family: inherit; 
-}
-.light-contact-form input:focus, .light-contact-form select:focus, .light-contact-form textarea:focus { outline: none; border-color: var(--accent-blue); }
-.light-contact-form .submit-btn { background-color: #12c2e9; color: #ffffff; padding: 18px; border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s, transform 0.2s; width: 100%; margin-top: 10px; }
-.light-contact-form .submit-btn:hover { background-color: #0fb2d8; transform: translateY(-2px); }
-
-/* Footer */
-footer { text-align: center; padding: 30px; background-color: #050a13; color: var(--text-muted); border-top: 1px solid #112240; font-size: 0.9rem; }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .form-row { flex-direction: column; }
-    
-    /* Shrink and tighten the mobile sticky nav */
-    nav { flex-direction: column; gap: 15px; padding: 15px 10px; }
-    nav .logo-wrapper { flex-direction: row; gap: 10px; } 
-    nav .logo-img { height: 35px; } 
-    nav .logo-text { font-size: 1.3rem; }
-    
-    /* REORGANIZED: Wraps the links smoothly onto multiple lines if they run out of space */
-    nav ul { 
-        flex-wrap: wrap; 
-        justify-content: center; 
-        gap: 12px; 
-    }
-    nav a { font-size: 0.9rem; }
-    
-    /* ADJUSTED: Button sizing specifically for mobile */
-    .nav-cta-button { padding: 8px 16px; font-size: 0.9rem; }
-
-    /* Shrink the massive hero/header padding */
-    .hero { padding: 60px 20px 40px 20px; } 
-    .hero h1 { font-size: 2.2rem; margin-bottom: 15px; }
-    .hero p { font-size: 1rem; margin-bottom: 30px; }
-
-    /* Keeps the column stacking correctly */
-    .about-content-wrapper { flex-direction: column; }
-    .about-image { width: 100%; min-width: 100%; margin-top: 20px; }
-    .about-image img { width: 100%; height: auto; }
-    .template-image-link { height: 280px; padding: 10px 0; }
-}
+</body>
+</html>
