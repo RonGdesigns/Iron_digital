@@ -550,138 +550,14 @@
         </footer>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>{gsap.registerPlugin(ScrollTrigger);let _0x1a=gsap.timeline({scrollTrigger:{trigger:document.querySelector("#pricing"),start:"center center",end:"+=1200",pin:!0,scrub:1,anticipatePin:1}});_0x1a.to(gsap.utils.toArray("#pricing .card-inner"),{rotateY:180,duration:1,stagger:.25,ease:"power1.inOut"}),document.querySelectorAll("button, .cta-button, .nav-cta-button, .submit-btn").forEach(_0x2b=>{_0x2b.addEventListener("click",_0x3c=>{_0x3c.preventDefault(),window.location.href="templates.html"})})});const _0x4d=new THREE.Scene,_0x5e=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1e3),_0x6f=new THREE.WebGLRenderer({canvas:document.querySelector("#bg-canvas"),alpha:!0,antialias:!0});_0x6f.setPixelRatio(window.devicePixelRatio),_0x6f.setSize(window.innerWidth,window.innerHeight),_0x5e.position.z=10;const _0x70=new THREE.IcosahedronGeometry(2,0),_0x81=new THREE.MeshBasicMaterial({color:9055202,wireframe:!0,transparent:!0,opacity:.4}),_0x92=[];for(let _0xa3=0;_0xa3<25;_0xa3++){const _0xb4=new THREE.Mesh(_0x70,_0x81);_0xb4.position.x=(Math.random()-.5)*30,_0xb4.position.y=(Math.random()-.5)*30,_0xb4.position.z=(Math.random()-.5)*-40,_0xb4.rotationData={x:(Math.random()-.5)*.01,y:(Math.random()-.5)*.01,z:(Math.random()-.5)*.01},_0x4d.add(_0xb4),_0x92.push(_0xb4)}function _0xc5(){const _0xd6=document.body.getBoundingClientRect().top;_0x5e.position.z=10+_0xd6*-.01,_0x5e.rotation.z=_0xd6*-2e-4}document.body.onscroll=_0xc5,_0xc5();function _0xe7(){requestAnimationFrame(_0xe7),_0x92.forEach(_0xf8=>{_0xf8.rotation.x+=_0xf8.rotationData.x,_0xf8.rotation.y+=_0xf8.rotationData.y,_0xf8.rotation.z+=_0xf8.rotationData.z}),_0x6f.render(_0x4d,_0x5e)}_0xe7(),window.addEventListener("resize",()=>{_0x5e.aspect=window.innerWidth/window.innerHeight,_0x5e.updateProjectionMatrix(),_0x6f.setSize(window.innerWidth,window.innerHeight)});(()=>{if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(..._0x1a)=>{window.chatbase.q||(window.chatbase.q=[]),window.chatbase.q.push(_0x1a)},window.chatbase=new Proxy(window.chatbase,{get:(_0x2b,_0x3c)=>"q"===_0x3c?_0x2b.q:(..._0x4d)=>_0x2b(_0x3c,..._0x4d)})}const _0x1b=()=>{const _0x2c=document.createElement("script");_0x2c.src="https://www.chatbase.co/embed.min.js",_0x2c.id="1BPyEgSSpnDXcPOQIHQW-",_0x2c.domain="www.chatbase.co",document.body.appendChild(_0x2c)};"complete"===document.readyState?_0x1b():window.addEventListener("load",_0x1b)})();</script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            gsap.registerPlugin(ScrollTrigger);
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-            const stickySection = document.querySelector("#pricing");
-            const cards = gsap.utils.toArray("#pricing .card-inner");
-
-            // Create the ScrollTrigger to pin the section
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: stickySection,
-                    start: "center center", 
-                    end: "+=1200",          
-                    pin: true,              
-                    scrub: 1,               
-                    anticipatePin: 1
-                }
-            });
-
-            // Animate the cards flipping
-            tl.to(cards, {
-                rotateY: 180,                
-                duration: 1,
-                stagger: 0.25,              
-                ease: "power1.inOut"
-            });
-        });
-    </script>
-
-    <script>
-        // 1. Scene Setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-        // Alpha true allows the dark CSS background to show through
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas: document.querySelector('#bg-canvas'), 
-            alpha: true,
-            antialias: true 
-        });
-
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        camera.position.z = 10;
-
-        // 2. Add Objects (Data Nodes / Icosahedrons instead of letters)
-        // This shape looks like a technological network node
-        const geometry = new THREE.IcosahedronGeometry(2, 0); 
-        
-        // Neon Purple wireframe material
-        const material = new THREE.MeshBasicMaterial({ color: 0x8a2be2, wireframe: true, transparent: true, opacity: 0.4 });
-
-        // Build a floating field of data nodes
-        const nodes = [];
-        for(let i = 0; i < 25; i++) {
-            const mesh = new THREE.Mesh(geometry, material);
-            
-            // Randomize positions to create a "cloud" of data
-            mesh.position.x = (Math.random() - 0.5) * 30;
-            mesh.position.y = (Math.random() - 0.5) * 30;
-            mesh.position.z = (Math.random() - 0.5) * -40; 
-            
-            // Random rotation speed for each node
-            mesh.rotationData = {
-                x: (Math.random() - 0.5) * 0.01,
-                y: (Math.random() - 0.5) * 0.01,
-                z: (Math.random() - 0.5) * 0.01
-            };
-
-            scene.add(mesh);
-            nodes.push(mesh);
-        }
-
-        // 3. The Scroll Magic
-        function moveCamera() {
-            const t = document.body.getBoundingClientRect().top;
-            
-            // Move the camera slowly through the data nodes
-            camera.position.z = 10 + (t * -0.01);
-            camera.rotation.z = t * -0.0002;
-        }
-
-        document.body.onscroll = moveCamera;
-        moveCamera(); 
-
-        // 4. Animation Loop
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Slowly tumble all the nodes
-            nodes.forEach(mesh => {
-                mesh.rotation.x += mesh.rotationData.x;
-                mesh.rotation.y += mesh.rotationData.y;
-                mesh.rotation.z += mesh.rotationData.z;
-            });
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // 5. Handle window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Find all buttons and links styled as buttons on the page
-            const allButtons = document.querySelectorAll("button, .cta-button, .nav-cta-button, .submit-btn");
-
-            allButtons.forEach(function(btn) {
-                btn.addEventListener("click", function(e) {
-                    // Only intercept if it's the submit button (since we already updated the a tags), 
-                    // but this will act as a safety net for all buttons on the page.
-                    e.preventDefault(); 
-                    window.location.href = "templates.html"; 
-                });
-            });
-        });
-    </script>
-
-    <script>
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-    </script>
-
+<script>
+document.addEventListener("DOMContentLoaded",()=>{gsap.registerPlugin(ScrollTrigger);let _0x1a=gsap.timeline({scrollTrigger:{trigger:document.querySelector("#pricing"),start:"center center",end:"+=1200",pin:!0,scrub:1,anticipatePin:1}});_0x1a.to(gsap.utils.toArray("#pricing .card-inner"),{rotateY:180,duration:1,stagger:.25,ease:"power1.inOut"}),document.querySelectorAll("button, .cta-button, .nav-cta-button, .submit-btn").forEach(_0x2b=>{_0x2b.addEventListener("click",_0x3c=>{_0x3c.preventDefault(),window.location.href="templates.html"})})});const _0x4d=new THREE.Scene,_0x5e=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1e3),_0x6f=new THREE.WebGLRenderer({canvas:document.querySelector("#bg-canvas"),alpha:!0,antialias:!0});_0x6f.setPixelRatio(window.devicePixelRatio),_0x6f.setSize(window.innerWidth,window.innerHeight),_0x5e.position.z=10;const _0x70=new THREE.IcosahedronGeometry(2,0),_0x81=new THREE.MeshBasicMaterial({color:9055202,wireframe:!0,transparent:!0,opacity:.4}),_0x92=[];for(let _0xa3=0;_0xa3<25;_0xa3++){const _0xb4=new THREE.Mesh(_0x70,_0x81);_0xb4.position.x=(Math.random()-.5)*30,_0xb4.position.y=(Math.random()-.5)*30,_0xb4.position.z=(Math.random()-.5)*-40,_0xb4.rotationData={x:(Math.random()-.5)*.01,y:(Math.random()-.5)*.01,z:(Math.random()-.5)*.01},_0x4d.add(_0xb4),_0x92.push(_0xb4)}function _0xc5(){const _0xd6=document.body.getBoundingClientRect().top;_0x5e.position.z=10+_0xd6*-.01,_0x5e.rotation.z=_0xd6*-2e-4}document.body.onscroll=_0xc5,_0xc5();function _0xe7(){requestAnimationFrame(_0xe7),_0x92.forEach(_0xf8=>{_0xf8.rotation.x+=_0xf8.rotationData.x,_0xf8.rotation.y+=_0xf8.rotationData.y,_0xf8.rotation.z+=_0xf8.rotationData.z}),_0x6f.render(_0x4d,_0x5e)}_0xe7(),window.addEventListener("resize",()=>{_0x5e.aspect=window.innerWidth/window.innerHeight,_0x5e.updateProjectionMatrix(),_0x6f.setSize(window.innerWidth,window.innerHeight)});(()=>{if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(..._0x1a)=>{window.chatbase.q||(window.chatbase.q=[]),window.chatbase.q.push(_0x1a)},window.chatbase=new Proxy(window.chatbase,{get:(_0x2b,_0x3c)=>"q"===_0x3c?_0x2b.q:(..._0x4d)=>_0x2b(_0x3c,..._0x4d)})}const _0x1b=()=>{const _0x2c=document.createElement("script");_0x2c.src="https://www.chatbase.co/embed.min.js",_0x2c.id="1BPyEgSSpnDXcPOQIHQW-",_0x2c.domain="www.chatbase.co",document.body.appendChild(_0x2c)};"complete"===document.readyState?_0x1b():window.addEventListener("load",_0x1b)})();
+</script>
 </body>
 </html>
