@@ -31,16 +31,35 @@
             <h2 class="section-title">Design Inspiration</h2>
             <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
             
-            <div class="templates-grid">
-                <div class="template-card" onclick="window.location.href='template1.html';" style="cursor: pointer;">
-                    <div class="template-image-link">
-                        <img src="template_1.png" alt="Creative Portfolio Website Template">
-                    </div>
-                    <div class="template-info">
-                        <h3>Creative Portfolio</h3>
-                        <p>Bold typography and dynamic masonry image grids.</p>
+            <div class="template-card">
+                <div class="carousel-container" id="template1-carousel" data-index="0">
+                    <button class="carousel-btn prev" onclick="moveSlide(-1, 'template1-carousel')">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide(1, 'template1-carousel')">&#10095;</button>
+                    
+                    <div class="carousel-track">
+                        <div class="carousel-slide">
+                            <img src="template1.png" alt="Template Screenshot 1" onclick="openModal(this.src)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="template1.1.png" alt="Template Screenshot 2" onclick="openModal(this.src)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="template1.2.png" alt="Template Screenshot 3" onclick="openModal(this.src)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="template1.3.png" alt="Template Screenshot 4" onclick="openModal(this.src)">
+                        </div>
+                        <div class="carousel-slide" onclick="openVideoModal('template1.mp4')">
+                            <video src="template1.mp4" muted loop autoplay playsinline></video>
+                            <div class="play-overlay">&#9658;</div>
+                        </div>
                     </div>
                 </div>
+                <div class="template-info">
+                    <h3>Creative Portfolio</h3>
+                    <p>Bold typography and dynamic masonry image grids.</p>
+                </div>
+            </div>
                 
                 <div class="template-card">
                     <div class="template-image-link">
