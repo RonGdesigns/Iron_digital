@@ -361,29 +361,25 @@ footer { text-align: center; padding: 30px; background-color: #050a13; color: va
 .video-hover-card {
     position: relative;
     width: 100%;
-    height: 180px; /* REDUCED: Makes the video take up less space */
-    background: #000;
+    height: 220px; /* INCREASED: Gives the video much more room to breathe */
+    background: #070e1a;
     cursor: pointer;
     overflow: hidden;
     border-bottom: 1px solid #1a365d;
-    
-    /* THE FIX: Forces the video to respect the rounded corners so it doesn't blur or bleed out */
     border-top-left-radius: 12px; 
     border-top-right-radius: 12px;
     transform: translateZ(0); 
 }
-.video-placeholder {
+.video-placeholder, .hover-vid {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* THE FIX: Anchors the crop to the top of your screenshots so they don't look awkwardly chopped! */
+    object-position: top center; 
     z-index: 1;
 }
 .hover-vid {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     z-index: 2;
     opacity: 0;
     transition: opacity 0.4s ease; 
@@ -399,23 +395,25 @@ footer { text-align: center; padding: 30px; background-color: #050a13; color: va
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--bg-dark);
-    padding: 10px;
+    background-color: rgba(7, 14, 26, 0.6);
+    padding: 12px 10px;
     border-bottom: 1px solid #1a365d;
 }
 .gallery-viewport {
     flex-grow: 1;
-    height: 90px; /* REDUCED: Shrinks the screenshot gallery so it looks much tighter */
+    height: 80px; /* Kept tight and clean */
     margin: 0 10px;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid rgba(0, 212, 255, 0.2);
     cursor: pointer;
+    background: #000;
 }
 .gallery-viewport img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center; /* Also applied here so thumbnails show the top of the site */
     transition: transform 0.3s;
 }
 .gallery-viewport:hover img {
