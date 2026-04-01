@@ -20,7 +20,7 @@ function openVideoModal(videoSrc) {
     if(modal && video) {
         modal.style.display = "flex";
         video.src = videoSrc;
-        video.playbackRate = 0.65; // Slow down to 65% speed
+        video.playbackRate = 0.65; // Slow down the BIG modal video to 65%
         video.play();
     }
 }
@@ -47,6 +47,13 @@ window.onclick = function(event) {
 // 2. GSAP ENTRANCE ANIMATIONS & 3D TILT
 // ==========================================
 document.addEventListener("DOMContentLoaded", (event) => {
+    
+    // NEW: Automatically slow down all preview videos in the Bento Grid to 65%
+    const previewVideos = document.querySelectorAll('.bento-card video');
+    previewVideos.forEach(vid => {
+        vid.playbackRate = 0.65;
+    });
+
     // Check if GSAP is loaded on this specific page
     if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
