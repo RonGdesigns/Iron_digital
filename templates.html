@@ -32,29 +32,32 @@
             <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
             
             <div class="template-card">
-                <div class="carousel-container" id="template1-carousel" data-index="0">
-                    <button class="carousel-btn prev" onclick="moveSlide(-1, 'template1-carousel')">&#10094;</button>
-                    <button class="carousel-btn next" onclick="moveSlide(1, 'template1-carousel')">&#10095;</button>
+                
+                <div class="video-hover-card" onclick="openVideoModal('template1.mp4')">
+                    <img src="template1.png" alt="Creative Portfolio" class="video-placeholder">
                     
-                    <div class="carousel-track">
-                        <div class="carousel-slide">
-                            <img src="template1.png" alt="Template Screenshot 1" onclick="openModal(this.src)">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="template1.1.png" alt="Template Screenshot 2" onclick="openModal(this.src)">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="template1.2.png" alt="Template Screenshot 3" onclick="openModal(this.src)">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="template1.3.png" alt="Template Screenshot 4" onclick="openModal(this.src)">
-                        </div>
-                        <div class="carousel-slide" onclick="openVideoModal('template1.mp4')">
-                            <video src="template1.mp4" muted loop autoplay playsinline></video>
-                            <div class="play-overlay">&#9658;</div>
-                        </div>
-                    </div>
+                    <video class="hover-vid" src="template1.mp4" muted loop playsinline 
+                           onmouseover="this.play(); this.style.opacity=1;" 
+                           onmouseout="this.pause(); this.currentTime=0; this.style.opacity=0;"></video>
+                           
+                    <div class="play-overlay">&#9658;</div>
                 </div>
+
+                <div class="mini-gallery-container">
+                    <button class="gallery-btn" onclick="changeImage(-1, 'gallery1')">&#10094;</button>
+                    
+                    <div class="gallery-viewport" onclick="openModal(document.getElementById('gallery1-img').src)">
+                        <img id="gallery1-img" src="template1.png" alt="Template Screenshots">
+                    </div>
+                    
+                    <button class="gallery-btn" onclick="changeImage(1, 'gallery1')">&#10095;</button>
+                </div>
+
+                <div class="template-info">
+                    <h3>Creative Portfolio</h3>
+                    <p>Bold typography and dynamic masonry image grids.</p>
+                </div>
+            </div>
                 <div class="template-info">
                     <h3>Creative Portfolio</h3>
                     <p>Bold typography and dynamic masonry image grids.</p>
@@ -124,33 +127,71 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Hover Logic for the Card
-            const videoCard = document.querySelector(".video-hover-card");
-            const hoverVideo = videoCard ? videoCard.querySelector(".hover-vid") : null;
-
-            if (videoCard && hoverVideo) {
-                
-                // 1. Play small video on hover
-                videoCard.addEventListener("mouseenter", function() {
-                    hoverVideo.play();
-                });
-
-                // 2. Pause small video when mouse leaves
-                videoCard.addEventListener("mouseleave", function() {
-                    hoverVideo.pause();
-                    hoverVideo.currentTime = 0; 
-                });
-
-                // 3. Redirect to the new page on click
-                videoCard.addEventListener("click", function() {
-                    window.location.href = "template5.html";
-                });
+        // --- 1. Image Gallery Logic (Bulletproof Array Swapping) ---
+        // We store all the screenshot names here so the arrows know what to load next
+        const galleries = {
+            'gallery1': {
+                images: ['template1.png', 'template1.1.png', 'template1.2.png', 'template1.3.png'],
+                currentIndex: 0
             }
-        });
+        };
 
-        // Chatbase Script
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+        function changeImage(direction, galleryId) {
+            const gal = galleries[galleryId];
+            gal.currentIndex += direction;
+            
+            // If they click past the end, loop back to the start. If they click backward from the start, go to the end.
+            if (gal.currentIndex >= gal.images.length) {
+                gal.currentIndex = 0;
+            } else if (gal.currentIndex < 0) {
+                gal.currentIndex = gal.images.length - 1;
+            }
+            
+            // Instantly swap the image source on the screen
+            document.getElementById(galleryId + '-img').src = gal.images[gal.currentIndex];
+        }
+
+        // --- 2. Image Modal Logic (For the big popup) ---
+        function openModal(src) {
+            document.getElementById("imageModal").style.display = "flex";
+            document.getElementById("expandedImg").src = src;
+        }
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // --- 3. Video Modal Logic (Big popup + Slow Motion) ---
+        function openVideoModal(videoSrc) {
+            const modal = document.getElementById("videoModal");
+            const video = document.getElementById("expandedVideo");
+            
+            modal.style.display = "flex";
+            video.src = videoSrc;
+            
+            // Slows the video playback down to 65% as requested
+            video.playbackRate = 0.65; 
+            video.play();
+        }
+        function closeVideoModal() {
+            const modal = document.getElementById("videoModal");
+            const video = document.getElementById("expandedVideo");
+            
+            modal.style.display = "none";
+            video.pause();
+            video.src = ""; // Clears the source so it fully stops in the background
+        }
+
+        // --- 4. Close Modals when clicking the dark background ---
+        window.onclick = function(event) {
+            const imageModal = document.getElementById("imageModal");
+            const videoModal = document.getElementById("videoModal");
+            if (event.target == imageModal) {
+                closeModal();
+            }
+            if (event.target == videoModal) {
+                closeVideoModal();
+            }
+        }
     </script>
 </body>
 </html>
