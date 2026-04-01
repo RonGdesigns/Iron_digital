@@ -79,38 +79,40 @@ document.addEventListener("DOMContentLoaded", (event) => {
             );
         });
 
-        // 3D Tilt Hover Effect
-        const tiltElements = document.querySelectorAll('.tilt-effect');
-        tiltElements.forEach(element => {
-            element.addEventListener('mousemove', (e) => {
-                const rect = element.getBoundingClientRect();
-                const x = e.clientX - rect.left; 
-                const y = e.clientY - rect.top;  
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
+        // 3D Tilt Hover Effect - PERFORMANCE UPGRADE
+// Only run on devices with a fine pointer (mouse/trackpad), ignore touch screens
+if (window.matchMedia("(pointer: fine)").matches) {
+    const tiltElements = document.querySelectorAll('.tilt-effect');
+    tiltElements.forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left; 
+            const y = e.clientY - rect.top;  
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
 
-                gsap.to(element, {
-                    rotationX: rotateX,
-                    rotationY: rotateY,
-                    transformPerspective: 1000,
-                    ease: "power1.out",
-                    duration: 0.3
-                });
-            });
-
-            element.addEventListener('mouseleave', () => {
-                gsap.to(element, {
-                    rotationX: 0,
-                    rotationY: 0,
-                    ease: "power3.out",
-                    duration: 0.6
-                });
+            gsap.to(element, {
+                rotationX: rotateX,
+                rotationY: rotateY,
+                transformPerspective: 1000,
+                ease: "power1.out",
+                duration: 0.3
             });
         });
-    }
+
+        element.addEventListener('mouseleave', () => {
+            gsap.to(element, {
+                rotationX: 0,
+                rotationY: 0,
+                ease: "power3.out",
+                duration: 0.6
+            });
+        });
+    });
+}
     // Magnetic Button Effect for CTA
 const magneticBtn = document.querySelector('.cta-button');
 
