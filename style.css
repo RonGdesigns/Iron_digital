@@ -6,6 +6,23 @@
     --accent-blue: #00d4ff;
     --text-main: #e6f1ff;
     --text-muted: #8892b0;
+    
+    /* New Font Variables */
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-heading: 'Syne', sans-serif;
+}
+
+/* Global Styles Update */
+body {
+    margin: 0;
+    font-family: var(--font-body); /* Swapped from Segoe UI */
+    /* ... keep your existing background properties ... */
+}
+
+/* Apply the custom heading font to all titles */
+h1, h2, h3, .logo-text, .section-title {
+    font-family: var(--font-heading);
+    letter-spacing: -0.5px; /* Tightens up the premium look */
 }
 /* Fixes the white flash during GSAP animations */
 html {
