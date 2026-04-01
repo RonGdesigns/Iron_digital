@@ -1,9 +1,60 @@
 // ==========================================
-// 1. GSAP ENTRANCE ANIMATIONS & 3D TILT
+// 1. MODAL LOGIC (Images & Videos)
 // ==========================================
-document.addEventListener("DOMContentLoaded", () => {
+function openModal(src) {
+    const modal = document.getElementById("imageModal");
+    if(modal) {
+        modal.style.display = "flex";
+        document.getElementById("expandedImg").src = src;
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById("imageModal");
+    if(modal) modal.style.display = "none";
+}
+
+function openVideoModal(videoSrc) {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("expandedVideo");
+    if(modal && video) {
+        modal.style.display = "flex";
+        video.src = videoSrc;
+        video.playbackRate = 0.65; // Slow down the BIG modal video to 65%
+        video.play();
+    }
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("expandedVideo");
+    if(modal && video) {
+        modal.style.display = "none";
+        video.pause();
+        video.src = ""; 
+    }
+}
+
+// Close modals when clicking the dark background
+window.onclick = function(event) {
+    const imageModal = document.getElementById("imageModal");
+    const videoModal = document.getElementById("videoModal");
+    if (event.target == imageModal) closeModal();
+    if (event.target == videoModal) closeVideoModal();
+}
+
+// ==========================================
+// 2. GSAP ENTRANCE ANIMATIONS & 3D TILT
+// ==========================================
+document.addEventListener("DOMContentLoaded", (event) => {
     
-    // Check if GSAP is loaded
+    // NEW: Automatically slow down all preview videos in the Bento Grid to 65%
+    const previewVideos = document.querySelectorAll('.bento-card video');
+    previewVideos.forEach(vid => {
+        vid.playbackRate = 0.65;
+    });
+
+    // Check if GSAP is loaded on this specific page
     if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
@@ -29,77 +80,73 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // 3D Tilt Hover Effect - PERFORMANCE UPGRADE
-        // Only run on devices with a fine pointer (mouse/trackpad), ignore touch screens
-        if (window.matchMedia("(pointer: fine)").matches) {
-            const tiltElements = document.querySelectorAll('.tilt-effect');
-            tiltElements.forEach(element => {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left; 
-                    const y = e.clientY - rect.top;  
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -10;
-                    const rotateY = ((x - centerX) / centerX) * 10;
+// Only run on devices with a fine pointer (mouse/trackpad), ignore touch screens
+if (window.matchMedia("(pointer: fine)").matches) {
+    const tiltElements = document.querySelectorAll('.tilt-effect');
+    tiltElements.forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left; 
+            const y = e.clientY - rect.top;  
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
 
-                    gsap.to(element, {
-                        rotationX: rotateX,
-                        rotationY: rotateY,
-                        transformPerspective: 1000,
-                        ease: "power1.out",
-                        duration: 0.3
-                    });
-                });
-
-                element.addEventListener('mouseleave', () => {
-                    gsap.to(element, {
-                        rotationX: 0,
-                        rotationY: 0,
-                        ease: "power3.out",
-                        duration: 0.6
-                    });
-                });
+            gsap.to(element, {
+                rotationX: rotateX,
+                rotationY: rotateY,
+                transformPerspective: 1000,
+                ease: "power1.out",
+                duration: 0.3
             });
-        }
+        });
+
+        element.addEventListener('mouseleave', () => {
+            gsap.to(element, {
+                rotationX: 0,
+                rotationY: 0,
+                ease: "power3.out",
+                duration: 0.6
+            });
+        });
+    });
+}
+    // Magnetic Button Effect for CTA
+const magneticBtn = document.querySelector('.cta-button');
+
+if(magneticBtn && typeof gsap !== 'undefined') {
+    magneticBtn.addEventListener('mousemove', (e) => {
+        const rect = magneticBtn.getBoundingClientRect();
+        const h = rect.width / 2;
+        const v = rect.height / 2;
         
-        // ==========================================
-        // MAGNETIC BUTTON EFFECT (CTA)
-        // ==========================================
-        const magneticBtn = document.querySelector('.cta-button');
+        // Calculate distance from center
+        const x = e.clientX - rect.left - h;
+        const y = e.clientY - rect.top - v;
+        
+        // Subtle pull effect towards the cursor
+        gsap.to(magneticBtn, {
+            x: x * 0.4, // multiplier controls the strength of the pull
+            y: y * 0.4,
+            duration: 0.4,
+            ease: 'power3.out'
+        });
+    });
 
-        if(magneticBtn) {
-            magneticBtn.addEventListener('mousemove', (e) => {
-                const rect = magneticBtn.getBoundingClientRect();
-                const h = rect.width / 2;
-                const v = rect.height / 2;
-                
-                const x = e.clientX - rect.left - h;
-                const y = e.clientY - rect.top - v;
-                
-                gsap.to(magneticBtn, {
-                    x: x * 0.4, 
-                    y: y * 0.4,
-                    duration: 0.4,
-                    ease: 'power3.out'
-                });
-            });
-
-            magneticBtn.addEventListener('mouseleave', () => {
-                gsap.to(magneticBtn, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.7,
-                    ease: 'elastic.out(1, 0.3)' 
-                });
-            });
-        }
-    }
+    // Snap back to place when cursor leaves
+    magneticBtn.addEventListener('mouseleave', () => {
+        gsap.to(magneticBtn, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: 'elastic.out(1, 0.3)' // Gives it that satisfying "snap"
+        });
+    });
+}
 });
-
-// ==========================================
-// 2. CUSTOM SELECT DROPDOWN LOGIC
-// ==========================================
+// Custom Select Dropdown Logic
 document.addEventListener('DOMContentLoaded', () => {
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
@@ -108,27 +155,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const options = wrapper.querySelectorAll('.custom-option');
         const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
 
-        // Toggle open/close on click
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation(); 
+        trigger.addEventListener('click', function() {
             wrapper.classList.toggle('open');
         });
 
-        // Handle option selection
         options.forEach(option => {
             option.addEventListener('click', function() {
                 // Update trigger text
                 trigger.querySelector('span').textContent = this.textContent;
-                // Update hidden input value for the Formspree submission
-                if(hiddenInput) hiddenInput.value = this.getAttribute('data-value');
+                // Update hidden input value for the form submission
+                hiddenInput.value = this.getAttribute('data-value');
                 // Close dropdown
                 wrapper.classList.remove('open');
-                // Change text color to show it's selected
-                trigger.style.color = "#ffffff";
+                // Optional: Highlight selected text
+                trigger.querySelector('span').style.color = "var(--text-main)";
             });
         });
 
-        // Close dropdown when clicking outside of it
+        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!wrapper.contains(e.target)) {
                 wrapper.classList.remove('open');
@@ -136,47 +180,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-// ==========================================
-// 3. MODAL LOGIC (Images & Videos)
-// ==========================================
-function openModal(src) {
-    const modal = document.getElementById("imageModal");
-    if(modal) {
-        modal.style.display = "flex";
-        document.getElementById("expandedImg").src = src;
-    }
-}
-
-function closeModal() {
-    const modal = document.getElementById("imageModal");
-    if(modal) modal.style.display = "none";
-}
-
-function openVideoModal(videoSrc) {
-    const modal = document.getElementById("videoModal");
-    const video = document.getElementById("expandedVideo");
-    if(modal && video) {
-        modal.style.display = "flex";
-        video.src = videoSrc;
-        video.playbackRate = 0.65; 
-        video.play();
-    }
-}
-
-function closeVideoModal() {
-    const modal = document.getElementById("videoModal");
-    const video = document.getElementById("expandedVideo");
-    if(modal && video) {
-        modal.style.display = "none";
-        video.pause();
-        video.src = ""; 
-    }
-}
-
-window.onclick = function(event) {
-    const imageModal = document.getElementById("imageModal");
-    const videoModal = document.getElementById("videoModal");
-    if (event.target == imageModal) closeModal();
-    if (event.target == videoModal) closeVideoModal();
-}
