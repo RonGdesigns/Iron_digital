@@ -92,16 +92,33 @@
                     </div>
                 </div>
                 
-                <div class="template-card video-hover-card">
-                    <div class="template-image-link" style="position: relative;">
-                        <img src="template_5.png" alt="Tech SaaS Startup Website Template" class="static-img">
-                        <video src="template_5.mp4" muted loop playsinline class="hover-vid"></video>
-                    </div>
-                    <div class="template-info">
-                        <h3>Tech SaaS Startup</h3>
-                        <p>Feature highlights and high-converting trial funnels.</p>
-                    </div>
+                <div class="template-card">
+                
+                <div class="video-hover-card" onclick="openVideoModal('template5.mp4')">
+                    <img src="template5.png" alt="Tech SaaS Startup" class="video-placeholder">
+                    
+                    <video class="hover-vid" src="template5.mp4" muted loop playsinline 
+                           onmouseover="this.play(); this.style.opacity=1;" 
+                           onmouseout="this.pause(); this.currentTime=0; this.style.opacity=0;"></video>
+                           
+                    <div class="play-overlay">&#9658;</div>
                 </div>
+
+                <div class="mini-gallery-container">
+                    <button class="gallery-btn" onclick="changeImage(-1, 'gallery5')">&#10094;</button>
+                    
+                    <div class="gallery-viewport" onclick="openModal(document.getElementById('gallery5-img').src)">
+                        <img id="gallery5-img" src="template5.png" alt="Template Screenshots">
+                    </div>
+                    
+                    <button class="gallery-btn" onclick="changeImage(1, 'gallery5')">&#10095;</button>
+                </div>
+
+                <div class="template-info">
+                    <h3>Tech SaaS Startup</h3>
+                    <p>Feature highlights and high-converting trial funnels.</p>
+                </div>
+            </div>
 
                 <div class="template-card">
                     <div class="template-image-link">
@@ -127,11 +144,15 @@
     </footer>
 
     <script>
-        // --- 1. Image Gallery Logic (Bulletproof Array Swapping) ---
-        // We store all the screenshot names here so the arrows know what to load next
+        /// --- 1. Image Gallery Logic (Bulletproof Array Swapping) ---
         const galleries = {
             'gallery1': {
                 images: ['template1.png', 'template1.1.png', 'template1.2.png', 'template1.3.png'],
+                currentIndex: 0
+            },
+            // NEW: Added Template 5 images here!
+            'gallery5': {
+                images: ['template5.png', 'template5.1.png', 'template5.2.png', 'template5.3.png'],
                 currentIndex: 0
             }
         };
