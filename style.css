@@ -7,7 +7,10 @@
     --text-main: #e6f1ff;
     --text-muted: #8892b0;
 }
-
+/* Fixes the white flash during GSAP animations */
+html {
+    background-color: #070e1a; 
+}
 /* Global Styles */
 body {
     margin: 0;
@@ -217,14 +220,17 @@ nav a:hover { color: var(--accent-blue); }
 .faq-item[open] summary::after { transform: rotate(45deg); }
 .faq-content { padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
 
-/* Contact Section - Upgraded to Dark Glassmorphism */
+/* Contact Section (Upgraded to Dark Bento Theme) */
 .contact-wrapper { 
-    background-color: transparent; /* Removed the harsh white */
+    background-color: transparent; /* Removes the massive white block */
     width: 100%; 
     padding: 80px 0; 
 }
 .contact-wrapper .section-title { 
-    color: var(--text-main); /* Match global text */
+    color: var(--text-main); /* Changes text to white */
+    text-transform: uppercase; 
+    font-size: 2.2rem; 
+    margin-bottom: 40px; 
 }
 .light-contact-form { 
     max-width: 800px; 
@@ -232,65 +238,80 @@ nav a:hover { color: var(--accent-blue); }
     display: flex; 
     flex-direction: column; 
     gap: 25px; 
-    
-    /* Apply Glassmorphism to the form container itself */
-    background-color: rgba(17, 34, 64, 0.6); 
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); 
-    border-radius: 20px; 
-    padding: 50px; 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 .form-row { display: flex; gap: 20px; }
 .form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.light-contact-form label { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
 
-/* Inputs converted to dark mode */
+.light-contact-form label { 
+    font-size: 0.85rem; 
+    color: var(--text-muted); /* Changes labels to premium gray */
+    font-weight: 700; 
+    text-transform: uppercase; 
+}
+
+/* Premium Dark Glass Inputs */
 .light-contact-form input[type="text"], 
 .light-contact-form input[type="email"], 
-.light-contact-form select,
-.light-contact-form textarea { 
+.light-contact-form select { 
     width: 100%; 
     padding: 15px 20px; 
-    background-color: rgba(7, 14, 26, 0.8); /* Dark input backgrounds */
-    border: 1px solid #1a365d; 
-    color: var(--text-main);
-    border-radius: 12px; 
+    background-color: rgba(17, 34, 64, 0.6); /* Matches Bento Cards */
+    color: #ffffff;
+    border: 1px solid rgba(0, 212, 255, 0.2); 
+    border-radius: 15px; 
     font-size: 1rem; 
     box-sizing: border-box; 
     font-family: inherit; 
     transition: border-color 0.3s, box-shadow 0.3s;
 }
-.light-contact-form textarea { min-height: 120px; resize: vertical; }
+.light-contact-form textarea { 
+    width: 100%; 
+    padding: 15px 20px; 
+    background-color: rgba(17, 34, 64, 0.6); 
+    color: #ffffff;
+    border: 1px solid rgba(0, 212, 255, 0.2); 
+    border-radius: 15px; 
+    font-size: 1rem; 
+    box-sizing: border-box; 
+    min-height: 120px; 
+    resize: vertical; 
+    font-family: inherit; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
 
+/* Fix Dropdown options so they are readable */
+.light-contact-form select option {
+    background-color: #070e1a;
+    color: #ffffff;
+}
+
+/* Hover & Focus Glow */
 .light-contact-form input:focus, 
 .light-contact-form select:focus, 
 .light-contact-form textarea:focus { 
     outline: none; 
     border-color: var(--accent-blue); 
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); /* Glow on focus */
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
 }
 
 .light-contact-form .submit-btn { 
     background-color: var(--accent-blue); 
-    color: #000; 
+    color: #000000; 
     padding: 18px; 
     border: none; 
-    border-radius: 30px; 
-    font-size: 1.1rem; 
+    border-radius: 40px; 
+    font-size: 1.2rem; 
     font-weight: bold; 
     text-transform: uppercase; 
     cursor: pointer; 
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; 
+    transition: background-color 0.3s, transform 0.2s; 
     width: 100%; 
     margin-top: 10px; 
 }
 .light-contact-form .submit-btn:hover { 
     background-color: #0fb2d8; 
     transform: translateY(-2px); 
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
-}}
+}
 
 /* Footer */
 footer { text-align: center; padding: 30px; background-color: #050a13; color: var(--text-muted); border-top: 1px solid #112240; font-size: 0.9rem; }
