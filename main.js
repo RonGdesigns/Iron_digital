@@ -48,7 +48,7 @@ window.onclick = function(event) {
 // ==========================================
 document.addEventListener("DOMContentLoaded", (event) => {
     
-    // NEW: Automatically slow down all preview videos in the Bento Grid to 65%
+    // Automatically slow down all preview videos in the Bento Grid to 65%
     const previewVideos = document.querySelectorAll('.bento-card video');
     previewVideos.forEach(vid => {
         vid.playbackRate = 0.65;
@@ -80,73 +80,74 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
 
         // 3D Tilt Hover Effect - PERFORMANCE UPGRADE
-// Only run on devices with a fine pointer (mouse/trackpad), ignore touch screens
-if (window.matchMedia("(pointer: fine)").matches) {
-    const tiltElements = document.querySelectorAll('.tilt-effect');
-    tiltElements.forEach(element => {
-        element.addEventListener('mousemove', (e) => {
-            const rect = element.getBoundingClientRect();
-            const x = e.clientX - rect.left; 
-            const y = e.clientY - rect.top;  
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
+        // Only run on devices with a fine pointer (mouse/trackpad), ignore touch screens
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const tiltElements = document.querySelectorAll('.tilt-effect');
+            tiltElements.forEach(element => {
+                element.addEventListener('mousemove', (e) => {
+                    const rect = element.getBoundingClientRect();
+                    const x = e.clientX - rect.left; 
+                    const y = e.clientY - rect.top;  
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -10;
+                    const rotateY = ((x - centerX) / centerX) * 10;
 
-            gsap.to(element, {
-                rotationX: rotateX,
-                rotationY: rotateY,
-                transformPerspective: 1000,
-                ease: "power1.out",
-                duration: 0.3
+                    gsap.to(element, {
+                        rotationX: rotateX,
+                        rotationY: rotateY,
+                        transformPerspective: 1000,
+                        ease: "power1.out",
+                        duration: 0.3
+                    });
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    gsap.to(element, {
+                        rotationX: 0,
+                        rotationY: 0,
+                        ease: "power3.out",
+                        duration: 0.6
+                    });
+                });
             });
-        });
-
-        element.addEventListener('mouseleave', () => {
-            gsap.to(element, {
-                rotationX: 0,
-                rotationY: 0,
-                ease: "power3.out",
-                duration: 0.6
+        }
+        
+        // Magnetic Button Effect for CTA
+        const magneticBtn = document.querySelector('.cta-button');
+        if(magneticBtn && typeof gsap !== 'undefined') {
+            magneticBtn.addEventListener('mousemove', (e) => {
+                const rect = magneticBtn.getBoundingClientRect();
+                const h = rect.width / 2;
+                const v = rect.height / 2;
+                
+                const x = e.clientX - rect.left - h;
+                const y = e.clientY - rect.top - v;
+                
+                gsap.to(magneticBtn, {
+                    x: x * 0.4,
+                    y: y * 0.4,
+                    duration: 0.4,
+                    ease: 'power3.out'
+                });
             });
-        });
-    });
-}
-    // Magnetic Button Effect for CTA
-const magneticBtn = document.querySelector('.cta-button');
 
-if(magneticBtn && typeof gsap !== 'undefined') {
-    magneticBtn.addEventListener('mousemove', (e) => {
-        const rect = magneticBtn.getBoundingClientRect();
-        const h = rect.width / 2;
-        const v = rect.height / 2;
-        
-        // Calculate distance from center
-        const x = e.clientX - rect.left - h;
-        const y = e.clientY - rect.top - v;
-        
-        // Subtle pull effect towards the cursor
-        gsap.to(magneticBtn, {
-            x: x * 0.4, // multiplier controls the strength of the pull
-            y: y * 0.4,
-            duration: 0.4,
-            ease: 'power3.out'
-        });
-    });
-
-    // Snap back to place when cursor leaves
-    magneticBtn.addEventListener('mouseleave', () => {
-        gsap.to(magneticBtn, {
-            x: 0,
-            y: 0,
-            duration: 0.7,
-            ease: 'elastic.out(1, 0.3)' // Gives it that satisfying "snap"
-        });
-    });
-}
+            magneticBtn.addEventListener('mouseleave', () => {
+                gsap.to(magneticBtn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.7,
+                    ease: 'elastic.out(1, 0.3)' 
+                });
+            });
+        }
+    }
 });
-// Custom Select Dropdown Logic
+
+// ==========================================
+// 3. Custom Select Dropdown Logic
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const customSelects = document.querySelectorAll('.custom-select-wrapper');
 
@@ -155,24 +156,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const options = wrapper.querySelectorAll('.custom-option');
         const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
 
-        trigger.addEventListener('click', function() {
-            wrapper.classList.toggle('open');
-        });
+        if(trigger) {
+            trigger.addEventListener('click', function() {
+                wrapper.classList.toggle('open');
+            });
+        }
 
         options.forEach(option => {
             option.addEventListener('click', function() {
-                // Update trigger text
                 trigger.querySelector('span').textContent = this.textContent;
-                // Update hidden input value for the form submission
-                hiddenInput.value = this.getAttribute('data-value');
-                // Close dropdown
+                if(hiddenInput) hiddenInput.value = this.getAttribute('data-value');
                 wrapper.classList.remove('open');
-                // Optional: Highlight selected text
                 trigger.querySelector('span').style.color = "var(--text-main)";
             });
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!wrapper.contains(e.target)) {
                 wrapper.classList.remove('open');
