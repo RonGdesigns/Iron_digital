@@ -352,48 +352,43 @@ footer { text-align: center; padding: 30px; background-color: #050a13; color: va
 /* ==========================================
    MODAL (POPUP) SYSTEM FIX
    ========================================== */
-/* This block hides the popups and creates the dark background overlay */
 .modal {
-    display: none; /* THIS IS THE MAGIC INVISIBILITY CLOAK! */
+    display: none; /* Keeps it hidden until clicked */
     position: fixed; 
     z-index: 2000; 
     left: 0; 
     top: 0; 
     width: 100%; 
     height: 100%;
-    background-color: rgba(0,0,0,0.9); 
+    background-color: rgba(0,0,0,0.95); /* Ultra-dark cinematic background */
     align-items: center; 
     justify-content: center;
 }
 
-/* This styles the actual image/video inside the popup */
+/* THIS FORCES THE IMAGE/VIDEO TO BLOW UP FULL SCREEN */
 .modal-content { 
-    max-width: 90%; 
-    max-height: 90%; 
-    border-radius: 8px; 
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); 
+    width: 90vw !important; /* Forces it to take up 90% of the screen width */
+    height: 90vh !important; /* Forces it to take up 90% of the screen height */
+    max-width: 1400px; /* Stops it from getting too crazy on giant ultrawide monitors */
+    object-fit: contain !important; /* Ensures the image is perfectly scaled and NEVER cut off */
+    border-radius: 12px; 
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.2); 
+    background-color: #000; /* Seamless black background behind the video/image */
 }
 
-/* This styles the big 'X' close button */
+/* The 'X' Close Button */
 .close-modal {
     position: absolute; 
-    top: 20px; 
-    right: 40px; 
+    top: 15px; 
+    right: 35px; 
     color: #fff; 
-    font-size: 45px;
+    font-size: 50px;
     font-weight: bold; 
     cursor: pointer; 
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.2s;
+    z-index: 2001; /* Keeps the X hovering safely above everything */
 }
 .close-modal:hover { 
     color: var(--accent-blue); 
-}
-
-/* Specific styling for the Video Popup */
-#videoModal .modal-content {
-    background: #000;
-    padding: 0;
-    border: 1px solid var(--accent-blue);
-    width: 90%;
-    max-width: 1000px;
+    transform: scale(1.1);
 }
