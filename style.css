@@ -418,3 +418,10 @@ video.modal-content {
         margin-top: 30px; 
     }
 }
+/* SEO/Performance Fix: Disables heavy blur for low-power devices */
+@media (prefers-reduced-motion: reduce) {
+    .pricing-card, .custom-options {
+        backdrop-filter: none;
+        background-color: rgba(17, 34, 64, 0.95);
+    }
+}
