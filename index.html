@@ -195,14 +195,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="project-type">Project Type</label>
-                    <select id="project-type" name="project-type" required>
-                        <option value="" disabled selected>Select an Option</option>
-                        <option value="starter">Starter Build</option>
-                        <option value="standard">Standard Subscription</option>
-                        <option value="growth">Growth Subscription</option>
-                        <option value="premium">Premium Subscription</option>
-                    </select>
+        <label>Project Type</label>
+        <div class="custom-select-wrapper">
+            <div class="custom-select-trigger">
+                <span>Select an Option</span>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="custom-options">
+                <span class="custom-option" data-value="starter">Starter Build</span>
+                <span class="custom-option" data-value="standard">Standard Subscription</span>
+                <span class="custom-option" data-value="growth">Growth Subscription</span>
+                <span class="custom-option" data-value="premium">Premium Subscription</span>
+            </div>
+        </div>
+        <input type="hidden" id="project-type" name="project-type" required>
+    </div>
                 </div>
                 <div class="form-group">
                     <label for="message">Project Details</label>
