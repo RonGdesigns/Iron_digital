@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iron Digital | Detroit Digital Ecosystem</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -28,16 +30,16 @@
             <li><a href="about.html">About</a></li>
             <li><a href="templates.html">Templates</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="start.html" class="nav-cta-button" style="background-color: #00d4ff; color: #000; padding: 10px 20px; border-radius: 25px; font-weight: bold; text-decoration: none;">Start a Project</a></li>
+            <li><a href="#contact" class="nav-cta-button">Start a Project</a></li>
         </ul>
     </nav>
 
     <section class="hero" data-animate="pop-in">
         <h1>Elevating Your<br><span>Digital Presence</span></h1>
         <p>Custom, modern websites tailored for business growth. Clean, responsive, and professional.</p>
-        <a href="start.html" class="cta-button">Get A Quote &rarr;</a>
+        <a href="#contact" class="cta-button">Get A Quote &rarr;</a>
     </section>
-    
+
     <div class="trust-marquee-container">
         <p class="trust-text">TRUSTED BY DETROIT'S GROWING BRANDS</p>
         <div class="marquee-track">
@@ -136,23 +138,23 @@
     
     <section id="services" class="section-container">
         <h2 class="section-title" data-animate="pop-in">Beyond Web Design</h2>
-        <p class="section-subtitle" data-animate="pop-in">We don't just build websites; we engineer your complete digital footprint to maximize visibility, trust, and conversions.</p>
+        <p class="section-subtitle" data-animate="pop-in">We don't just build websites; we engineer your complete digital footprint.</p>
         
         <div class="services-grid">
             <div class="service-card tilt-effect" data-animate="pop-in">
                 <div class="service-icon">🌐</div>
                 <h3>Google Business Optimization</h3>
-                <p>Dominate local search. We fully optimize your Google Business Profile so you show up first on Google Maps and local search results when customers are looking for your services.</p>
+                <p>Dominate local search. We fully optimize your Google Business Profile so you show up first on Google Maps.</p>
             </div>
             <div class="service-card tilt-effect" data-animate="pop-in">
                 <div class="service-icon">📱</div>
                 <h3>Social Media Branding</h3>
-                <p>First impressions matter. We optimize and brand your social media profiles (Facebook, Instagram, LinkedIn) to create a cohesive, professional look that builds instant credibility.</p>
+                <p>First impressions matter. We optimize and brand your social media profiles to create a cohesive, professional look.</p>
             </div>
             <div class="service-card tilt-effect" data-animate="pop-in">
                 <div class="service-icon">🚀</div>
                 <h3>Ecosystem Integration</h3>
-                <p>We connect the dots. By linking your high-converting website directly to your optimized social channels and search profiles, we create a unified funnel that drives continuous leads.</p>
+                <p>We connect the dots. Linking your high-converting website directly to your optimized social channels.</p>
             </div>
         </div>
     </section>
@@ -163,19 +165,15 @@
         <div class="faq-container">
             <details class="faq-item" data-animate="pop-in">
                 <summary>How long does a standard website build take?</summary>
-                <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks, depending on the scope of the project and how quickly we can finalize your content and media.</div>
+                <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks.</div>
             </details>
             <details class="faq-item" data-animate="pop-in">
                 <summary>Who owns the website and the design?</summary>
-                <div class="faq-content">You fully own your website and your domain name. However, Iron Digital retains the rights to our custom design structures unless you have provided an original, exact template (not a screenshot of an existing site) that we followed perfectly.</div>
+                <div class="faq-content">You fully own your website and your domain name.</div>
             </details>
             <details class="faq-item" data-animate="pop-in">
                 <summary>What happens if I need changes after the site is live?</summary>
-                <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments. Additionally, all websites are protected by our Emergency Maintenance Warranty. This covers broken links, website crashes, and emergency takedowns for 6 months after your last subscription payment, or 3 months after a standard plan payment.</div>
-            </details>
-            <details class="faq-item" data-animate="pop-in">
-                <summary>Do you only work with businesses in Detroit?</summary>
-                <div class="faq-content">Not at all. While we are incredibly proud of our Detroit roots and local hustle, we build digital ecosystems for businesses, brands, and individuals worldwide, including international clients.</div>
+                <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments.</div>
             </details>
         </div>
     </section>
@@ -183,40 +181,42 @@
     <div class="contact-wrapper" id="contact" data-animate="pop-in">
         <div class="section-container" style="padding: 0 20px;">
             <h2 class="section-title">Submit Your Project Request</h2>
+            
             <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
                     </div>
                 </div>
+                
                 <div class="form-group">
-        <label>Project Type</label>
-        <div class="custom-select-wrapper">
-            <div class="custom-select-trigger">
-                <span>Select an Option</span>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="custom-options">
-                <span class="custom-option" data-value="starter">Starter Build</span>
-                <span class="custom-option" data-value="standard">Standard Subscription</span>
-                <span class="custom-option" data-value="growth">Growth Subscription</span>
-                <span class="custom-option" data-value="premium">Premium Subscription</span>
-            </div>
-        </div>
-        <input type="hidden" id="project-type" name="project-type" required>
-    </div>
+                    <label>Project Type</label>
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select-trigger">
+                            <span>Select an Option</span>
+                            <div class="arrow">▼</div>
+                        </div>
+                        <div class="custom-options">
+                            <span class="custom-option" data-value="starter">Starter Build</span>
+                            <span class="custom-option" data-value="standard">Standard Subscription</span>
+                            <span class="custom-option" data-value="growth">Growth Subscription</span>
+                            <span class="custom-option" data-value="premium">Premium Subscription</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="project-type" name="project-type" required>
                 </div>
+
                 <div class="form-group">
                     <label for="message">Project Details</label>
                     <textarea id="message" name="message" placeholder="Tell us a bit about your business and goals..." required></textarea>
                 </div>
                 
-                <p style="font-size: 0.85rem; color: #555; margin: 0; font-style: italic; text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; font-style: italic; text-align: center;">
                     *Have photos or design inspiration? We will grab those from you via email after you submit your request!
                 </p>
 
