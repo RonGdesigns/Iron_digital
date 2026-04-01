@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design Templates | Iron Digital</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    
     <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -20,117 +24,157 @@
         </a>
         <ul>
             <li><a href="about.html">About</a></li>
-            <li><a href="templates.html" style="color: var(--accent-blue);">Templates</a></li>
+            <li><a href="templates.html">Templates</a></li>
             <li><a href="index.html#pricing">Pricing</a></li>
-            <li><a href="start.html" class="nav-cta-button" style="background-color: #00d4ff; color: #000; padding: 10px 20px; border-radius: 25px; font-weight: bold; text-decoration: none;">Start a Project</a></li>
+            <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
         </ul>
     </nav>
 
-    <div style="padding-top: 60px;">
-        <section id="templates" class="section-container">
-            <h2 class="section-title">Design Inspiration</h2>
-            <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
-            
-            <div class="template-card">
-                
-                <div class="video-hover-card" onclick="openVideoModal('template1.mp4')">
-                    <img src="template1.png" alt="Creative Portfolio" class="video-placeholder">
-                    
-                    <video class="hover-vid" src="template1.mp4" muted loop playsinline 
-                           onmouseover="this.play(); this.style.opacity=1;" 
-                           onmouseout="this.pause(); this.currentTime=0; this.style.opacity=0;"></video>
-                           
-                    <div class="play-overlay">&#9658;</div>
-                </div>
+    <div class="section-container" style="padding-bottom: 20px;">
+        <h2 class="section-title">Design Inspiration</h2>
+        <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
+    </div>
 
-                <div class="mini-gallery-container">
-                    <button class="gallery-btn" onclick="changeImage(-1, 'gallery1')">&#10094;</button>
-                    
-                    <div class="gallery-viewport" onclick="openModal(document.getElementById('gallery1-img').src)">
-                        <img id="gallery1-img" src="template1.png" alt="Template Screenshots">
-                    </div>
-                    
-                    <button class="gallery-btn" onclick="changeImage(1, 'gallery1')">&#10095;</button>
-                </div>
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
 
-                <div class="template-info">
+    <div id="videoModal" class="modal">
+        <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+        <video class="modal-content" id="expandedVideo" controls playsinline></video>
+    </div>
+
+    <div class="template-bento-section">
+        <div class="bento-grid">
+            <div class="bento-card feature-card tilt-effect" data-animate="pop-in" onclick="openVideoModal('template1.mp4')">
+                <video src="template1.mp4" muted loop autoplay playsinline></video>
+                <div class="bento-play-btn">&#9658;</div>
+                <div class="bento-text-content">
                     <h3>Creative Portfolio</h3>
                     <p>Bold typography and dynamic masonry image grids.</p>
                 </div>
             </div>
-                <div class="template-info">
-                    <h3>Creative Portfolio</h3>
-                    <p>Bold typography and dynamic masonry image grids.</p>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template1.1.png')">
+                <img src="template1.1.png" alt="Screenshot 1">
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template1.2.png')">
+                <img src="template1.2.png" alt="Screenshot 2">
+            </div>
+            <div class="bento-card wide-card tilt-effect" data-animate="pop-in" onclick="openModal('template1.3.png')">
+                <img src="template1.3.png" alt="Screenshot 3">
+            </div>
+        </div>
+    </div>
+
+    <div class="template-bento-section">
+        <div class="bento-grid">
+            <div class="bento-card feature-card tilt-effect" data-animate="pop-in" onclick="openVideoModal('template2.mp4')">
+                <img src="template_2.png" alt="Clean E-Commerce Placeholder">
+                <div class="bento-play-btn">&#9658;</div>
+                <div class="bento-text-content">
+                    <h3>Clean E-Commerce</h3>
+                    <p>Sleek product grids and seamless checkout flow.</p>
                 </div>
             </div>
-                
-                <div class="template-card">
-                    <div class="template-image-link">
-                        <img src="template_2.png" alt="Clean E-Commerce Website Template">
-                    </div>
-                    <div class="template-info">
-                        <h3>Clean E-Commerce</h3>
-                        <p>Sleek product grids and seamless checkout flow.</p>
-                    </div>
-                </div>
-                <div class="template-card">
-                    <div class="template-image-link">
-                        <img src="template_3.png" alt="Corporate Landing Page Website Template">
-                    </div>
-                    <div class="template-info">
-                        <h3>Corporate Landing</h3>
-                        <p>Trust-building layout focused on professional B2B services.</p>
-                    </div>
-                </div>
-                <div class="template-card">
-                    <div class="template-image-link">
-                        <img src="template_4.png" alt="Local Business Website Template">
-                    </div>
-                    <div class="template-info">
-                        <h3>Local Business</h3>
-                        <p>Clear service menus and built-in booking/map integration.</p>
-                    </div>
-                </div>
-                
-                <div class="template-card">
-                
-                <div class="video-hover-card" onclick="openVideoModal('template5.mp4')">
-                    <img src="template5.png" alt="Tech SaaS Startup" class="video-placeholder">
-                    
-                    <video class="hover-vid" src="template5.mp4" muted loop playsinline 
-                           onmouseover="this.play(); this.style.opacity=1;" 
-                           onmouseout="this.pause(); this.currentTime=0; this.style.opacity=0;"></video>
-                           
-                    <div class="play-overlay">&#9658;</div>
-                </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_2.png')">
+                <img src="template_2.png" alt="Screenshot 1">
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_2.png')">
+                <img src="template_2.png" alt="Screenshot 2">
+            </div>
+            <div class="bento-card wide-card tilt-effect" data-animate="pop-in" onclick="openModal('template_2.png')">
+                <img src="template_2.png" alt="Screenshot 3">
+            </div>
+        </div>
+    </div>
 
-                <div class="mini-gallery-container">
-                    <button class="gallery-btn" onclick="changeImage(-1, 'gallery5')">&#10094;</button>
-                    
-                    <div class="gallery-viewport" onclick="openModal(document.getElementById('gallery5-img').src)">
-                        <img id="gallery5-img" src="template5.png" alt="Template Screenshots">
-                    </div>
-                    
-                    <button class="gallery-btn" onclick="changeImage(1, 'gallery5')">&#10095;</button>
+    <div class="template-bento-section">
+        <div class="bento-grid">
+            <div class="bento-card feature-card tilt-effect" data-animate="pop-in" onclick="openVideoModal('template3.mp4')">
+                <img src="template_3.png" alt="Corporate Landing Placeholder">
+                <div class="bento-play-btn">&#9658;</div>
+                <div class="bento-text-content">
+                    <h3>Corporate Landing</h3>
+                    <p>Trust-building layout focused on professional B2B services.</p>
                 </div>
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_3.png')">
+                <img src="template_3.png" alt="Screenshot 1">
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_3.png')">
+                <img src="template_3.png" alt="Screenshot 2">
+            </div>
+            <div class="bento-card wide-card tilt-effect" data-animate="pop-in" onclick="openModal('template_3.png')">
+                <img src="template_3.png" alt="Screenshot 3">
+            </div>
+        </div>
+    </div>
 
-                <div class="template-info">
+    <div class="template-bento-section">
+        <div class="bento-grid">
+            <div class="bento-card feature-card tilt-effect" data-animate="pop-in" onclick="openVideoModal('template4.mp4')">
+                <img src="template_4.png" alt="Local Business Placeholder">
+                <div class="bento-play-btn">&#9658;</div>
+                <div class="bento-text-content">
+                    <h3>Local Business</h3>
+                    <p>Clear service menus and built-in booking/map integration.</p>
+                </div>
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_4.png')">
+                <img src="template_4.png" alt="Screenshot 1">
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_4.png')">
+                <img src="template_4.png" alt="Screenshot 2">
+            </div>
+            <div class="bento-card wide-card tilt-effect" data-animate="pop-in" onclick="openModal('template_4.png')">
+                <img src="template_4.png" alt="Screenshot 3">
+            </div>
+        </div>
+    </div>
+
+    <div class="template-bento-section">
+        <div class="bento-grid">
+            <div class="bento-card feature-card tilt-effect" data-animate="pop-in" onclick="openVideoModal('template5.mp4')">
+                <video src="template5.mp4" muted loop autoplay playsinline></video>
+                <div class="bento-play-btn">&#9658;</div>
+                <div class="bento-text-content">
                     <h3>Tech SaaS Startup</h3>
                     <p>Feature highlights and high-converting trial funnels.</p>
                 </div>
             </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template5.1.png')">
+                <img src="template5.1.png" alt="Screenshot 1">
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template5.2.png')">
+                <img src="template5.2.png" alt="Screenshot 2">
+            </div>
+            <div class="bento-card wide-card tilt-effect" data-animate="pop-in" onclick="openModal('template5.3.png')">
+                <img src="template5.3.png" alt="Screenshot 3">
+            </div>
+        </div>
+    </div>
 
-                <div class="template-card">
-                    <div class="template-image-link">
-                        <img src="template_6.png" alt="Elegant Publication Website Template">
-                    </div>
-                    <div class="template-info">
-                        <h3>Elegant Publication</h3>
-                        <p>Readability-focused article feeds for modern blogs.</p>
-                    </div>
+    <div class="template-bento-section">
+        <div class="bento-grid">
+            <div class="bento-card feature-card tilt-effect" data-animate="pop-in" onclick="openVideoModal('template6.mp4')">
+                <img src="template_6.png" alt="Elegant Publication Placeholder">
+                <div class="bento-play-btn">&#9658;</div>
+                <div class="bento-text-content">
+                    <h3>Elegant Publication</h3>
+                    <p>Readability-focused article feeds for modern blogs.</p>
                 </div>
             </div>
-        </section>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_6.png')">
+                <img src="template_6.png" alt="Screenshot 1">
+            </div>
+            <div class="bento-card tilt-effect" data-animate="pop-in" onclick="openModal('template_6.png')">
+                <img src="template_6.png" alt="Screenshot 2">
+            </div>
+            <div class="bento-card wide-card tilt-effect" data-animate="pop-in" onclick="openModal('template_6.png')">
+                <img src="template_6.png" alt="Screenshot 3">
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -140,79 +184,12 @@
             <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
         </div>
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
-        
     </footer>
 
+    <script src="main.js"></script>
+
     <script>
-        /// --- 1. Image Gallery Logic (Bulletproof Array Swapping) ---
-        const galleries = {
-            'gallery1': {
-                images: ['template1.png', 'template1.1.png', 'template1.2.png', 'template1.3.png'],
-                currentIndex: 0
-            },
-            // NEW: Added Template 5 images here!
-            'gallery5': {
-                images: ['template5.png', 'template5.1.png', 'template5.2.png', 'template5.3.png'],
-                currentIndex: 0
-            }
-        };
-
-        function changeImage(direction, galleryId) {
-            const gal = galleries[galleryId];
-            gal.currentIndex += direction;
-            
-            // If they click past the end, loop back to the start. If they click backward from the start, go to the end.
-            if (gal.currentIndex >= gal.images.length) {
-                gal.currentIndex = 0;
-            } else if (gal.currentIndex < 0) {
-                gal.currentIndex = gal.images.length - 1;
-            }
-            
-            // Instantly swap the image source on the screen
-            document.getElementById(galleryId + '-img').src = gal.images[gal.currentIndex];
-        }
-
-        // --- 2. Image Modal Logic (For the big popup) ---
-        function openModal(src) {
-            document.getElementById("imageModal").style.display = "flex";
-            document.getElementById("expandedImg").src = src;
-        }
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-
-        // --- 3. Video Modal Logic (Big popup + Slow Motion) ---
-        function openVideoModal(videoSrc) {
-            const modal = document.getElementById("videoModal");
-            const video = document.getElementById("expandedVideo");
-            
-            modal.style.display = "flex";
-            video.src = videoSrc;
-            
-            // Slows the video playback down to 65% as requested
-            video.playbackRate = 0.65; 
-            video.play();
-        }
-        function closeVideoModal() {
-            const modal = document.getElementById("videoModal");
-            const video = document.getElementById("expandedVideo");
-            
-            modal.style.display = "none";
-            video.pause();
-            video.src = ""; // Clears the source so it fully stops in the background
-        }
-
-        // --- 4. Close Modals when clicking the dark background ---
-        window.onclick = function(event) {
-            const imageModal = document.getElementById("imageModal");
-            const videoModal = document.getElementById("videoModal");
-            if (event.target == imageModal) {
-                closeModal();
-            }
-            if (event.target == videoModal) {
-                closeVideoModal();
-            }
-        }
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
 </body>
 </html>
