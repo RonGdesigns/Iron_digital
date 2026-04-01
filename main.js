@@ -111,4 +111,36 @@ document.addEventListener("DOMContentLoaded", (event) => {
             });
         });
     }
+    // Magnetic Button Effect for CTA
+const magneticBtn = document.querySelector('.cta-button');
+
+if(magneticBtn && typeof gsap !== 'undefined') {
+    magneticBtn.addEventListener('mousemove', (e) => {
+        const rect = magneticBtn.getBoundingClientRect();
+        const h = rect.width / 2;
+        const v = rect.height / 2;
+        
+        // Calculate distance from center
+        const x = e.clientX - rect.left - h;
+        const y = e.clientY - rect.top - v;
+        
+        // Subtle pull effect towards the cursor
+        gsap.to(magneticBtn, {
+            x: x * 0.4, // multiplier controls the strength of the pull
+            y: y * 0.4,
+            duration: 0.4,
+            ease: 'power3.out'
+        });
+    });
+
+    // Snap back to place when cursor leaves
+    magneticBtn.addEventListener('mouseleave', () => {
+        gsap.to(magneticBtn, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: 'elastic.out(1, 0.3)' // Gives it that satisfying "snap"
+        });
+    });
+}
 });
