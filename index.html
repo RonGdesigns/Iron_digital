@@ -6,6 +6,9 @@
     <title>Iron Digital | Detroit Digital Ecosystem</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -20,24 +23,24 @@
         </a>
         <ul>
             <li><a href="about.html">About</a></li>
-           <li><a href="templates.html">Templates</a></li>
+            <li><a href="templates.html">Templates</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="start.html" class="nav-cta-button" style="background-color: #00d4ff; color: #000; padding: 10px 20px; border-radius: 25px; font-weight: bold; text-decoration: none;">Start a Project</a></li>
         </ul>
     </nav>
 
-    <section class="hero">
+    <section class="hero" data-animate="pop-in">
         <h1>Elevating Your<br><span>Digital Presence</span></h1>
         <p>Custom, modern websites tailored for business growth. Clean, responsive, and professional.</p>
         <a href="start.html" class="cta-button">Get A Quote &rarr;</a>
     </section>
 
     <section id="pricing" class="section-container">
-        <h2 class="section-title">Pricing Plans</h2>
-        <p class="section-subtitle">Transparent pricing designed for scale.</p>
+        <h2 class="section-title" data-animate="pop-in">Pricing Plans</h2>
+        <p class="section-subtitle" data-animate="pop-in">Transparent pricing designed for scale.</p>
 
         <div class="pricing-grid">
-            <div class="pricing-card">
+            <div class="pricing-card tilt-effect" data-animate="pop-in">
                 <h3>Starter Build</h3>
                 <div class="price">$1,000</div>
                 <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
@@ -53,7 +56,7 @@
                 </ul>
             </div>
             
-            <div class="pricing-card">
+            <div class="pricing-card tilt-effect" data-animate="pop-in">
                 <h3>Standard</h3>
                 <div class="price">$99<span style="font-size: 1.2rem;">/mo</span></div>
                 <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
@@ -70,7 +73,7 @@
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
             </div>
             
-            <div class="pricing-card featured">
+            <div class="pricing-card featured tilt-effect" data-animate="pop-in">
                 <div class="recommended-badge">Recommended</div>
                 <h3>Growth</h3>
                 <div class="price">$199<span style="font-size: 1.2rem;">/mo</span></div>
@@ -88,7 +91,7 @@
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
             </div>
             
-            <div class="pricing-card">
+            <div class="pricing-card tilt-effect" data-animate="pop-in">
                 <h3>Premium</h3>
                 <div class="price">$399<span style="font-size: 1.2rem;">/mo</span></div>
                 <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
@@ -109,21 +112,21 @@
     </section>
     
     <section id="services" class="section-container">
-        <h2 class="section-title">Beyond Web Design</h2>
-        <p class="section-subtitle">We don't just build websites; we engineer your complete digital footprint to maximize visibility, trust, and conversions.</p>
+        <h2 class="section-title" data-animate="pop-in">Beyond Web Design</h2>
+        <p class="section-subtitle" data-animate="pop-in">We don't just build websites; we engineer your complete digital footprint to maximize visibility, trust, and conversions.</p>
         
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card tilt-effect" data-animate="pop-in">
                 <div class="service-icon">🌐</div>
                 <h3>Google Business Optimization</h3>
                 <p>Dominate local search. We fully optimize your Google Business Profile so you show up first on Google Maps and local search results when customers are looking for your services.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card tilt-effect" data-animate="pop-in">
                 <div class="service-icon">📱</div>
                 <h3>Social Media Branding</h3>
                 <p>First impressions matter. We optimize and brand your social media profiles (Facebook, Instagram, LinkedIn) to create a cohesive, professional look that builds instant credibility.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card tilt-effect" data-animate="pop-in">
                 <div class="service-icon">🚀</div>
                 <h3>Ecosystem Integration</h3>
                 <p>We connect the dots. By linking your high-converting website directly to your optimized social channels and search profiles, we create a unified funnel that drives continuous leads.</p>
@@ -132,29 +135,29 @@
     </section>
 
     <section id="faq" class="section-container">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-subtitle">Everything you need to know about working with Iron Digital.</p>
+        <h2 class="section-title" data-animate="pop-in">Frequently Asked Questions</h2>
+        <p class="section-subtitle" data-animate="pop-in">Everything you need to know about working with Iron Digital.</p>
         <div class="faq-container">
-            <details class="faq-item">
+            <details class="faq-item" data-animate="pop-in">
                 <summary>How long does a standard website build take?</summary>
                 <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks, depending on the scope of the project and how quickly we can finalize your content and media.</div>
             </details>
-            <details class="faq-item">
+            <details class="faq-item" data-animate="pop-in">
                 <summary>Who owns the website and the design?</summary>
                 <div class="faq-content">You fully own your website and your domain name. However, Iron Digital retains the rights to our custom design structures unless you have provided an original, exact template (not a screenshot of an existing site) that we followed perfectly.</div>
             </details>
-            <details class="faq-item">
+            <details class="faq-item" data-animate="pop-in">
                 <summary>What happens if I need changes after the site is live?</summary>
                 <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments. Additionally, all websites are protected by our Emergency Maintenance Warranty. This covers broken links, website crashes, and emergency takedowns for 6 months after your last subscription payment, or 3 months after a standard plan payment.</div>
             </details>
-            <details class="faq-item">
+            <details class="faq-item" data-animate="pop-in">
                 <summary>Do you only work with businesses in Detroit?</summary>
                 <div class="faq-content">Not at all. While we are incredibly proud of our Detroit roots and local hustle, we build digital ecosystems for businesses, brands, and individuals worldwide, including international clients.</div>
             </details>
         </div>
     </section>
 
-    <div class="contact-wrapper" id="contact">
+    <div class="contact-wrapper" id="contact" data-animate="pop-in">
         <div class="section-container" style="padding: 0 20px;">
             <h2 class="section-title">Submit Your Project Request</h2>
             <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
@@ -201,56 +204,10 @@
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
+    <script src="main.js"></script>
+
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Hover Logic for the Card
-        const videoCard = document.querySelector(".video-hover-card");
-        const hoverVideo = videoCard ? videoCard.querySelector(".hover-vid") : null;
-
-        // Modal Logic
-        const videoModal = document.getElementById("videoModal");
-        const modalVideo = document.getElementById("modalVideo");
-        const closeBtn = document.querySelector(".video-close");
-
-        if (videoCard && hoverVideo && videoModal && modalVideo) {
-            
-            // 1. Play small video on hover
-            videoCard.addEventListener("mouseenter", function() {
-                hoverVideo.play();
-            });
-
-            // 2. Pause small video when mouse leaves
-            videoCard.addEventListener("mouseleave", function() {
-                hoverVideo.pause();
-                hoverVideo.currentTime = 0; 
-            });
-
-            // 3. Open Modal and play BIG video on click
-            videoCard.addEventListener("click", function(e) {
-                e.preventDefault(); // Prevents any default link behavior
-                videoModal.classList.add("show");
-                
-                // Pause the tiny background hover video
-                hoverVideo.pause(); 
-                
-                // Play the large modal video
-                modalVideo.play();
-            });
-
-            // 4. Close Modal logic
-            videoModal.addEventListener("click", function(e) {
-                // If they click the background, the close button, or the video itself
-                if (e.target === videoModal || e.target === modalVideo || e.target === closeBtn) {
-                    videoModal.classList.remove("show");
-                    modalVideo.pause();
-                    modalVideo.currentTime = 0; // Rewind the video
-                }
-            });
-        }
-    });
-
-    // Chatbase Script
-    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
 </body>
 </html>
