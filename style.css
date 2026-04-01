@@ -217,26 +217,80 @@ nav a:hover { color: var(--accent-blue); }
 .faq-item[open] summary::after { transform: rotate(45deg); }
 .faq-content { padding: 0 20px 20px 20px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
 
-/* Contact Section */
-.contact-wrapper { background-color: #ffffff; width: 100%; padding: 80px 0; }
-.contact-wrapper .section-title { color: #000000; text-transform: uppercase; font-size: 2.2rem; margin-bottom: 40px; }
-.light-contact-form { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+/* Contact Section - Upgraded to Dark Glassmorphism */
+.contact-wrapper { 
+    background-color: transparent; /* Removed the harsh white */
+    width: 100%; 
+    padding: 80px 0; 
+}
+.contact-wrapper .section-title { 
+    color: var(--text-main); /* Match global text */
+}
+.light-contact-form { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 25px; 
+    
+    /* Apply Glassmorphism to the form container itself */
+    background-color: rgba(17, 34, 64, 0.6); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 20px; 
+    padding: 50px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
 .form-row { display: flex; gap: 20px; }
 .form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.light-contact-form label { font-size: 0.85rem; color: #000000; font-weight: 700; text-transform: uppercase; }
+.light-contact-form label { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
 
-/* Cleaned up Input CSS */
+/* Inputs converted to dark mode */
 .light-contact-form input[type="text"], 
 .light-contact-form input[type="email"], 
-.light-contact-form select { 
-    width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 30px; font-size: 1rem; box-sizing: border-box; font-family: inherit; 
-}
+.light-contact-form select,
 .light-contact-form textarea { 
-    width: 100%; padding: 15px 20px; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 15px; font-size: 1rem; box-sizing: border-box; min-height: 120px; resize: vertical; font-family: inherit; 
+    width: 100%; 
+    padding: 15px 20px; 
+    background-color: rgba(7, 14, 26, 0.8); /* Dark input backgrounds */
+    border: 1px solid #1a365d; 
+    color: var(--text-main);
+    border-radius: 12px; 
+    font-size: 1rem; 
+    box-sizing: border-box; 
+    font-family: inherit; 
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
-.light-contact-form input:focus, .light-contact-form select:focus, .light-contact-form textarea:focus { outline: none; border-color: var(--accent-blue); }
-.light-contact-form .submit-btn { background-color: #12c2e9; color: #ffffff; padding: 18px; border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: background-color 0.3s, transform 0.2s; width: 100%; margin-top: 10px; }
-.light-contact-form .submit-btn:hover { background-color: #0fb2d8; transform: translateY(-2px); }
+.light-contact-form textarea { min-height: 120px; resize: vertical; }
+
+.light-contact-form input:focus, 
+.light-contact-form select:focus, 
+.light-contact-form textarea:focus { 
+    outline: none; 
+    border-color: var(--accent-blue); 
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2); /* Glow on focus */
+}
+
+.light-contact-form .submit-btn { 
+    background-color: var(--accent-blue); 
+    color: #000; 
+    padding: 18px; 
+    border: none; 
+    border-radius: 30px; 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; 
+    width: 100%; 
+    margin-top: 10px; 
+}
+.light-contact-form .submit-btn:hover { 
+    background-color: #0fb2d8; 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+}}
 
 /* Footer */
 footer { text-align: center; padding: 30px; background-color: #050a13; color: var(--text-muted); border-top: 1px solid #112240; font-size: 0.9rem; }
@@ -529,4 +583,44 @@ footer { text-align: center; padding: 30px; background-color: #050a13; color: va
 @media (min-width: 768px) {
     .feature-card { grid-column: span 2; grid-row: span 2; }
     .wide-card { grid-column: span 2; }
+}
+/* Trust Marquee Styles */
+.trust-marquee-container {
+    padding: 30px 0;
+    background: rgba(7, 14, 26, 0.8);
+    border-top: 1px solid #112240;
+    border-bottom: 1px solid #112240;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.trust-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-marquee 20s linear infinite; /* CSS-only performant animation */
+}
+.marquee-content {
+    display: flex;
+    gap: 60px;
+    padding: 0 30px;
+}
+.marquee-content span {
+    color: #4a5d7c;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+.marquee-content span:hover {
+    color: var(--accent-blue); /* Micro-interaction on hover */
+}
+@keyframes scroll-marquee {
+    to { transform: translateX(-50%); }
 }
