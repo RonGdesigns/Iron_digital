@@ -146,3 +146,37 @@ if(magneticBtn && typeof gsap !== 'undefined') {
     });
 }
 });
+// Custom Select Dropdown Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const customSelects = document.querySelectorAll('.custom-select-wrapper');
+
+    customSelects.forEach(wrapper => {
+        const trigger = wrapper.querySelector('.custom-select-trigger');
+        const options = wrapper.querySelectorAll('.custom-option');
+        const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
+
+        trigger.addEventListener('click', function() {
+            wrapper.classList.toggle('open');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                // Update trigger text
+                trigger.querySelector('span').textContent = this.textContent;
+                // Update hidden input value for the form submission
+                hiddenInput.value = this.getAttribute('data-value');
+                // Close dropdown
+                wrapper.classList.remove('open');
+                // Optional: Highlight selected text
+                trigger.querySelector('span').style.color = "var(--text-main)";
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!wrapper.contains(e.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+    });
+});
