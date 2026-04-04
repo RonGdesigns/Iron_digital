@@ -72,11 +72,15 @@
         </ul>
     </nav>
 
-    <section class="hero" data-animate="pop-in">
-        <h1>Elevating Your<br><span>Digital Presence</span></h1>
-        <p>Custom, modern websites tailored for business growth. Clean, responsive, and professional.</p>
-        <a href="#contact" class="cta-button">Get A Quote &rarr;</a>
-    </section>
+    <section class="hero" style="position: relative; overflow: hidden; z-index: 1;">
+    <canvas id="iron-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></canvas>
+    
+    <div style="position: relative; z-index: 2; pointer-events: none;">
+        <h1 class="kinetic-text">Elevating Your<br><span>Digital Presence</span></h1>
+        <p>Custom, modern websites tailored for business growth.</p>
+        <a href="#contact" class="cta-button" style="pointer-events: auto;">Get A Quote &rarr;</a>
+    </div>
+</section>
 
     <div class="trust-marquee-container">
         <p class="trust-text">TRUSTED BY DETROIT'S GROWING BRANDS</p>
