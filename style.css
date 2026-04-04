@@ -862,26 +862,28 @@ video.modal-content {
     }
 }
 /* Hide default cursor */
-body { cursor: none; }
+body { cursor: none !important; }
 
-/* Custom Cursor */
+/* The True Magnetic Cursor */
 .custom-cursor {
     position: fixed;
     top: 0; left: 0;
     width: 20px; height: 20px;
-    background-color: var(--accent-blue);
+    background-color: #ffffff; /* Must be white for difference blending */
     border-radius: 50%;
-    pointer-events: none; /* Let clicks pass through */
-    z-index: 9999;
-    mix-blend-mode: difference; /* Creates a beautiful inversion effect over white text */
-    transition: width 0.3s, height 0.3s;
+    pointer-events: none; /* Crucial: lets clicks pass through to the buttons */
+    z-index: 99999; /* Absolute top layer */
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%); /* Centers the point of interaction */
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                background-color 0.3s;
 }
 
-/* When hovering over buttons */
 .custom-cursor.hovering {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background-color: transparent;
-    border: 2px solid var(--accent-blue);
+    border: 2px solid #ffffff;
 }
 
