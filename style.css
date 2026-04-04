@@ -861,3 +861,27 @@ video.modal-content {
         font-size: 1.2rem !important;
     }
 }
+/* Hide default cursor */
+body { cursor: none; }
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 20px; height: 20px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    pointer-events: none; /* Let clicks pass through */
+    z-index: 9999;
+    mix-blend-mode: difference; /* Creates a beautiful inversion effect over white text */
+    transition: width 0.3s, height 0.3s;
+}
+
+/* When hovering over buttons */
+.custom-cursor.hovering {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: 2px solid var(--accent-blue);
+}
+
