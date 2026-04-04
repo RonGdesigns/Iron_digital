@@ -232,3 +232,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// ==========================================
+// LIQUID IRON WEBGL SHADER (THREE.JS)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof THREE !== 'undefined' && document.getElementById('iron-canvas')) {
+        const canvas = document.getElementById('iron-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create a highly detailed plane for fluid distortion
+        const geometry = new THREE.PlaneGeometry(10, 10, 128, 128);
+        
+        // Custom GLSL Shader Material
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0.0 },
+                uColorMain: { value: new THREE.Color('#070e1a') },
+                uColorAccent: { value: new THREE.Color('#00d4ff') }
+            },
+            vertexShader: `
+                uniform float uTime;
+                varying vec2 vUv;
+                varying float vElevation;
+                void main() {
+                    vUv = uv;
+                    // Create fluid undulation using sine waves
+                    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+                    float elevation = sin(modelPosition.x * 2.0 + uTime) * 0.2 
+                                    + sin(modelPosition.y * 1.5 + uTime * 0.8) * 0.2;
+                    modelPosition.z += elevation;
+                    vElevation = elevation;
+                    gl_Position = projectionMatrix * viewMatrix * modelPosition;
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 uColorMain;
+                uniform vec3 uColorAccent;
+                varying float vElevation;
+                void main() {
+                    // Mix the dark iron and cyan thermal glow based on height
+                    float mixStrength = (vElevation + 0.4) * 0.8;
+                    vec3 finalColor = mix(uColorMain, uColorAccent, mixStrength);
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `,
+            wireframe: false // Change to true if you want a brutalist digital grid look
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        plane.rotation.x = -Math.PI * 0.2; // Tilt it back slightly
+        scene.add(plane);
+        camera.position.z = 2;
+
+        // Render Loop
+        const clock = new THREE.Clock();
+        function animate() {
+            const elapsedTime = clock.getElapsedTime();
+            material.uniforms.uTime.value = elapsedTime * 0.4; // Speed of the fluid
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Handle Resizing
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    }
+});
