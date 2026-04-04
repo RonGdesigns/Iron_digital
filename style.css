@@ -898,3 +898,29 @@ body { cursor: none !important; }
 @media (max-width: 768px) {
     .kinetic-text { font-size: 3rem; }
 }
+// ==========================================
+// KINETIC VARIABLE TYPOGRAPHY
+// ==========================================
+// This requires GSAP ScrollTrigger and Lenis smooth scrolling to be active
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    const kineticText = document.querySelector('.kinetic-text');
+    
+    if (kineticText) {
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: (self) => {
+                // Get scroll velocity (how fast the user is scrolling)
+                let velocity = Math.abs(self.getVelocity());
+                
+                // Map velocity to font weight. 
+                // Idle = 800 (Heavy). Max Scroll Speed = 400 (Thin).
+                let newWeight = gsap.utils.clamp(400, 800, 800 - (velocity * 0.5));
+                
+                // Apply the physical weight change to the DOM
+                kineticText.style.fontVariationSettings = `"wght" ${newWeight}`;
+            }
+        });
+    }
+}
