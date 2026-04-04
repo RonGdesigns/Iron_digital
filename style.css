@@ -887,3 +887,14 @@ body { cursor: none !important; }
     border: 2px solid #ffffff;
 }
 
+.kinetic-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem; /* Make it massive */
+    line-height: 1.1;
+    font-variation-settings: "wght" 800; /* Default to maximum thickness */
+    transition: font-variation-settings 0.1s ease-out; /* Smooth the morphing */
+}
+
+@media (max-width: 768px) {
+    .kinetic-text { font-size: 3rem; }
+}
