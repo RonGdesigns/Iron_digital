@@ -12,7 +12,7 @@ gsap.ticker.add((time)=>{
 });
 gsap.ticker.lagSmoothing(0, 0);
 
-// 0.5. KINETIC SCROLL VELOCITY
+// 0.2. KINETIC SCROLL VELOCITY
 let proxy = { skew: 0 },
     skewSetter = gsap.quickSetter(".pricing-card, .hero h1", "skewY", "deg"),
     clamp = gsap.utils.clamp(-15, 15); // Don't let it distort too much
@@ -31,6 +31,26 @@ ScrollTrigger.create({
       });
     }
   }
+});
+
+// 0.3. FLUID CUSTOM CURSOR
+const cursor = document.querySelector('.custom-cursor');
+const interactables = document.querySelectorAll('a, button, .cta-button, .pricing-card');
+
+// Move cursor
+window.addEventListener('mousemove', (e) => {
+    gsap.to(cursor, {
+        x: e.clientX - cursor.offsetWidth / 2,
+        y: e.clientY - cursor.offsetHeight / 2,
+        duration: 0.15, // Slight lag for a fluid feel
+        ease: "power2.out"
+    });
+});
+
+// Snap and expand on hover
+interactables.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
 // ==========================================
 // 1. MODAL LOGIC (Images & Videos)
