@@ -11,6 +11,27 @@ gsap.ticker.add((time)=>{
   lenis.raf(time * 1000);
 });
 gsap.ticker.lagSmoothing(0, 0);
+
+// 0.5. KINETIC SCROLL VELOCITY
+let proxy = { skew: 0 },
+    skewSetter = gsap.quickSetter(".pricing-card, .hero h1", "skewY", "deg"),
+    clamp = gsap.utils.clamp(-15, 15); // Don't let it distort too much
+
+ScrollTrigger.create({
+  onUpdate: (self) => {
+    let skew = clamp(self.getVelocity() / -100);
+    if (Math.abs(skew) > Math.abs(proxy.skew)) {
+      proxy.skew = skew;
+      gsap.to(proxy, {
+        skew: 0,
+        duration: 0.8,
+        ease: "power3",
+        overwrite: true,
+        onUpdate: () => skewSetter(proxy.skew)
+      });
+    }
+  }
+});
 // ==========================================
 // 1. MODAL LOGIC (Images & Videos)
 // ==========================================
