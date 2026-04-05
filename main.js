@@ -307,3 +307,56 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+// ==========================================
+// 1. THE MAGNETIC SPOTLIGHT CURSOR
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.querySelector('.custom-cursor');
+    const interactables = document.querySelectorAll('a, button, .cta-button, .pricing-card, .custom-select-trigger');
+
+    // If the device has a mouse, run the custom cursor logic
+    if (cursor && window.matchMedia("(pointer: fine)").matches) {
+        
+        // Track the mouse and animate the cursor div
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.15, // This creates the premium "heavy" trailing effect
+                ease: "power2.out"
+            });
+        });
+
+        // Add the expanding hover effect when touching links or buttons
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+    }
+});
+
+// ==========================================
+// 2. KINETIC VARIABLE TYPOGRAPHY
+// ==========================================
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    const kineticText = document.querySelector('.kinetic-text');
+    
+    if (kineticText) {
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            onUpdate: (self) => {
+                // Get scroll velocity
+                let velocity = Math.abs(self.getVelocity());
+                
+                // Map velocity to font weight (800 is idle, 400 is max speed)
+                let newWeight = gsap.utils.clamp(400, 800, 800 - (velocity * 0.5));
+                
+                // Apply the physical weight change to the DOM
+                kineticText.style.fontVariationSettings = `"wght" ${newWeight}`;
+            }
+        });
+    }
+}
+
