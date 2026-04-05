@@ -32,11 +32,47 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     scroll-behavior: smooth;
+    cursor: none !important; /* Hide default cursor globally */
 }
 
 h1, h2, h3, .logo-text, .section-title {
     font-family: var(--font-heading);
     letter-spacing: -0.5px;
+}
+
+/* The True Magnetic Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 20px; 
+    height: 20px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    pointer-events: none; /* Crucial: lets clicks pass through */
+    z-index: 99999; /* Absolute top layer */
+    transform: translate(-50%, -50%); /* Centers the point of interaction */
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                background-color 0.3s;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); /* Subtle glow */
+}
+
+.custom-cursor.hovering {
+    width: 80px;
+    height: 80px;
+    background-color: transparent;
+    border: 2px solid var(--accent-blue);
+    box-shadow: none;
+}
+
+/* Kinetic Variable Typography */
+.kinetic-text {
+    font-family: var(--font-heading);
+    font-size: 5rem; 
+    line-height: 1.1;
+    font-variation-settings: "wght" 800; /* Default to maximum thickness */
+    transition: font-variation-settings 0.1s ease-out; /* Smooth the morphing */
 }
 
 /* Navigation */
@@ -112,13 +148,6 @@ nav a:hover {
     text-align: center; 
     padding: 120px 20px; 
     background: transparent; 
-}
-
-.hero h1 { 
-    font-size: 3.5rem; 
-    margin-bottom: 20px; 
-    letter-spacing: 2px; 
-    text-transform: uppercase; 
 }
 
 .hero h1 span { 
@@ -415,9 +444,7 @@ nav a:hover {
     font-size: 0.95rem; 
 }
 
-/* =========================================
-   CONTACT SECTION (Glassmorphism & Custom Select)
-   ========================================= */
+/* Contact Section */
 .contact-wrapper { 
     background-color: transparent; 
     width: 100%; 
@@ -458,7 +485,6 @@ nav a:hover {
     text-transform: uppercase; 
 }
 
-/* Premium Dark Glass Inputs */
 .light-contact-form input[type="text"], 
 .light-contact-form input[type="email"],
 .light-contact-form textarea { 
@@ -487,7 +513,6 @@ nav a:hover {
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); 
 }
 
-/* Placeholder Color Fix */
 .light-contact-form input::placeholder,
 .light-contact-form textarea::placeholder { 
     color: rgba(230, 241, 255, 0.4); 
@@ -609,9 +634,7 @@ footer {
     font-size: 0.9rem; 
 }
 
-/* ==========================================
-   BENTO GRID SYSTEM (Templates Page)
-   ========================================== */
+/* Bento Grid */
 .template-bento-section {
     max-width: 1200px;
     margin: 0 auto 100px auto;
@@ -718,9 +741,7 @@ footer {
     }
 }
 
-/* ==========================================
-   MODAL (POPUP) SYSTEM FIX - SNUG FIT UPDATE
-   ========================================== */
+/* Modals */
 .modal {
     display: none; 
     position: fixed; 
@@ -734,7 +755,6 @@ footer {
     justify-content: center;
 }
 
-/* Unified rule for both Images and Videos in the Modal */
 .modal-content, #videoModal .modal-content { 
     width: auto !important; 
     height: auto !important;
@@ -746,7 +766,6 @@ footer {
     object-fit: contain; 
 }
 
-/* Ensure the video controls area matches the border radius if possible */
 video.modal-content {
     outline: none;
     border: 1px solid var(--accent-blue);
@@ -769,9 +788,7 @@ video.modal-content {
     transform: scale(1.1);
 }
 
-/* ==========================================
-   ABOUT PAGE STYLING
-   ========================================== */
+/* About Page */
 .about-highlight {
     font-size: 1.2rem !important; 
     color: var(--text-main) !important; 
@@ -797,7 +814,6 @@ video.modal-content {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-/* SEO/Performance Fix: Disables heavy blur for low-power devices */
 @media (prefers-reduced-motion: reduce) {
     .pricing-card, .custom-options {
         backdrop-filter: none;
@@ -805,9 +821,7 @@ video.modal-content {
     }
 }
 
-/* ==========================================
-   MOBILE OVERRIDES & OPTIMIZATIONS
-   ========================================== */
+/* Mobile Overrides */
 @media (max-width: 768px) {
     .form-row { flex-direction: column; }
     
@@ -823,6 +837,7 @@ video.modal-content {
     .hero { padding: 60px 20px 40px 20px; } 
     .hero h1 { font-size: 2.2rem; margin-bottom: 15px; }
     .hero p { font-size: 1rem; margin-bottom: 30px; }
+    .kinetic-text { font-size: 3rem; }
     
     .about-content-wrapper { flex-direction: column; }
     .about-image { 
@@ -832,25 +847,21 @@ video.modal-content {
         margin-top: 30px; 
     }
     
-    /* MOBILE OPTIMIZATION: COMPACT BENTO GRID */
     .bento-grid {
-        /* Forces 2 columns on mobile instead of 1 */
         grid-template-columns: 1fr 1fr !important; 
-        /* Shrinks the standard screenshot row height so it doesn't take forever to scroll */
         grid-auto-rows: 140px !important; 
         gap: 12px !important;
     }
     
     .bento-card.feature-card {
-        grid-column: span 2 !important; /* Forces video card to be full width */
-        grid-row: span 2 !important; /* Makes the video card taller */
+        grid-column: span 2 !important; 
+        grid-row: span 2 !important; 
     }
     
     .bento-card.wide-card {
-        grid-column: span 2 !important; /* Forces the 3rd screenshot to span full width at the bottom */
+        grid-column: span 2 !important; 
     }
 
-    /* Scales down the text and play button so it fits perfectly on a phone screen */
     .bento-text-content h3 {
         font-size: 1.5rem !important; 
     }
@@ -860,41 +871,4 @@ video.modal-content {
         height: 50px !important;
         font-size: 1.2rem !important;
     }
-}
-/* Hide default cursor */
-body { cursor: none !important; }
-
-/* The True Magnetic Cursor */
-.custom-cursor {
-    position: fixed;
-    top: 0; left: 0;
-    width: 20px; height: 20px;
-    background-color: #ffffff; /* Must be white for difference blending */
-    border-radius: 50%;
-    pointer-events: none; /* Crucial: lets clicks pass through to the buttons */
-    z-index: 99999; /* Absolute top layer */
-    mix-blend-mode: difference;
-    transform: translate(-50%, -50%); /* Centers the point of interaction */
-    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                background-color 0.3s;
-}
-
-.custom-cursor.hovering {
-    width: 80px;
-    height: 80px;
-    background-color: transparent;
-    border: 2px solid #ffffff;
-}
-
-.kinetic-text {
-    font-family: 'Syne', sans-serif;
-    font-size: 5rem; /* Make it massive */
-    line-height: 1.1;
-    font-variation-settings: "wght" 800; /* Default to maximum thickness */
-    transition: font-variation-settings 0.1s ease-out; /* Smooth the morphing */
-}
-
-@media (max-width: 768px) {
-    .kinetic-text { font-size: 3rem; }
 }
