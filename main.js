@@ -5,9 +5,10 @@ let lenis;
 let animationFrameId; 
 let sfxHover, sfxClick;
 
+// THE AUDIO FIX: Using universally supported .mp3 formats
 if (typeof Howl !== 'undefined') {
-    sfxHover = new Howl({ src: ['https://actions.google.com/sounds/v1/ui/pop_up_short.ogg'], volume: 0.1 });
-    sfxClick = new Howl({ src: ['https://actions.google.com/sounds/v1/ui/button_click.ogg'], volume: 0.4 });
+    sfxHover = new Howl({ src: ['https://cdn.pixabay.com/audio/2022/03/15/audio_a16a8d3db5.mp3'], volume: 0.15 });
+    sfxClick = new Howl({ src: ['https://cdn.pixabay.com/audio/2022/03/15/audio_7314227f91.mp3'], volume: 0.4 });
 }
 
 if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
@@ -88,11 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
             interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.classList.add('hovering');
-                    if(sfxHover) sfxHover.play();
+                    if(sfxHover) sfxHover.play(); // Audio fires here
                 });
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
                 el.addEventListener('click', () => {
-                    if(sfxClick) sfxClick.play();
+                    if(sfxClick) sfxClick.play(); // Audio fires here
                 });
             });
         }
@@ -210,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cards = document.querySelectorAll('[data-animate="pop-in"]');
         cards.forEach((card, index) => {
             if (isMobile) {
-                // MOBILE: Clean, lightweight fade-in without the physical jumping (y-axis movement)
+                // MOBILE: Clean, lightweight fade-in
                 gsap.fromTo(card, 
                     { opacity: 0 },
                     { opacity: 1, duration: 0.6, ease: "power2.out", 
@@ -218,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 );
             } else {
-                // DESKTOP: Full heavy pop-in with scaling
+                // DESKTOP: Full heavy pop-in
                 gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
                     { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
                       scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
