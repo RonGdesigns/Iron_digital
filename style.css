@@ -12,12 +12,10 @@
     --font-heading: 'Syne', sans-serif;
 }
 
-/* Fixes the white flash during GSAP animations */
 html {
     background-color: var(--bg-dark); 
 }
 
-/* Global Styles */
 body {
     margin: 0;
     font-family: var(--font-body); 
@@ -32,7 +30,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     scroll-behavior: smooth;
-    cursor: none !important; /* Hide default cursor globally */
+    cursor: none !important; 
 }
 
 h1, h2, h3, .logo-text, .section-title {
@@ -49,13 +47,13 @@ h1, h2, h3, .logo-text, .section-title {
     height: 20px;
     background-color: var(--accent-blue);
     border-radius: 50%;
-    pointer-events: none; /* Crucial: lets clicks pass through */
-    z-index: 99999; /* Absolute top layer */
-    transform: translate(-50%, -50%); /* Centers the point of interaction */
+    pointer-events: none; 
+    z-index: 99999; 
+    transform: translate(-50%, -50%); 
     transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
                 height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
                 background-color 0.3s;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); /* Subtle glow */
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); 
 }
 
 .custom-cursor.hovering {
@@ -71,8 +69,8 @@ h1, h2, h3, .logo-text, .section-title {
     font-family: var(--font-heading);
     font-size: 5rem; 
     line-height: 1.1;
-    font-variation-settings: "wght" 800; /* Default to maximum thickness */
-    transition: font-variation-settings 0.1s ease-out; /* Smooth the morphing */
+    font-variation-settings: "wght" 800; 
+    transition: font-variation-settings 0.1s ease-out; 
 }
 
 /* Navigation */
@@ -123,10 +121,6 @@ nav a {
     transition: color 0.3s; 
 }
 
-nav a:hover { 
-    color: var(--accent-blue); 
-}
-
 .nav-cta-button {
     background-color: var(--accent-blue);
     color: #000 !important;
@@ -136,11 +130,6 @@ nav a:hover {
     text-decoration: none;
     transition: background-color 0.3s, transform 0.2s;
     white-space: nowrap; 
-}
-
-.nav-cta-button:hover { 
-    background-color: #0fb2d8; 
-    transform: translateY(-2px); 
 }
 
 /* Hero Section */
@@ -172,11 +161,6 @@ nav a:hover {
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.3s, transform 0.2s;
-}
-
-.cta-button:hover { 
-    background-color: #00b3d6; 
-    transform: translateY(-2px); 
 }
 
 /* Trust Marquee */
@@ -216,10 +200,6 @@ nav a:hover {
     font-size: 1.2rem; 
     text-transform: uppercase; 
     transition: color 0.3s ease; 
-}
-
-.marquee-content span:hover { 
-    color: var(--accent-blue); 
 }
 
 @keyframes scroll-marquee { 
@@ -271,19 +251,9 @@ nav a:hover {
     flex-direction: column;
 }
 
-.pricing-card:hover { 
-    transform: translateY(-5px); 
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); 
-    background-color: rgba(17, 34, 64, 0.8); 
-}
-
 .pricing-card.featured { 
     border: 2px solid var(--accent-blue); 
     transform: scale(1.03); 
-}
-
-.pricing-card.featured:hover { 
-    transform: scale(1.03) translateY(-5px); 
 }
 
 .recommended-badge {
@@ -362,14 +332,6 @@ nav a:hover {
     transition: transform 0.4s ease;
 }
 
-.service-card:hover { 
-    transform: translateY(-5px); 
-}
-
-.service-card:hover::before { 
-    transform: scaleX(1); 
-}
-
 .service-icon { 
     font-size: 2.5rem; 
     margin-bottom: 20px; 
@@ -422,9 +384,7 @@ nav a:hover {
     align-items: center; 
 }
 
-.faq-item summary::-webkit-details-marker { 
-    display: none; 
-}
+.faq-item summary::-webkit-details-marker { display: none; }
 
 .faq-item summary::after { 
     content: '+'; 
@@ -433,9 +393,7 @@ nav a:hover {
     transition: transform 0.3s; 
 }
 
-.faq-item[open] summary::after { 
-    transform: rotate(45deg); 
-}
+.faq-item[open] summary::after { transform: rotate(45deg); }
 
 .faq-content { 
     padding: 0 20px 20px 20px; 
@@ -466,17 +424,8 @@ nav a:hover {
     gap: 25px; 
 }
 
-.form-row { 
-    display: flex; 
-    gap: 20px; 
-}
-
-.form-group { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 8px; 
-}
+.form-row { display: flex; gap: 20px; }
+.form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 
 .light-contact-form label { 
     font-size: 0.85rem; 
@@ -501,10 +450,7 @@ nav a:hover {
     line-height: 1.6;
 }
 
-.light-contact-form textarea { 
-    min-height: 120px; 
-    resize: vertical; 
-}
+.light-contact-form textarea { min-height: 120px; resize: vertical; }
 
 .light-contact-form input:focus, 
 .light-contact-form textarea:focus { 
@@ -520,299 +466,147 @@ nav a:hover {
 }
 
 /* Custom Dropdown UI */
-.custom-select-wrapper { 
-    position: relative; 
-    user-select: none; 
-    width: 100%; 
-}
+.custom-select-wrapper { position: relative; user-select: none; width: 100%; }
 
 .custom-select-trigger {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    display: flex; justify-content: space-between; align-items: center; 
     padding: 15px 20px;
     background-color: rgba(17, 34, 64, 0.6); 
     border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 15px; 
-    color: rgba(230, 241, 255, 0.4); 
-    cursor: pointer; 
-    transition: all 0.3s; 
-    font-size: 1rem; 
-    font-family: inherit;
+    border-radius: 15px; color: rgba(230, 241, 255, 0.4); 
+    cursor: pointer; transition: all 0.3s; font-size: 1rem; font-family: inherit;
 }
 
 .custom-select-wrapper.open .custom-select-trigger { 
-    border-color: var(--accent-blue); 
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); 
+    border-color: var(--accent-blue); box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); 
 }
 
-.custom-select-trigger .arrow { 
-    font-size: 0.8rem; 
-    transition: transform 0.3s ease; 
-    color: var(--text-muted); 
-}
-
-.custom-select-wrapper.open .arrow { 
-    transform: rotate(-180deg); 
-}
+.custom-select-trigger .arrow { font-size: 0.8rem; transition: transform 0.3s ease; color: var(--text-muted); }
+.custom-select-wrapper.open .arrow { transform: rotate(-180deg); }
 
 .custom-options {
-    position: absolute; 
-    display: block; 
-    top: 100%; 
-    left: 0; 
-    right: 0;
-    background-color: rgba(17, 34, 64, 0.95); 
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 212, 255, 0.2); 
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-    margin-top: 8px; 
-    opacity: 0;
-    visibility: hidden; 
-    pointer-events: none; 
-    transition: all 0.3s ease; 
-    z-index: 10;
+    position: absolute; display: block; top: 100%; left: 0; right: 0;
+    background-color: rgba(17, 34, 64, 0.95); backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-top: 8px; opacity: 0;
+    visibility: hidden; pointer-events: none; transition: all 0.3s ease; z-index: 10;
 }
 
 .custom-select-wrapper.open .custom-options { 
-    opacity: 1; 
-    visibility: visible; 
-    pointer-events: all; 
-    transform: translateY(0); 
+    opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); 
 }
 
 .custom-option { 
-    display: block; 
-    padding: 15px 20px; 
-    color: var(--text-main); 
-    cursor: pointer; 
-    transition: background 0.2s; 
+    display: block; padding: 15px 20px; color: var(--text-main); cursor: pointer; transition: background 0.2s; 
 }
-
-.custom-option:hover { 
-    background-color: rgba(0, 212, 255, 0.15); 
-    color: var(--accent-blue); 
-}
-
-.custom-option:first-child { 
-    border-radius: 15px 15px 0 0; 
-}
-
-.custom-option:last-child { 
-    border-radius: 0 0 15px 15px; 
-}
+.custom-option:first-child { border-radius: 15px 15px 0 0; }
+.custom-option:last-child { border-radius: 0 0 15px 15px; }
 
 /* Submit Button */
 .light-contact-form .submit-btn { 
-    background-color: var(--accent-blue); 
-    color: #000000; 
-    padding: 18px; 
-    border: none; 
-    border-radius: 40px; 
-    font-size: 1.2rem; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    cursor: pointer; 
-    transition: background-color 0.3s, transform 0.2s; 
-    width: 100%; 
-    margin-top: 10px; 
-}
-
-.light-contact-form .submit-btn:hover { 
-    background-color: #0fb2d8; 
-    transform: translateY(-2px); 
+    background-color: var(--accent-blue); color: #000000; padding: 18px; 
+    border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; 
+    text-transform: uppercase; cursor: pointer; transition: background-color 0.3s, transform 0.2s; 
+    width: 100%; margin-top: 10px; 
 }
 
 /* Footer */
 footer { 
-    text-align: center; 
-    padding: 30px; 
-    background-color: #050a13; 
-    color: var(--text-muted); 
-    border-top: 1px solid #112240; 
-    font-size: 0.9rem; 
+    text-align: center; padding: 30px; background-color: #050a13; color: var(--text-muted); 
+    border-top: 1px solid #112240; font-size: 0.9rem; 
 }
 
 /* Bento Grid */
-.template-bento-section {
-    max-width: 1200px;
-    margin: 0 auto 100px auto;
-    padding: 0 20px;
-}
+.template-bento-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
 
 .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    grid-auto-rows: 250px;
-    gap: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-auto-rows: 250px; gap: 20px;
 }
 
 .bento-card {
-    background-color: var(--bg-panel);
-    border-radius: 20px;
-    border: 1px solid rgba(0, 212, 255, 0.15);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; 
-    padding: 25px;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background-color: var(--bg-panel); border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
+    position: relative; overflow: hidden; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 25px; transform-style: preserve-3d;
+    perspective: 1000px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .bento-card img, .bento-card video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; 
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    z-index: 1;
-    transition: transform 0.4s ease;
-}
-
-.bento-card:hover img, .bento-card:hover video {
-    transform: scale(1.05);
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: top center; z-index: 1; transition: transform 0.4s ease;
 }
 
 .bento-card.feature-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background: linear-gradient(to top, rgba(7, 14, 26, 0.95) 0%, rgba(7, 14, 26, 0.2) 60%);
-    z-index: 2;
-    pointer-events: none;
+    z-index: 2; pointer-events: none;
 }
 
-.bento-text-content {
-    position: relative;
-    z-index: 3;
-    pointer-events: none;
-    transform: translateZ(30px); 
-}
-
-.bento-text-content h3 {
-    color: var(--accent-blue);
-    font-size: 2rem;
-    margin: 0 0 5px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-}
-
-.bento-text-content p {
-    color: #fff;
-    margin: 0;
-    font-size: 1rem;
-}
+.bento-text-content { position: relative; z-index: 3; pointer-events: none; transform: translateZ(30px); }
+.bento-text-content h3 { color: var(--accent-blue); font-size: 2rem; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
+.bento-text-content p { color: #fff; margin: 0; font-size: 1rem; }
 
 .bento-play-btn {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) translateZ(40px);
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px solid var(--accent-blue);
-    color: var(--accent-blue);
-    border-radius: 50%;
-    width: 60px; height: 60px;
-    display: flex; justify-content: center; align-items: center;
-    font-size: 1.5rem;
-    z-index: 3;
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-
-.bento-card.feature-card:hover .bento-play-btn {
-    background: var(--accent-blue);
-    color: #000;
-    transform: translate(-50%, -50%) translateZ(50px) scale(1.1);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(40px);
+    background: rgba(0, 0, 0, 0.6); border: 2px solid var(--accent-blue); color: var(--accent-blue);
+    border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem; z-index: 3; transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 
 @media (min-width: 768px) {
-    .feature-card { 
-        grid-column: span 2; 
-        grid-row: span 2; 
-    }
-    .wide-card { 
-        grid-column: span 2; 
-    }
+    .feature-card { grid-column: span 2; grid-row: span 2; }
+    .wide-card { grid-column: span 2; }
 }
 
 /* Modals */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000; 
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(0,0,0,0.95); 
-    align-items: center; 
-    justify-content: center;
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center;
 }
 
 .modal-content, #videoModal .modal-content { 
-    width: auto !important; 
-    height: auto !important;
-    max-width: 90vw !important; 
-    max-height: 90vh !important; 
-    border-radius: 12px; 
-    box-shadow: 0 0 50px rgba(0, 212, 255, 0.2); 
-    background-color: #000; 
-    object-fit: contain; 
+    width: auto !important; height: auto !important; max-width: 90vw !important; max-height: 90vh !important; 
+    border-radius: 12px; box-shadow: 0 0 50px rgba(0, 212, 255, 0.2); background-color: #000; object-fit: contain; 
 }
 
-video.modal-content {
-    outline: none;
-    border: 1px solid var(--accent-blue);
-}
+video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
 
 .close-modal {
-    position: absolute; 
-    top: 15px; 
-    right: 35px; 
-    color: #fff; 
-    font-size: 50px;
-    font-weight: bold; 
-    cursor: pointer; 
-    transition: color 0.3s, transform 0.2s;
-    z-index: 2001;
-}
-
-.close-modal:hover { 
-    color: var(--accent-blue); 
-    transform: scale(1.1);
+    position: absolute; top: 15px; right: 35px; color: #fff; font-size: 50px;
+    font-weight: bold; cursor: pointer; transition: color 0.3s, transform 0.2s; z-index: 2001;
 }
 
 /* About Page */
 .about-highlight {
-    font-size: 1.2rem !important; 
-    color: var(--text-main) !important; 
-    font-weight: bold;
-    border-bottom: 1px solid rgba(0, 212, 255, 0.2); 
-    padding-bottom: 15px; 
-    margin-bottom: 25px !important;
+    font-size: 1.2rem !important; color: var(--text-main) !important; font-weight: bold;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2); padding-bottom: 15px; margin-bottom: 25px !important;
 }
 
-.about-image { 
-    flex: 1.5; 
-    width: 100%; 
-    max-width: 500px; 
-    margin: 0 auto; 
+.about-image { flex: 1.5; width: 100%; max-width: 500px; margin: 0 auto; }
+.about-image img { width: 100%; max-width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.3); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); }
+
+
+/* =========================================================================
+   THE HARDWARE HOVER FIX
+   This guarantees that hover states ONLY fire on devices with physical mice.
+   This prevents buttons from getting "stuck" when tapped on an iPhone.
+   ========================================================================= */
+@media (hover: hover) and (pointer: fine) {
+    nav a:hover { color: var(--accent-blue); }
+    .nav-cta-button:hover { background-color: #0fb2d8; transform: translateY(-2px); }
+    .cta-button:hover { background-color: #00b3d6; transform: translateY(-2px); }
+    .marquee-content span:hover { color: var(--accent-blue); }
+    .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); background-color: rgba(17, 34, 64, 0.8); }
+    .pricing-card.featured:hover { transform: scale(1.03) translateY(-5px); }
+    .service-card:hover { transform: translateY(-5px); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .custom-option:hover { background-color: rgba(0, 212, 255, 0.15); color: var(--accent-blue); }
+    .light-contact-form .submit-btn:hover { background-color: #0fb2d8; transform: translateY(-2px); }
+    .bento-card:hover img, .bento-card:hover video { transform: scale(1.05); }
+    .bento-card.feature-card:hover .bento-play-btn { background: var(--accent-blue); color: #000; transform: translate(-50%, -50%) translateZ(50px) scale(1.1); }
+    .close-modal:hover { color: var(--accent-blue); transform: scale(1.1); }
 }
 
-.about-image img {
-    width: 100%; 
-    max-width: 100%; 
-    height: auto; 
-    border-radius: 12px; 
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
 
 @media (prefers-reduced-motion: reduce) {
     .pricing-card, .custom-options {
@@ -840,35 +634,11 @@ video.modal-content {
     .kinetic-text { font-size: 3rem; }
     
     .about-content-wrapper { flex-direction: column; }
-    .about-image { 
-        width: 100%; 
-        min-width: 0; 
-        max-width: 100%; 
-        margin-top: 30px; 
-    }
+    .about-image { width: 100%; min-width: 0; max-width: 100%; margin-top: 30px; }
     
-    .bento-grid {
-        grid-template-columns: 1fr 1fr !important; 
-        grid-auto-rows: 140px !important; 
-        gap: 12px !important;
-    }
-    
-    .bento-card.feature-card {
-        grid-column: span 2 !important; 
-        grid-row: span 2 !important; 
-    }
-    
-    .bento-card.wide-card {
-        grid-column: span 2 !important; 
-    }
-
-    .bento-text-content h3 {
-        font-size: 1.5rem !important; 
-    }
-    
-    .bento-play-btn {
-        width: 50px !important;
-        height: 50px !important;
-        font-size: 1.2rem !important;
-    }
+    .bento-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: 140px !important; gap: 12px !important; }
+    .bento-card.feature-card { grid-column: span 2 !important; grid-row: span 2 !important; }
+    .bento-card.wide-card { grid-column: span 2 !important; }
+    .bento-text-content h3 { font-size: 1.5rem !important; }
+    .bento-play-btn { width: 50px !important; height: 50px !important; font-size: 1.2rem !important; }
 }
