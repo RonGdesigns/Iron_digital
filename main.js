@@ -7,7 +7,9 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
     lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-        smooth: true,
+        smoothWheel: true,
+        smoothTouch: false, // CRITICAL FIX: Lets native mobile touch scroll take over for zero lag
+        touchMultiplier: 2,
     });
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -41,6 +43,8 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    const isMobile = window.innerWidth <= 768; // Device detection variable
+
     // ==========================================
     // 1. THE MAGNETIC SPOTLIGHT CURSOR
     // ==========================================
@@ -93,9 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        // PERFORMANCE FIX: Cap pixel ratio on mobile to prevent GPU thermal throttling
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
 
-        const geometry = new THREE.PlaneGeometry(10, 10, 128, 128);
+        // PERFORMANCE FIX: Drop geometry segments drastically on phones (16k polys down to 1k)
+        const segments = isMobile ? 32 : 128; 
+        const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
         
         const material = new THREE.ShaderMaterial({
             uniforms: {
