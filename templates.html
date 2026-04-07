@@ -54,21 +54,20 @@
         </ul>
     </nav>
 
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg" loading="lazy">
+    </div>
+
+    <div id="videoModal" class="modal">
+        <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+        <video class="modal-content" id="expandedVideo" controls playsinline preload="none"></video>
+    </div>
     <main id="swup" class="transition-fade">
         
         <div class="section-container" style="padding-bottom: 20px;">
             <h2 class="section-title">Design Inspiration</h2>
             <p class="section-subtitle">Explore our layout concepts to find the perfect starting point for your brand.</p>
-        </div>
-
-        <div id="imageModal" class="modal">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <img class="modal-content" id="expandedImg" loading="lazy">
-        </div>
-
-        <div id="videoModal" class="modal">
-            <span class="close-modal" onclick="closeVideoModal()">&times;</span>
-            <video class="modal-content" id="expandedVideo" controls playsinline preload="none"></video>
         </div>
 
         <div class="template-bento-section">
