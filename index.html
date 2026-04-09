@@ -3,687 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SortingSource | Algorithmic Lead Synthesis Lead Gen</title>
-
+    
+    <title>Iron Digital | Detroit Web Design & Digital Ecosystems</title>
+    <meta name="description" content="Based in Detroit, Iron Digital engineers custom, lightning-fast websites and complete digital ecosystems to maximize your visibility, trust, and conversions.">
+    <link rel="canonical" href="https://irondigitalmi.com/">
+    
     <link rel="icon" type="image/png" href="favicon.png">
-    <style>
-        /* --- THE AESTHETIC VARIABLES --- */
-        :root {
-            --bg-color: #0a0a0a;
-            --surface-color: #161616;
-            --accent-blue: #2563eb;
-            --accent-purple: #8b5cf6;
-            --accent-glow: rgba(37, 99, 235, 0.4);
-            --inner-glow: rgba(37, 99, 235, 0.2); 
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --terminal-green: #10b981;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'Fira Code', 'Courier New', monospace;
-        }
-
-        /* --- GLOBAL RESET & TYPOGRAPHY --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle, #222 1px, transparent 1px);
-            background-size: 24px 24px;
-            color: var(--text-main);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
-        a { text-decoration: none; }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.98)), url('cube.png') no-repeat center center;
-            background-size: cover;
-            border-bottom: 1px solid #222;
-        }
-        .status-badge {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: rgba(37, 99, 235, 0.05);
-        }
-        .hero h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-        .hero h1 span { color: #3b82f6; }
-        .hero p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-        .btn-group { display: flex; gap: 1rem; }
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-primary {
-            background: var(--accent-blue);
-            color: white;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px var(--accent-glow);
-            background: #3b82f6;
-        }
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid #333;
-        }
-        .btn-secondary:hover { background: #222; }
-
-        /* --- THE ENGINE SECTION --- */
-        .engine {
-            padding: 8rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-        .section-header h2 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            font-style: italic;
-        }
-        .section-header p {
-            font-family: var(--font-mono);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        /* Alternating Layout Framework */
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 8rem;
-        }
-        @media (min-width: 769px) {
-            .split-layout.reverse .step-content { grid-column: 2; grid-row: 1; }
-            .split-layout.reverse .visual-container { grid-column: 1; grid-row: 1; }
-        }
-        .split-layout:last-child { margin-bottom: 0; }
-
-        .step-content h3 {
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .step-content .tag {
-            color: var(--accent-blue);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            display: block;
-            margin: 0.5rem 0 1.5rem 0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        /* --- VISUALIZERS (The Displays) --- */
-        .visual-container {
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid #222;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 15px var(--inner-glow); 
-            position: relative;
-            min-height: 280px;
-        }
-        .terminal-header {
-            background: #111;
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid #222;
-            position: absolute;
-            top: 0; width: 100%;
-            z-index: 10;
-        }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot.r { background: #ef4444; }
-        .dot.y { background: #f59e0b; }
-        .dot.g { background: #10b981; }
-        .terminal-title {
-            margin-left:1rem; 
-            font-family:var(--font-mono); 
-            font-size:0.7rem; 
-            color:#666;
-            text-transform: uppercase;
-        }
-        .display-body {
-            padding: 4rem 2rem 2rem 2rem;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            height: 100%;
-            animation: textFlash 4s infinite linear;
-        }
-
-        /* Display Variants */
-        .display-hunter { color: var(--terminal-green); }
-        .display-extractor {
-            color: var(--text-muted);
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed #333;
-            padding-bottom: 0.2rem;
-            animation: fadeIn 0.5s ease forwards;
-            opacity: 0;
-        }
-        .data-row:nth-child(1) { animation-delay: 0.2s; }
-        .data-row:nth-child(2) { animation-delay: 0.6s; }
-        .data-row:nth-child(3) { animation-delay: 1.0s; }
-        .data-row:nth-child(4) { animation-delay: 1.4s; }
-        .data-highlight { color: #3b82f6; }
-
-        .display-pitcher {
-            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
-            color: #d8b4fe;
-            border: 1px solid rgba(139, 92, 246, 0.2);
-        }
-        .ai-pulse {
-            border-left: 2px solid var(--accent-purple);
-            padding-left: 1rem;
-            animation: pulseGlow 2s infinite;
-        }
-        .display-dispatcher { color: #ef4444; }
-        .log-entry { margin-bottom: 0.5rem; font-size: 0.8rem; }
-        .log-success { color: var(--terminal-green); }
-
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes pulseGlow {
-            0% { border-color: rgba(139, 92, 246, 0.2); }
-            50% { border-color: rgba(139, 92, 246, 1); }
-            100% { border-color: rgba(139, 92, 246, 0.2); }
-        }
-        @keyframes textFlash {
-            0%, 100% { opacity: 1; }
-            25% { opacity: 0.98; }
-            50% { opacity: 1; }
-            75% { opacity: 0.99; }
-        }
-
-        /* --- THE BENTO ARSENAL UPGRADE --- */
-        .arsenal {
-            padding: 8rem 2rem;
-            background: linear-gradient(to bottom, transparent, rgba(37,99,235,0.02));
-        }
-        .pricing-grid {
-            display: grid;
-            /* Enforces the single-row Bento layout on desktop */
-            grid-template-columns: 1fr 1.1fr 1fr;
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            align-items: stretch;
-        }
-        
-        .card {
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.95));
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px; /* Heavy Bento curve */
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-        }
-        .card:hover { 
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15);
-        }
-        
-        .card.popular {
-            background: linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(10, 10, 10, 0.95));
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.1), inset 0 1px 0 rgba(255,255,255,0.1);
-        }
-        
-        .popular-tag {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-blue);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 0.3rem 1.2rem;
-            border-radius: 20px;
-            text-transform: uppercase;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        /* The Bento Price Compartment */
-        .bento-price-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: center;
-            box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);
-        }
-        .price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-        }
-        .price span { font-size: 1rem; color: var(--text-muted); font-weight: normal; margin-left: 0.5rem;}
-        
-        ul.features {
-            list-style: none;
-            margin: 0 0 2rem 0;
-            flex-grow: 1;
-        }
-        ul.features li {
-            padding: 0.75rem 0;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        ul.features li:last-child { border-bottom: none; }
-        ul.features li::before { content: '✓'; color: var(--accent-blue); font-weight: bold; }
-        
-        .card .btn { width: 100%; margin-top: auto; border-radius: 12px; }
-
-        /* Bento Custom Deployment Section */
-        .custom-deployment {
-            max-width: 1200px;
-            margin: 1.5rem auto 2rem;
-            text-align: center;
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.95));
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 3rem;
-            border-radius: 24px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-        }
-        .custom-deployment h4 { margin-bottom: 1rem; font-size: 1.5rem; }
-        .custom-deployment p { color: var(--text-muted); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;}
-        .custom-deployment .btn { border-radius: 12px; }
-
-        /* --- MOBILE OVERRIDE PROTOCOLS (INDEX) --- */
-        @media (max-width: 768px) {
-            body, html { overflow-x: hidden; width: 100%; }
-            .hero h1 { font-size: 2.5rem; margin-top: 2rem; }
-            .hero p { font-size: 1rem; padding: 0 1rem; }
-            .btn-group { flex-direction: column; width: 100%; gap: 0.5rem; }
-            .btn-group .btn { width: 100%; }
-
-            .engine, .arsenal { padding: 4rem 1rem; }
-            .split-layout { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; }
-            .split-layout.reverse .step-content, .split-layout.reverse .visual-container { grid-column: auto; grid-row: auto; }
-            
-            .step-bg-1, .step-bg-2, .step-bg-3, .step-bg-4 {
-                margin-left: 0; margin-right: 0;
-                padding: 3rem 1rem;
-                border-radius: 12px;
-            }
-
-            .visual-container { min-height: 220px; }
-            .display-body { padding: 3rem 1rem 1rem 1rem; font-size: 0.75rem; }
-            
-            /* Stacks the Bento grid on mobile */
-            .pricing-grid { grid-template-columns: 1fr; }
-            .custom-deployment { padding: 2rem 1rem; border-radius: 16px; }
-        }
-
-        /* --- SYSTEM FOOTER (BULLETPROOF VERSION) --- */
-        .system-footer {
-            border-top: 1px dashed #222;
-            padding: 3rem 2rem;
-            margin-top: 2rem;
-            font-size: 0.85rem;
-            color: #888888; 
-            background: #050505;
-            position: relative; 
-            z-index: 10; 
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        .company-name {
-            color: #ccc;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-        .rights {
-            font-family: 'Fira Code', 'Courier New', monospace; 
-            font-size: 0.7rem;
-            color: #555;
-        }
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .footer-links a {
-            color: #888888; 
-            font-family: 'Fira Code', 'Courier New', monospace; 
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
-        }
-        .footer-links a:hover {
-            color: #2563eb;
-            text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .footer-content { flex-direction: column; text-align: center; gap: 2rem; }
-            .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; }
-        }
-
-        /* --- SEAMLESS IMAGE TRANSITIONS FOR THE ENGINE ROWS --- */
-        .step-bg-1, .step-bg-2, .step-bg-3, .step-bg-4 {
-            position: relative;
-            padding: 4rem 2rem; 
-            margin-left: -2rem; 
-            margin-right: -2rem;
-            border-radius: 20px;
-        }
-        .step-bg-1 { background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(10, 10, 10, 0.7) 15%, rgba(10, 10, 10, 0.7) 85%, var(--bg-color) 100%), url('1st.png') no-repeat center center; background-size: cover; }
-        .step-bg-2 { background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(10, 10, 10, 0.7) 15%, rgba(10, 10, 10, 0.7) 85%, var(--bg-color) 100%), url('2nd.png') no-repeat center center; background-size: cover; }
-        .step-bg-3 { background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(10, 10, 10, 0.7) 15%, rgba(10, 10, 10, 0.7) 85%, var(--bg-color) 100%), url('3rd.png') no-repeat center center; background-size: cover; }
-        .step-bg-4 { background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(10, 10, 10, 0.7) 15%, rgba(10, 10, 10, 0.7) 85%, var(--bg-color) 100%), url('4th.png') no-repeat center center; background-size: cover; }
-    </style>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://irondigitalmi.com/">
+    <meta property="og:title" content="Iron Digital | Detroit Digital Ecosystems">
+    <meta property="og:description" content="Custom, modern websites tailored for business growth. Clean, responsive, and professional.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" defer></script>
+    <script src="https://unpkg.com/swup@4" defer></script>
 </head>
+
 <body>
+    <div class="preloader">
+        <div class="counter">000</div>
+    </div>
 
-    <header class="hero">
-        <div class="status-badge">&gt;_ SYSTEM ONLINE // V 2.1.0 // NO SUBSCRIPTIONS</div>
-        <h1>Autonomous Target <br>Acquisition.<br><span>Zero Monthly Fees.</span></h1>
-        <p>SortingSource is the ultimate "Anti-SaaS" outbound engine. Pay once, own the engine forever, and generate an unlimited pipeline of leads stored locally on your machine.</p>
-        <div class="btn-group">
-            <a href="#arsenal" class="btn btn-primary">Acquire Your License</a>
-            <a href="#engine" class="btn btn-secondary">View The Arsenal</a>
-        </div>
-    </header>
+    <div class="custom-cursor"></div>
 
-    <section id="engine" class="engine">
-        <div class="section-header">
-            <h2>The 4-Step Engine</h2>
-            <p>Automated end-to-end execution.</p>
-        </div>
+    <nav>
+        <a href="index.html" class="logo-wrapper">
+            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
+            <div class="logo-text">
+                <span>IRON</span> 
+                <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
+            </div>
+        </a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="templates.html">Templates</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
+        </ul>
+    </nav>
 
-        <div class="split-layout step-bg-1">
-            <div class="step-content">
-                <h3>1. The Hunter</h3>
-                <span class="tag">Target Acquisition</span>
-                <p style="color: var(--text-muted);">Input your niche and city parameters. Our proprietary Google Maps API integration strips the web of dozens of relevant local businesses in seconds.</p>
-            </div>
-            <div class="visual-container">
-                <div class="terminal-header">
-                    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-                    <span class="terminal-title">ACTIVE_PROTOCOL_MONITOR</span>
-                </div>
-                <div class="display-body display-hunter" id="type-hunter"></div>
-            </div>
-        </div>
-
-        <div class="split-layout reverse step-bg-2">
-            <div class="step-content">
-                <h3>2. The Extractor</h3>
-                <span class="tag">Deep Data Mining</span>
-                <p style="color: var(--text-muted);">The Extractor runs asynchronous protocols on your targets' websites to pull direct emails and social handles (IG, FB, X, TikTok) that are usually hidden from public view.</p>
-            </div>
-            <div class="visual-container">
-                <div class="terminal-header">
-                    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-                    <span class="terminal-title">DATA_SCRAPE_THREADS</span>
-                </div>
-                <div class="display-body display-extractor" id="type-extractor"></div>
-            </div>
-        </div>
-
-        <div class="split-layout step-bg-3">
-            <div class="step-content">
-                <h3>3. The Pitcher</h3>
-                <span class="tag" style="color: var(--accent-purple);">Gemini AI Synthesis</span>
-                <p style="color: var(--text-muted);">Stop sending generic garbage. Route your target data through Gemini, OpenAI, or open-source Hugging Face models. Our future-proof 'Model Override' lets you plug in the newest LLMs the second they drop. The AI automatically synthesizes hyper-personalized pitches based on the Tech Audit data.</p>
-            </div>
-            <div class="visual-container display-pitcher">
-                <div class="terminal-header">
-                    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-                    <span class="terminal-title">LLM_SYNTHESIS_ENGINE</span>
-                </div>
-                <div class="display-body display-pitcher" id="type-pitcher"></div>
-            </div>
-        </div>
-
-        <div class="split-layout reverse step-bg-4">
-            <div class="step-content">
-                <h3>4. The Dispatcher</h3>
-                <span class="tag" style="color: #ef4444;">Stealth-Mode Inbox Delivery</span>
-                <p style="color: var(--text-muted);">Connect your SMTP/IMAP for email, or toggle the Twilio Gateway for SMS drops. Our 'Anti-Spam Jitter' protocol injects randomized human-like delays (30-90s) between messages to protect your domain and number reputation, syncing all replies directly to your local UI.</p>
-            </div>
-            <div class="visual-container">
-                <div class="terminal-header">
-                    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-                    <span class="terminal-title">SMTP_RELAY_ROUTER</span>
-                </div>
-                <div class="display-body display-dispatcher" id="type-dispatcher"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="arsenal" class="arsenal">
-        <div class="section-header">
-            <h2>The Arsenal</h2>
-            <p>DEPLOY THE RIGHT AMOUNT OF FIREPOWER FOR YOUR OPERATION.</p>
-        </div>
-
-        <div style="text-align: center; margin-bottom: 5rem;">
-            <a href="demo.html" class="btn btn-primary" style="font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 1.5rem 3rem; font-size: 1.1rem; border-radius: 12px;">
-                <span style="color: #ef4444; margin-right: 10px; text-shadow: 0 0 10px #ef4444;">⏺ REC</span> Watch The System Demo
-            </a>
-        </div>
+    <main id="swup" class="transition-fade">
         
-        <div class="pricing-grid">
-            <div class="card">
-                <h3>1-Key License</h3>
-                <p style="color: var(--text-muted); font-size:0.9rem;">For the Solo Mercenary</p>
-                
-                <div class="bento-price-box">
-                    <div class="price">$2,000<span>/ one-time</span></div>
-                </div>
-                
-                <ul class="features">
-                    <li>1 Device License</li>
-                    <li>Unlimited Local Lead Gen</li>
-                    <li>Full Suite (Hunter to Dispatcher)</li>
-                    <li>Local Database Encryption</li>
-                    <li>Standard Support</li>
-                </ul>
-                <a href="https://buy.stripe.com/8x23cw85F87Ocusb5Jf3a09" target="_blank" class="btn btn-secondary">&gt;_ Deploy 1 Key</a>
+        <section class="hero" style="position: relative; overflow: hidden; z-index: 1;">
+            <canvas id="iron-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></canvas>
+            
+            <div style="position: relative; z-index: 2; pointer-events: none;">
+                <h1 class="kinetic-text">Elevating Your<br><span>Digital Presence</span></h1>
+                <p>Custom, modern websites tailored for business growth.</p>
+                <a href="#contact" class="cta-button" style="pointer-events: auto;">Get A Quote &rarr;</a>
             </div>
+        </section>
 
-            <div class="card popular">
-                <div class="popular-tag">Most Popular</div>
-                <h3>5-Key License</h3>
-                <p style="color: var(--text-muted); font-size:0.9rem;">For the Agency Taskforce</p>
-                
-                <div class="bento-price-box">
-                    <div class="price">$8,750<span>/ one-time</span></div>
+        <div class="trust-marquee-container">
+            <p class="trust-text">TRUSTED BY DETROIT'S GROWING BRANDS</p>
+            <div class="marquee-track">
+                <div class="marquee-content">
+                    <span>TechTown Detroit</span>
+                    <span>Motor City Co.</span>
+                    <span>Iron Works</span>
+                    <span>Midtown Roasters</span>
+                    <span>Great Lakes Capital</span>
                 </div>
-
-                <ul class="features">
-                    <li>5 Device Licenses</li>
-                    <li>Unlimited Local Lead Gen</li>
-                    <li>Full Suite Access</li>
-                    <li>Local Database Encryption</li>
-                    <li>Priority Support</li>
-                </ul>
-                <a href="https://buy.stripe.com/bJebJ271Bds87a82zdf3a08" target="_blank" class="btn btn-primary">&gt;_ Deploy 5 Keys</a>
-            </div>
-
-            <div class="card">
-                <h3>10-Key License</h3>
-                <p style="color: var(--text-muted); font-size:0.9rem;">For the Enterprise Command</p>
-                
-                <div class="bento-price-box">
-                    <div class="price">$15,000<span>/ one-time</span></div>
+                <div class="marquee-content" aria-hidden="true">
+                    <span>TechTown Detroit</span>
+                    <span>Motor City Co.</span>
+                    <span>Iron Works</span>
+                    <span>Midtown Roasters</span>
+                    <span>Great Lakes Capital</span>
                 </div>
-
-                <ul class="features">
-                    <li>10 Device Licenses</li>
-                    <li>Unlimited Local Lead Gen</li>
-                    <li>Full Suite Access</li>
-                    <li>Local Database Encryption</li>
-                    <li>Dedicated Onboarding</li>
-                </ul>
-                <a href="https://buy.stripe.com/dRm14obhR3Rybqo7Txf3a07" target="_blank" class="btn btn-secondary">&gt;_ Deploy 10 Keys</a>
             </div>
         </div>
 
-        <div class="custom-deployment">
-            <h4>🛡️ CUSTOM DEPLOYMENT REQUIRED?</h4>
-            <p>If your operation requires more than 10 keys, or if you need a custom enterprise configuration for large-scale teams, contact the lead architect directly for a tailored quote.</p>
-            <a href="mailto:Ron@sortingsource.com" class="btn btn-primary">✉ EMAIL: Ron@sortingsource.com</a>
-        </div>
-    </section>
+        <section id="pricing" class="section-container">
+            <h2 class="section-title" data-animate="pop-in">Pricing Plans</h2>
+            <p class="section-subtitle" data-animate="pop-in">Transparent pricing designed for scale.</p>
 
-    <footer class="system-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <span class="company-name">© 2026 Sorting Source LLC.</span>
-                <span class="rights">ALL SYSTEMS OPERATIONAL // ALL RIGHTS RESERVED.</span>
-                <span class="rights" style="margin-top: 0.5rem; color: #666;">
-                    System Architecture by <a href="https://irondigitalmi.com" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: bold; text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);">Irondigitalmi.com</a>
-                </span>
+            <div class="pricing-grid">
+                <div class="pricing-card tilt-effect" data-animate="pop-in">
+                    <h3>Starter Build</h3>
+                    <div class="price">$1,000</div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                        One-Time Fee<br>
+                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Custom Website Design</li>
+                        <li>Mobile Responsive Build</li>
+                        <li>Basic SEO Setup</li>
+                        <li><strong style="color: #ff4d4d;">No Hosting</strong></li>
+                        <li><strong style="color: #ff4d4d;">No Maintenance</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card tilt-effect" data-animate="pop-in">
+                    <h3>Standard</h3>
+                    <div class="price">$99<span style="font-size: 1.2rem;">/mo</span></div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                        + $1,000 Upfront Build Fee<br>
+                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Custom Website Design</li>
+                        <li><strong>Includes Premium Hosting</strong></li>
+                        <li><strong>Up to 5 Changes/mo</strong></li>
+                        <li>Basic SEO Setup</li>
+                        <li>Standard Support</li>
+                    </ul>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
+                </div>
+                
+                <div class="pricing-card featured tilt-effect" data-animate="pop-in">
+                    <div class="recommended-badge">Recommended</div>
+                    <h3>Growth</h3>
+                    <div class="price">$199<span style="font-size: 1.2rem;">/mo</span></div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                        + $1,000 Upfront Build Fee<br>
+                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Custom Website Design</li>
+                        <li><strong>Includes Premium Hosting</strong></li>
+                        <li><strong>Up to 15 Changes/mo</strong></li>
+                        <li>Advanced SEO Setup</li>
+                        <li>Standard Support</li>
+                    </ul>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
+                </div>
+                
+                <div class="pricing-card tilt-effect" data-animate="pop-in">
+                    <h3>Premium</h3>
+                    <div class="price">$399<span style="font-size: 1.2rem;">/mo</span></div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+                        + $1,000 Upfront Build Fee<br>
+                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Complex Custom Design</li>
+                        <li><strong>Includes Premium Hosting</strong></li>
+                        <li><strong>Unlimited Content Changes</strong></li>
+                        <li>E-Commerce Capabilities</li>
+                        <li><strong>Priority Support</strong></li>
+                    </ul>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="how-it-works.html" style="color: #0dbd48;">How It Works</a>
-                <a href="architecture.html" style="color: #e40f08;">System Architecture</a>
-                <a href="demo.html" style="color: #2563eb;">Visual Intel (Demo)</a>
-                <a href="models.html" style="color: #8b5cf6;">Synthesis Models</a>
-                <a href="privacy.html">Privacy Protocol</a>
-                <a href="terms.html">Terms of Engagement</a>
+            <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 20px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
+        </section>
+
+        <section id="templates-preview" class="section-container">
+            <div class="tilt-effect" data-animate="pop-in" style="background-color: rgba(17, 34, 64, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 30px; padding: 60px 20px; text-align: center; backdrop-filter: blur(10px); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                
+                <div style="position: relative; z-index: 2;">
+                    <h2 class="section-title" style="margin-top: 0; color: #ffffff;">Need Design Inspiration?</h2>
+                    <p class="section-subtitle" style="max-width: 600px; margin: 0 auto 30px auto;">Explore our gallery of high-converting, responsive layouts. Find the perfect blueprint to start building your brand's digital ecosystem.</p>
+                    <a href="templates.html" class="cta-button">Browse Templates &rarr;</a>
+                </div>
+
+                <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(0, 212, 255, 0.15); filter: blur(50px); border-radius: 50%; z-index: 1; pointer-events: none;"></div>
+                <div style="position: absolute; bottom: -50px; right: -50px; width: 200px; height: 200px; background: rgba(0, 212, 255, 0.15); filter: blur(50px); border-radius: 50%; z-index: 1; pointer-events: none;"></div>
+            </div>
+        </section>
+        
+        <section id="services" class="section-container">
+            <h2 class="section-title" data-animate="pop-in">Beyond Standard Web Design</h2>
+            <p class="section-subtitle" data-animate="pop-in">We don't just build websites; we engineer high-performance digital ecosystems designed to dominate search rankings and exceed expectations.</p>
+            
+            <div class="services-grid">
+                <div class="service-card tilt-effect" data-animate="pop-in">
+                    <div class="service-icon">⚡</div>
+                    <h3>Technical SEO & Speed</h3>
+                    <p>Google prioritizes speed. We write clean, optimized code that guarantees lightning-fast load times and perfect Core Web Vitals, pushing your site to the top of search results.</p>
+                </div>
+                <div class="service-card tilt-effect" data-animate="pop-in">
+                    <div class="service-icon">🌐</div>
+                    <h3>Google Business Optimization</h3>
+                    <p>Dominate local search in Detroit and beyond. We fully optimize your Google Business Profile so you show up first on Google Maps when customers are actively searching for your services.</p>
+                </div>
+                <div class="service-card tilt-effect" data-animate="pop-in">
+                    <div class="service-icon">📊</div>
+                    <h3>Ecosystem Integration</h3>
+                    <p>We connect the dots. By linking your high-converting, custom-coded website directly to advanced analytics and local search profiles, we create a unified, data-driven funnel that captures leads.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-container">
+            <h2 class="section-title" data-animate="pop-in">Frequently Asked Questions</h2>
+            <p class="section-subtitle" data-animate="pop-in">Everything you need to know about working with Iron Digital.</p>
+            <div class="faq-container">
+                <details class="faq-item" data-animate="pop-in">
+                    <summary>How long does a standard website build take?</summary>
+                    <div class="faq-content">Most standard website builds are completed within 1 to 2 weeks.</div>
+                </details>
+                <details class="faq-item" data-animate="pop-in">
+                    <summary>Who owns the website and the design?</summary>
+                    <div class="faq-content">You fully own your website and your domain name.</div>
+                </details>
+                <details class="faq-item" data-animate="pop-in">
+                    <summary>What happens if I need changes after the site is live?</summary>
+                    <div class="faq-content">Our Starter Build includes a 7-day window for post-launch adjustments.</div>
+                </details>
+            </div>
+        </section>
+
+        <div class="contact-wrapper" id="contact" data-animate="pop-in">
+            <div class="section-container" style="padding: 0 20px;">
+                <h2 class="section-title">Submit Your Project Request</h2>
+                
+                <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Project Type</label>
+                        <div class="custom-select-wrapper">
+                            <div class="custom-select-trigger">
+                                <span>Select an Option</span>
+                                <div class="arrow">▼</div>
+                            </div>
+                            <div class="custom-options">
+                                <span class="custom-option" data-value="starter">Starter Build</span>
+                                <span class="custom-option" data-value="standard">Standard Subscription</span>
+                                <span class="custom-option" data-value="growth">Growth Subscription</span>
+                                <span class="custom-option" data-value="premium">Premium Subscription</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="project-type" name="project-type" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" placeholder="Tell us a bit about your business and goals..." required></textarea>
+                    </div>
+                    
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; font-style: italic; text-align: center;">
+                        *Have photos or design inspiration? We will grab those from you via email after you submit your request!
+                    </p>
+
+                    <button type="submit" class="submit-btn">Submit Request</button>
+                </form>
             </div>
         </div>
+    </main> 
+    <footer>
+        <div style="margin-bottom: 15px;">
+            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+            <span style="color: #1a365d;">|</span>
+            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+        </div>
+        <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
+    <script src="main.js"></script>
+
     <script>
-    const protocols = [
-        { id: 'type-hunter', text: "> PROTOCOL: HUNTER\n> ACQUIRING TARGETS...\n> 47 ENTITIES FOUND.\n_" },
-        { id: 'type-extractor', text: "> TARGET: domain_A.com... <span style='color:#3b82f6'>[2 EMAILS]</span>\n> TARGET: domain_B.com... <span style='color:#3b82f6'>[IG HANDLE]</span>\n> TARGET: domain_C.net... <span style='color:#3b82f6'>[1 EMAIL]</span>\n> BYPASSING CLOUDFLARE... <span style='color:#10b981'>[SUCCESS]</span>\n_" },
-        { id: 'type-pitcher', text: "> GENERATING PERSONALIZATION...\n\n\"I noticed your site's load time is 4.2s, causing a 30% drop in conversion...\"\n\n> STATUS: READY FOR DISPATCH.\n_" },
-        { id: 'type-dispatcher', text: "[14:02:11] Initiating anti-spam jitter...\n<span style='color:#10b981'>[14:02:15] Delivered -> target_A@domain.com</span>\n[14:02:42] Delaying next send (27s)...\n<span style='color:#10b981'>[14:03:09] Delivered -> target_B@domain.com</span>\n_" }
-    ];
-
-    function typeWriter(elementId, text) {
-        const container = document.getElementById(elementId);
-        if (!container) return;
-        container.innerHTML = ''; 
-        
-        let i = 0;
-        let isTag = false;
-        let textBuffer = '';
-
-        function type() {
-            if (i < text.length) {
-                let char = text.charAt(i);
-                
-                if (char === '<') isTag = true;
-                if (isTag) {
-                    textBuffer += char;
-                    if (char === '>') {
-                        isTag = false;
-                        container.innerHTML += textBuffer;
-                        textBuffer = '';
-                    }
-                } else if (char === '\n') {
-                    container.innerHTML += '<br>';
-                } else {
-                    container.innerHTML += char;
-                }
-                
-                i++;
-                let delay = isTag ? 0 : (Math.random() * 30 + 15);
-                setTimeout(type, delay);
-            }
-        }
-        setTimeout(type, 400); 
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const protocol = protocols.find(p => p.id === entry.target.id);
-                if (protocol && !entry.target.classList.contains('typing-started')) {
-                    entry.target.classList.add('typing-started');
-                    typeWriter(protocol.id, protocol.text);
-                }
-            }
-        });
-    }, { threshold: 0.5 }); 
-
-    protocols.forEach(p => {
-        const el = document.getElementById(p.id);
-        if (el) observer.observe(el);
-    });
-</script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
 </body>
 </html>
