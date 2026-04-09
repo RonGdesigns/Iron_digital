@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operational Protocol | SortingSource</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <style>
+        :root { 
+            --bg: #050505; 
+            --text: #888; 
+            --accent: #2563eb; 
+            --accent-glow: rgba(37, 99, 235, 0.3);
+            --danger: #ef4444;
+            --success: #10b981;
+            --mono: 'Fira Code', 'Courier New', monospace; 
+            --sans: 'Inter', -apple-system, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            background-color: var(--bg);
+            color: var(--text); 
+            font-family: var(--sans); 
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;          
+            flex-direction: column; 
+            position: relative; /* REQUIRED: Anchors the absolute video to the full document length */
+        }
+
+        /* THE NEW VIDEO BACKGROUND LAYER */
+        .bg-video {
+            position: absolute; /* Releases it from the screen so it scrolls */
+            top: 0;
+            left: 0;
+            width: 100%;        /* Stretches to full document width */
+            height: 100%;       /* Stretches to full document height */
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* THE CINEMATIC SHADOW OVERLAY */
+        body::before {
+            content: '';
+            position: absolute; /* Releases it from the screen so it scrolls */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; 
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.85) 100%);
+            z-index: 1; 
+            pointer-events: none;
+        }
+
+        /* TEXT CONTAINER: Pulls your timeline above the video and pushes footer down */
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2; 
+            flex-grow: 1; 
+            width: 100%;
+        }
+        
+        h1, h2, h3 { color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--mono); }
+        h1 { border-bottom: 1px dashed #333; padding-bottom: 1rem; margin-bottom: 1rem; font-size: 2.5rem; }
+        .subtitle { font-family: var(--mono); font-size: 0.85rem; color: #666; margin-bottom: 5rem; display: block; }
+        
+        .back-btn { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; font-family: var(--mono); background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 4px; border: 1px solid #333;}
+        .back-btn:hover { color: #fff; text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); border-color: var(--accent); }
+
+        /* --- SCHEMATIC IMAGE FRAME --- */
+        .schematic-frame {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 5rem auto;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 0.5rem;
+            background: rgba(10, 10, 10, 0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px var(--accent-glow);
+            position: relative;
+        }
+        
+        .schematic-frame::before {
+            content: '> VISUAL_INTEL // SCHEMATIC';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--bg);
+            padding: 0 10px;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+
+        .schematic-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            border: 1px dashed #444;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .schematic-frame:hover img {
+            opacity: 1;
+        }
+
+        /* --- THE PROTOCOL TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* The glowing center line */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent), var(--accent), transparent);
+            top: 0;
+            bottom: 0;
+            left: 50px; 
+            margin-left: -1px;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .timeline-module {
+            padding: 2rem 0 2rem 100px;
+            position: relative;
+            width: 100%;
+        }
+
+        /* The Glowing Node */
+        .timeline-module::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: auto;
+            left: 42px;
+            top: 40px;
+            background-color: var(--bg);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-module:hover::after {
+            background-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent);
+            transform: scale(1.2);
+        }
+
+        .module-content {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #222;
+            padding: 2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-module:hover .module-content {
+            border-color: #444;
+            box-shadow: inset 0 0 20px rgba(37, 99, 235, 0.1), 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateX(5px);
+        }
+
+        .phase-tag {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(37, 99, 235, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .module-content h2 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
+        .module-content p { color: #999; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
+        
+        .terminal-block {
+            background: #000;
+            border: 1px dashed #333;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--success);
+        }
+
+        /* Desktop Layout Override (Center Timeline) */
+        @media screen and (min-width: 768px) {
+            .timeline::after { left: 50%; }
+            .timeline-module {
+                width: 50%;
+                padding: 0 3rem 4rem 0;
+            }
+            .timeline-module:nth-child(even) {
+                left: 50%;
+                padding: 0 0 4rem 3rem;
+            }
+            .timeline-module::after {
+                left: 100%;
+                margin-left: -8px;
+            }
+            .timeline-module:nth-child(even)::after {
+                left: 0;
+            }
+            .timeline-module:nth-child(even):hover .module-content {
+                transform: translateX(5px);
+            }
+            .timeline-module:nth-child(odd):hover .module-content {
+                transform: translateX(-5px);
+            }
+        }
+
+        /* --- SYSTEM FOOTER --- */
+        .system-footer {
+            border-top: 1px dashed #222;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: #050505;
+            position: relative; /* REQUIRED to pull it above the background image */
+            z-index: 2; /* REQUIRED to pull it above the background image */
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .company-name {
+            color: #ccc;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .rights {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: #555;
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--accent-blue);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* --- MOBILE OVERRIDE PROTOCOLS (HOW IT WORKS) --- */
+        @media (max-width: 768px) {
+            /* 1. Global Viewport Control: Prevent horizontal swiping */
+            body, html {
+                overflow-x: hidden;
+                width: 100%;
+            }
+
+            /* 2. Scale down the massive headers */
+            h1 { font-size: 1.8rem; }
+            .subtitle { margin-bottom: 3rem; }
+
+            /* 3. Re-align the Timeline to give text more breathing room */
+            .container { padding: 3rem 1rem; }
+            
+            /* Move the glowing line closer to the left edge */
+            .timeline::after { left: 25px; }
+            
+            /* Move the glowing nodes to perfectly intersect the line */
+            .timeline-module::after { left: 17px; width: 14px; height: 14px; top: 30px; }
+            
+            /* Reduce the massive left padding so the glass boxes fit on screen */
+            .timeline-module { padding: 1rem 0 2rem 60px; }
+
+            /* 4. Tighten the Glassmorphic Boxes */
+            .module-content {
+                padding: 1.25rem;
+                border-radius: 6px;
+            }
+            .module-content h2 { font-size: 1.25rem; }
+            .module-content p { font-size: 0.85rem; line-height: 1.6; }
+            
+            /* Shrink the terminal block text to prevent overflow */
+            .terminal-block { font-size: 0.7rem; padding: 0.75rem; }
+            .phase-tag { font-size: 0.65rem; margin-bottom: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted playsinline class="bg-video">
+        <source src="video2.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">&lt;_ RETURN TO MAIN SYSTEM</a>
+        
+        <h1>Operational Protocol</h1>
+        <span class="subtitle">DOCUMENTATION // HOW THE ENGINE EXECUTES</span>
+
+        <div class="timeline">
+            
+            <div class="timeline-module">
+                <div class="module-content">
+                    <span class="phase-tag" style="color: #666; background: #111;">PHASE 00</span>
+                    <h2>The Local Vault Initialization</h2>
+                    <p>SortingSource operates on a strict BYOK (Bring Your Own Key) architecture. Upon launching the `.exe` for the first time, you input your API keys for Google Places, your chosen LLM (Gemini/OpenAI), and your SMTP gateway. These keys are heavily encrypted and stored strictly on your local hardware.</p>
+                    <div class="terminal-block" style="color: #888;">
+                        > ENCRYPTING CREDENTIALS...<br>
+                        > LOCAL_VAULT.DB SECURED.<br>
+                        > NO CLOUD CONNECTION DETECTED.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-module">
+                <div class="module-content">
+                    <span class="phase-tag">PHASE 01</span>
+                    <h2>The Rule of 60 (Acquisition)</h2>
+                    <p>You input your target parameters (e.g., "HVAC in Austin, TX"). The Hunter module hits the Google Places API. To bypass bot-detection, the engine runs the "Rule of 60"—processing highly localized batches of 60 leads at a time. The "Skip Known" function ensures you never scrape a duplicate lead into your database.</p>
+                    <div class="terminal-block" style="color: var(--accent);">
+                        > TARGETING: 'HVAC' // 'AUSTIN_TX'<br>
+                        > BYPASSING RATE LIMITS...<br>
+                        > 60 NEW ENTITIES ACQUIRED.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-module">
+                <div class="module-content">
+                    <span class="phase-tag">PHASE 02</span>
+                    <h2>Asynchronous Tech Audit</h2>
+                    <p>The Extractor takes the URLs acquired by the Hunter and deploys headless browsing threads. It strips the websites for hidden contact data (Emails, IG, LinkedIn) while simultaneously running a deep technical audit. It logs missing SSL certificates, poor mobile optimization, and missing tracking pixels.</p>
+                    <div class="terminal-block">
+                        > SCANNING: TARGET_A.COM<br>
+                        > CONTACT: OWNER@TARGET_A.COM<br>
+                        > VULNERABILITY: [MISSING SSL] DETECTED.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-module">
+                <div class="module-content">
+                    <span class="phase-tag" style="color: #8b5cf6; background: rgba(139, 92, 246, 0.1);">PHASE 03</span>
+                    <h2>AI Persona Synthesis</h2>
+                    <p>The engine takes the vulnerability data and your "Core Offer" (e.g., "Google Maps Optimization") and routes it directly into your selected LLM. The AI constructs hyper-personalized outreach copy, directly referencing the target's specific technical failures to instantly establish your authority.</p>
+                    <div class="terminal-block" style="color: #d8b4fe;">
+                        > INJECTING CONTEXT TO GEMINI_PRO...<br>
+                        > SYNTHESIZING DRAFT...<br>
+                        > "Noticed your site drops warnings due to missing SSL..."
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-module">
+                <div class="module-content">
+                    <span class="phase-tag" style="color: var(--danger); background: rgba(239, 68, 68, 0.1);">PHASE 04</span>
+                    <h2>The Anti-Spam Jitter Dispatch</h2>
+                    <p>Standard automation ruins sender reputations. The Dispatcher injects our proprietary "Anti-Spam Jitter"—randomized delays between 30 and 90 seconds between every email sent. This perfectly mimics human typing speeds, bypassing algorithmic spam filters and ensuring your payloads land squarely in the primary inbox.</p>
+                    <div class="terminal-block" style="color: var(--danger);">
+                        > PAYLOAD DELIVERED -> TARGET_A.<br>
+                        > JITTER DELAY INITIATED: WAITING 47 SECONDS...<br>
+                        > PAYLOAD DELIVERED -> TARGET_B.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="system-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="company-name">© 2026 Sorting Source LLC.</span>
+                <span class="rights">ALL SYSTEMS OPERATIONAL // ALL RIGHTS RESERVED.</span>
+                <span class="rights" style="margin-top: 0.5rem; color: #666;">
+                    System Architecture by <a href="https://irondigitalmi.com" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: bold; text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);">Irondigitalmi.com</a>
+                </span>
+            </div>
+            <div class="footer-links">
+                <a href="how-it-works.html" style="color: #0dbd48;">How It Works</a>
+                <a href="architecture.html" style="color: #e40f08;">System Architecture</a>
+                <a href="demo.html" style="color: #2563eb;">Visual Intel (Demo)</a>
+                <a href="models.html" style="color: #8b5cf6;">Synthesis Models</a>
+                <a href="privacy.html">Privacy Protocol</a>
+                <a href="terms.html">Terms of Engagement</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

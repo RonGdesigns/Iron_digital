@@ -3,114 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service | Iron Digital</title>
+    <title>Terms of Engagement | SortingSource</title>
+    
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
-        :root {
-            --bg-dark: #070e1a;
-            --bg-panel: #112240;
-            --accent-blue: #00d4ff;
-            --text-main: #e6f1ff;
-            --text-muted: #8892b0;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom, #070e1a 0%, #112240 100%);
-            color: var(--text-main);
-            line-height: 1.6;
+        :root { --bg: #050505; --text: #888; --accent: #2563eb; --mono: 'Fira Code', 'Courier New', monospace; }
+        
+        /* Global Reset */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: var(--mono); 
+            line-height: 1.8; 
+            overflow-x: hidden; 
+            /* FLEXBOX STICKY FOOTER: Stacks elements and allows the container to push the footer down */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        nav {
+        /* FIXED VIEWPORT CANVAS: Locks terms.png to the screen while text scrolls */
+        body::before {
+            content: '';
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh; 
+            background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.95) 100%), url('terms.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover; 
+            z-index: 0; 
+            pointer-events: none;
+        }
+
+        /* TEXT CONTAINER: Pulls text safely above the image and acts as the flex-spring */
+        .container { 
+            padding: 4rem 2rem; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            position: relative; 
+            z-index: 2; 
+            flex-grow: 1; /* CRITICAL: Forces container to expand and crush the footer to the bottom */
+            width: 100%;
+        }
+
+        h1, h2 { color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        /* Removed the dashed border so it doesn't slice the background photo */
+        h1 { margin-bottom: 2rem; font-size: 2.5rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        
+        .back-btn { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+        .back-btn:hover { color: #fff; text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+        
+        /* GLASSMORPHISM: Keeps text readable as it scrolls over terms.png */
+        .clause { 
+            margin-bottom: 3rem; 
+            background: rgba(10, 10, 10, 0.65); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- SYSTEM FOOTER (BULLETPROOF VERSION) --- */
+        .system-footer {
+            border-top: 1px dashed #222;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #888888; 
+            background: #050505;
+            position: relative; /* Pulls footer above the background */
+            z-index: 10;        
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background-color: rgba(7, 14, 26, 0.95);
-            border-bottom: 1px solid #112240;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .company-name {
+            color: #ccc;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .rights {
+            font-family: 'Fira Code', 'Courier New', monospace; 
+            font-size: 0.7rem;
+            color: #555;
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .footer-links a {
+            color: #888888; 
+            font-family: 'Fira Code', 'Courier New', monospace; 
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #2563eb;
+            text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
         }
 
-        nav .logo-wrapper { display: flex; align-items: center; gap: 15px; text-decoration: none;}
-        nav .logo-img { height: 45px; width: auto; display: block; }
-        nav .logo-text { font-size: 1.5rem; font-weight: bold; color: var(--text-main); }
-        
-        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
-        nav a { color: var(--text-main); text-decoration: none; font-size: 1rem; transition: color 0.3s; }
-        nav a:hover { color: var(--accent-blue); }
-
-        .legal-container {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 50px;
-            background-color: var(--bg-panel);
-            border-radius: 12px;
-            border: 1px solid #1a365d;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            flex: 1;
-        }
-
-        .legal-container h1 { color: var(--accent-blue); margin-top: 0; margin-bottom: 10px; font-size: 2.2rem; }
-        .legal-container p.date { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 40px; font-style: italic; }
-        .legal-container h2 { color: var(--text-main); margin-top: 30px; font-size: 1.3rem; border-bottom: 1px solid #1a365d; padding-bottom: 10px; }
-        .legal-container p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; }
-
-        footer { text-align: center; padding: 30px; background-color: #050a13; color: var(--text-muted); border-top: 1px solid #112240; font-size: 0.9rem; margin-top: auto; }
-
+        /* --- MOBILE OVERRIDE PROTOCOLS --- */
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; padding: 15px; }
-            .legal-container { margin: 20px; padding: 30px; }
+            body, html { overflow-x: hidden; width: 100%; }
+            .container { padding: 3rem 1.5rem; } 
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.2rem; }
+            p { font-size: 0.95rem; }
+            .clause { padding: 1.5rem; }
+            
+            .system-footer { padding: 2rem 1rem; }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem; 
+            }
+            .footer-links {
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 1rem 1.5rem; 
+            }
         }
     </style>
+    <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
-    <div class="custom-cursor"></div>
+    
+    <div class="container">
+        <a href="index.html" class="back-btn">&lt;_ RETURN TO MAIN SYSTEM</a>
+        <h1>Terms of Engagement</h1>
+        
+        <div class="clause">
+            <h2>> 01. BYOK (Bring Your Own Key) Doctrine</h2>
+            <p>SortingSource is a standalone architecture. You are acquiring the engine, not the fuel. Users must supply their own active accounts and API limits for Google Places, OpenAI, Gemini, Twilio, and SMTP gateways.</p>
+        </div>
 
-    <nav>
-        <a href="index.html" class="logo-wrapper">
-            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
-            <div class="logo-text">
-                <span>IRON</span> 
-                <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
-            </div>
-        </a>
-        <ul>
-            <li><a href="index.html#templates">Templates</a></li>
-            <li><a href="index.html#pricing">Pricing</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <div class="legal-container">
-        <h1>Terms of Service</h1>
-        <p class="date">Effective Date: March 2026</p>
-
-        <h2>1. Agreement to Terms</h2>
-        <p>By accessing the website at irondigitalmi.com, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you disagree with any part of the terms, you may not access our services.</p>
-
-        <h2>2. Intellectual Property & Ownership</h2>
-        <p>Upon final payment or successful initiation of a subscription agreement, the client retains full ownership of their specific domain name and the unique content provided for the website. Iron Digital retains all rights, title, and interest in our proprietary code, custom design structures, and proprietary digital ecosystem frameworks used to construct the site, unless the client provided a completely original, exact template that was replicated.</p>
-
-        <h2>3. Payments and Non-Refundable Deposit</h2>
-        <p>A $250 non-refundable deposit is required prior to the commencement of any website build or digital service. This deposit secures your project in our production queue and covers the initial administrative costs of project scoping, onboarding, and strategy. Because this time and administrative work cannot be recovered, this deposit is strictly non-refundable under any circumstances. The remaining balance or subscription billing will commence according to your selected plan and signed agreement.</p>
-
-        <h2>4. Maintenance and Warranties</h2>
-        <p>Iron Digital provides an Emergency Maintenance Warranty covering broken links, server crashes, and necessary takedowns. This warranty is active for 6 months following the final payment of a subscription plan, or 3 months following the final payment of a standard one-time build.</p>
-
-        <h2>5. Limitation of Liability</h2>
-        <p>In no event shall Iron Digital be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the services.</p>
+        <div class="clause">
+            <h2>> 02. Legal Accountability & Compliance</h2>
+            <p>By executing the Pitch Engine, you accept full legal responsibility for your outreach. SortingSource LLC is not liable for domain blacklisting, rate limits, or violations of CAN-SPAM, TCPA, or third-party API Terms of Service. Misuse of the engine (e.g., ignoring opt-outs, harassment) is strictly prohibited.</p>
+        </div>
     </div>
 
-    <footer>
-        <div style="margin-bottom: 15px;">
-            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
-            <span style="color: #1a365d;">|</span>
-            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+    <footer class="system-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="company-name">© 2026 Sorting Source LLC.</span>
+                <span class="rights">ALL SYSTEMS OPERATIONAL // ALL RIGHTS RESERVED.</span>
+                <span class="rights" style="margin-top: 0.5rem; color: #666;">
+                    System Architecture by <a href="https://irondigitalmi.com" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: bold; text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);">Irondigitalmi.com</a>
+                </span>
+            </div>
+            <div class="footer-links">
+                <a href="how-it-works.html" style="color: #0dbd48;">How It Works</a>
+                <a href="architecture.html" style="color: #e40f08;">System Architecture</a>
+                <a href="demo.html" style="color: #2563eb;">Visual Intel (Demo)</a>
+                <a href="models.html" style="color: #8b5cf6;">Synthesis Models</a>
+                <a href="privacy.html">Privacy Protocol</a>
+                <a href="terms.html">Terms of Engagement</a>
+            </div>
         </div>
-        <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
 </body>

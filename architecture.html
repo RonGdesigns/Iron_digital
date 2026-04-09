@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture | SortingSource</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        :root { 
+            --bg: #050505; 
+            --text: #888; 
+            --accent: #2563eb; 
+            --accent-glow: rgba(37, 99, 235, 0.2);
+            --mono: 'Fira Code', 'Courier New', monospace; 
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: var(--mono); 
+            line-height: 1.8; 
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* THE NEW VIDEO BACKGROUND LAYER */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover; /* Ensures the video fills the screen without stretching */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* THE CINEMATIC SHADOW OVERLAY */
+        /* This sits on top of the video to darken it so your text remains readable */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh; 
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.95) 100%);
+            z-index: 1; /* Sits exactly between the video (0) and your container (2) */
+            pointer-events: none;
+        }
+
+        /* INJECTED: The missing container to hold your text above the background */
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 4rem 2rem; 
+            position: relative;
+            z-index: 2; 
+        }
+
+        h1, h2, h3 { color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+        h1 { border-bottom: 1px dashed #333; padding-bottom: 1rem; margin-bottom: 3rem; }
+        .back-btn { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+        .back-btn:hover { color: #fff; text-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+        .clause { margin-bottom: 4rem; }
+        .green { color: #10b981; }
+
+        /* --- CREDENTIAL MATRIX STYLES (GLASSMORPHISM UPGRADE) --- */
+        .key-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .key-card {
+            background: rgba(10, 10, 10, 0.65); /* Made transparent for the background image */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .key-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: #333;
+            transition: all 0.3s ease;
+        }
+        .key-card:hover {
+            border-color: var(--accent);
+            box-shadow: inset 0 0 20px var(--accent-glow), 0 10px 30px rgba(0,0,0,0.8);
+            transform: translateY(-3px);
+            background: rgba(15, 15, 15, 0.85);
+        }
+        .key-card:hover::before { background: var(--accent); }
+        .key-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .key-card p { font-size: 0.85rem; color: #aaa; margin-bottom: 1.5rem; line-height: 1.5; }
+        
+        .key-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        .key-link:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        
+        .app-password-box {
+            background: rgba(16, 185, 129, 0.1); /* Transparent Glass */
+            backdrop-filter: blur(10px);
+            border: 1px dashed rgba(16, 185, 129, 0.5);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* --- SYSTEM FOOTER (BULLETPROOF VERSION) --- */
+        .system-footer {
+            border-top: 1px dashed #222;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #888888; 
+            background: #050505;
+            position: relative; 
+            z-index: 10;        
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .company-name {
+            color: #ccc;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .rights {
+            font-family: 'Fira Code', 'Courier New', monospace; 
+            font-size: 0.7rem;
+            color: #555;
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .footer-links a {
+            color: #888888; 
+            font-family: 'Fira Code', 'Courier New', monospace; 
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #2563eb;
+            text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+        }
+
+        /* --- MOBILE OVERRIDE PROTOCOLS --- */
+        @media (max-width: 768px) {
+            body, html { overflow-x: hidden; width: 100%; }
+            .container { padding: 3rem 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.2rem; }
+            
+            /* Stacks the grid on mobile */
+            .key-grid { grid-template-columns: 1fr; }
+            
+            /* Footer overrides */
+            .system-footer { padding: 2rem 1rem; }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem; 
+            }
+            .footer-links {
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 1rem 1.5rem; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted playsinline class="bg-video">
+        <source src="arch.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">&lt;_ RETURN TO MAIN SYSTEM</a>
+        <h1>System Architecture v2.1</h1>
+        
+        <div class="clause">
+            <h2>> Engine Specifications</h2>
+            <p>Pitch Engine v2.1 operates as a standalone compiled executable. Core CRM data is managed via a local <code>outbound_crm.db</code> file. AI Synthesis is dynamically routed; our 'Model Override' feature allows users to manually inject the latest provider strings (e.g., gpt-4o, gemini-1.5-pro) without requiring a software patch.</p>
+        </div>
+
+        <div class="clause">
+            <h2>> Credential Acquisition Matrix</h2>
+            <p>To initialize the Pitch Engine, you must supply active API parameters from your preferred intelligence and data providers. Generate your secure tokens below.</p>
+            
+            <div class="key-grid">
+                <div class="key-card">
+                    <h3>Google Places API</h3>
+                    <p>Fuels the "Hunter" module. Required for deep-scanning local business data and technical extraction.</p>
+                    <a href="https://console.cloud.google.com/" target="_blank" class="key-link">Generate Token &gt;_</a>
+                </div>
+
+                <div class="key-card">
+                    <h3>Google Gemini AI</h3>
+                    <p>The primary synthesis engine. Generates hyper-personalized pitch parameters based on extracted data.</p>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="key-link">Generate Token &gt;_</a>
+                </div>
+
+                <div class="key-card">
+                    <h3>OpenAI (ChatGPT)</h3>
+                    <p>Secondary synthesis option. Compatible with gpt-4, gpt-4o, and gpt-turbo model overrides.</p>
+                    <a href="https://platform.openai.com/api-keys" target="_blank" class="key-link">Generate Token &gt;_</a>
+                </div>
+
+                <div class="key-card">
+                    <h3>Twilio SMS Gateway</h3>
+                    <p>Required for mobile text dispatch. Secure your Account SID and Auth Token to bypass standard carrier blocks.</p>
+                    <a href="https://console.twilio.com/" target="_blank" class="key-link">Generate Token &gt;_</a>
+                </div>
+            </div>
+
+            <div class="app-password-box">
+                <h3 style="color: #10b981; margin-bottom: 0.5rem;">[CRITICAL] SMTP Authentication (App Passwords)</h3>
+                <p style="font-size: 0.9rem; color: #aaa;">To dispatch emails via standard providers (Gmail, Outlook) without triggering security locks, you <strong>cannot</strong> use your master login password. You must generate a dedicated 16-digit "App Password". Ensure 2-Factor Authentication is enabled on your provider account before generating.</p>
+                <br>
+                <a href="https://myaccount.google.com/apppasswords" target="_blank" class="key-link" style="border-color: #10b981; color: #10b981;">Generate Gmail App Password &gt;_</a>
+            </div>
+        </div>
+        
+        <div class="clause">
+            <h2>> System Requirements</h2>
+            <ul>
+                <li style="margin-bottom: 0.5rem;"><span class="green">OS:</span> Windows 10 / Windows 11 (Delivered as a standalone .exe)</li>
+                <li><span class="green">Storage:</span> &lt; 1GB Local Disk Space (Ultra-lightweight footprint)</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="system-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="company-name">© 2026 Sorting Source LLC.</span>
+                <span class="rights">ALL SYSTEMS OPERATIONAL // ALL RIGHTS RESERVED.</span>
+                <span class="rights" style="margin-top: 0.5rem; color: #666;">
+                    System Architecture by <a href="https://irondigitalmi.com" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: bold; text-shadow: 0 0 8px rgba(37, 99, 235, 0.4);">Irondigitalmi.com</a>
+                </span>
+            </div>
+            <div class="footer-links">
+                <a href="how-it-works.html" style="color: #0dbd48;">How It Works</a>
+                <a href="architecture.html" style="color: #e40f08;">System Architecture</a>
+                <a href="demo.html" style="color: #2563eb;">Visual Intel (Demo)</a>
+                <a href="models.html" style="color: #8b5cf6;">Synthesis Models</a>
+                <a href="privacy.html">Privacy Protocol</a>
+                <a href="terms.html">Terms of Engagement</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
