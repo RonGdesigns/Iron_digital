@@ -25,32 +25,6 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // ==========================================
-    // 1. THE CINEMATIC PRELOADER
-    // ==========================================
-    const preloader = document.querySelector('.preloader');
-    const counterElement = document.querySelector('.counter');
-    
-    if (preloader && counterElement) {
-        let count = { val: 0 };
-        gsap.to(count, {
-            val: 100,
-            duration: 1.8,
-            ease: "power2.inOut",
-            onUpdate: () => counterElement.innerText = Math.round(count.val).toString().padStart(3, '0'),
-            onComplete: () => {
-                gsap.to(preloader, {
-                    yPercent: -100, duration: 1, ease: "power4.inOut",
-                    onComplete: () => {
-                        preloader.style.display = "none";
-                        initForge(); 
-                    }
-                });
-            }
-        });
-    } else {
-        initForge();
-    }
 
     // ==========================================
     // 2. GLOBAL CURSOR TRACKING
