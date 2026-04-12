@@ -53,13 +53,23 @@
 
     <main id="swup" class="transition-fade">
         
-        <section class="hero" style="position: relative; z-index: 1;">
+        <section class="hero" style="position: relative; overflow: hidden; z-index: 1;">
+            
+            <canvas id="iron-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3;"></canvas>
+            
             <div style="position: relative; z-index: 2; pointer-events: none;">
                 <h1 class="kinetic-text">Elevating Your<br><span>Digital Presence</span></h1>
                 <p>Custom, modern websites tailored for business growth.</p>
-                <a href="#contact" class="cta-button" style="pointer-events: auto;">Get A Quote &rarr;</a>
+                
+                <div class="hero-btns" style="pointer-events: auto; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#contact" class="cta-button">Get A Quote &rarr;</a>
+                    
+                    <a href="https://pagespeed.web.dev/" target="_blank" rel="noopener" class="secondary-cta">Test Your Current Website</a>
+                </div>
             </div>
         </section>
+
+        <div class="trust-marquee-container">
 
         <div class="trust-marquee-container">
             <p class="trust-text">TRUSTED BY DETROIT'S GROWING BRANDS</p>
