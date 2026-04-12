@@ -22,7 +22,16 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            margin: 0;
         }
+
+        /* Pushes footer to bottom */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .standalone-form-container {
             flex-grow: 1;
             display: flex;
@@ -55,7 +64,6 @@
             margin-bottom: 30px;
         }
 
-        /* Ensuring the row fields match perfectly */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -145,8 +153,8 @@
         </div>
     </main>
 
-    <footer>
-        <p style="margin: 0; text-align: center; padding: 20px; color: var(--text-muted);">&copy; 2026 Iron Digital. | Based in Detroit.</p>
+    <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="margin: 0; color: var(--text-muted);">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
     <script src="main.js"></script>
