@@ -49,10 +49,12 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="templates.html">Templates</a></li>
-            <li><a href="index.html#pricing" data-no-swup>Pricing</a></li>
+            <li><a href="index.html">Pricing</a></li>
             <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
         </ul>
     </nav>
+
+    <canvas id="iron-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; pointer-events: none;"></canvas>
 
     <div id="imageModal" class="modal">
         <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -217,7 +219,7 @@
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="script.js"></script>
 
     <script>
         (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
