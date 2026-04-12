@@ -29,28 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. THE CINEMATIC PRELOADER
     // ==========================================
     const preloader = document.querySelector('.preloader');
-    const counterElement = document.querySelector('.counter');
-    
-    if (preloader && counterElement) {
-        let count = { val: 0 };
-        gsap.to(count, {
-            val: 100,
-            duration: 1.8,
-            ease: "power2.inOut",
-            onUpdate: () => counterElement.innerText = Math.round(count.val).toString().padStart(3, '0'),
-            onComplete: () => {
-                gsap.to(preloader, {
-                    yPercent: -100, duration: 1, ease: "power4.inOut",
-                    onComplete: () => {
-                        preloader.style.display = "none";
-                        initForge(); 
-                    }
-                });
-            }
-        });
-    } else {
-        initForge();
-    }
+    // Only run the preloader logic if the element actually exists in the HTML
+const counterElement = document.querySelector('.counter');
+
+if (counterElement) {
+    // Your current preloader/countdown code goes here
+    // e.g., gsap.to(".counter", { ... })
+} else {
+    // If no preloader exists, just make sure the page is visible immediately
+    document.body.classList.add('loaded'); 
+    const preloader = document.querySelector('.preloader');
+    if (preloader) preloader.style.display = 'none';
+}
 
     // ==========================================
     // 2. GLOBAL CURSOR TRACKING
