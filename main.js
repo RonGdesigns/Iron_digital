@@ -155,20 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     animationFrameId = requestAnimationFrame(animate); 
                 }
                 animate();
-            }, 500); // 500 millisecond delay
-        }
-
-            const plane = new THREE.Mesh(geometry, material);
-            plane.rotation.x = -Math.PI * 0.2; 
-            scene.add(plane); camera.position.z = 2;
-
-            const clock = new THREE.Clock();
-            function animate() {
-                material.uniforms.uTime.value = clock.getElapsedTime() * 0.4; 
-                renderer.render(scene, camera);
-                animationFrameId = requestAnimationFrame(animate); 
-            }
-            animate();
+            }, 500); 
         }
 
         // F. Cinematic Video Slow-Mo
