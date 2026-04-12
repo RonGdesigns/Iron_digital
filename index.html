@@ -29,6 +29,10 @@
 </head>
 
 <body>
+    <div class="preloader">
+        <div class="counter">000</div>
+    </div>
+
     <div class="custom-cursor"></div>
 
     <nav>
@@ -50,10 +54,7 @@
 
     <main id="swup" class="transition-fade">
         
-        <section class="hero" style="position: relative; overflow: hidden; z-index: 1;">
-            
-            <canvas id="iron-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3;"></canvas>
-            
+        <section class="hero" style="position: relative; z-index: 1;">
             <div style="position: relative; z-index: 2; pointer-events: none;">
                 <h1 class="kinetic-text">Elevating Your<br><span>Digital Presence</span></h1>
                 <p>Custom, modern websites tailored for business growth.</p>
@@ -81,82 +82,127 @@
             </div>
         </div>
 
-        <section id="pricing" class="section-container">
-            <h2 class="section-title" data-animate="pop-in">Pricing Plans</h2>
-            <p class="section-subtitle" data-animate="pop-in">Transparent pricing designed for scale.</p>
+        <style>
+            /* Standalone 3D Flip CSS for the cards */
+            .flip-card { perspective: 1000px; min-height: 480px; width: 100%; }
+            .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; }
+            .card-front, .card-back {
+                width: 100%; height: 100%; position: absolute; backface-visibility: hidden;
+                border-radius: 35px; background-color: rgba(17, 34, 64, 0.6);
+                background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+                backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.15);
+                box-shadow: 0 8px 32px 0 rgba(0, 212, 255, 0.1); padding: 40px 20px;
+                display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            }
+            .card-back { transform: rotateY(180deg); justify-content: flex-start; }
+            .pricing-features-list { list-style: none; padding: 0; margin: 0 0 20px 0; width: 100%; text-align: left; }
+            .pricing-features-list li { padding: 10px 0; border-bottom: 1px solid rgba(26, 54, 93, 0.5); font-size: 0.95rem; color: #8892b0; }
+        </style>
 
-            <div class="pricing-grid">
-                <div class="pricing-card tilt-effect" data-animate="pop-in">
-                    <h3>Starter Build</h3>
-                    <div class="price">$1,000</div>
-                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
-                        One-Time Fee<br>
-                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Custom Website Design</li>
-                        <li>Mobile Responsive Build</li>
-                        <li>Basic SEO Setup</li>
-                        <li><strong style="color: #ff4d4d;">No Hosting</strong></li>
-                        <li><strong style="color: #ff4d4d;">No Maintenance</strong></li>
-                    </ul>
-                </div>
-                
-                <div class="pricing-card tilt-effect" data-animate="pop-in">
-                    <h3>Standard</h3>
-                    <div class="price">$99<span style="font-size: 1.2rem;">/mo</span></div>
-                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
-                        + $1,000 Upfront Build Fee<br>
-                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Custom Website Design</li>
-                        <li><strong>Includes Premium Hosting</strong></li>
-                        <li><strong>Up to 5 Changes/mo</strong></li>
-                        <li>Basic SEO Setup</li>
-                        <li>Standard Support</li>
-                    </ul>
-                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
-                </div>
-                
-                <div class="pricing-card featured tilt-effect" data-animate="pop-in">
-                    <div class="recommended-badge">Recommended</div>
-                    <h3>Growth</h3>
-                    <div class="price">$199<span style="font-size: 1.2rem;">/mo</span></div>
-                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
-                        + $1,000 Upfront Build Fee<br>
-                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Custom Website Design</li>
-                        <li><strong>Includes Premium Hosting</strong></li>
-                        <li><strong>Up to 15 Changes/mo</strong></li>
-                        <li>Advanced SEO Setup</li>
-                        <li>Standard Support</li>
-                    </ul>
-                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
-                </div>
-                
-                <div class="pricing-card tilt-effect" data-animate="pop-in">
-                    <h3>Premium</h3>
-                    <div class="price">$399<span style="font-size: 1.2rem;">/mo</span></div>
-                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
-                        + $1,000 Upfront Build Fee<br>
-                        <span style="color: var(--accent-blue); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Complex Custom Design</li>
-                        <li><strong>Includes Premium Hosting</strong></li>
-                        <li><strong>Unlimited Content Changes</strong></li>
-                        <li>E-Commerce Capabilities</li>
-                        <li><strong>Priority Support</strong></li>
-                    </ul>
-                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; font-style: italic; line-height: 1.3;">*Startup cost can exceed listed price based on customer needs.</div>
-                </div>
+        <section id="pricing" class="sticky-section section-container">
+            <div class="sticky-header" style="text-align: center; margin-bottom: 50px;">
+                <h2 class="section-title">Pricing Plans</h2>
+                <p class="section-subtitle" style="color: var(--accent-blue);">Transparent pricing designed for scale. Keep scrolling to reveal details.</p>
             </div>
-            <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 20px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
-        </section>
 
+            <div class="card-container pricing-grid">
+                
+                <div class="flip-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3 style="margin: 0; color: #e6f1ff; font-size: 1.5rem; font-family: 'Syne', sans-serif;">Starter Build</h3>
+                            <div class="price" style="font-size: 2.5rem; color: #00d4ff; font-weight: bold; margin: 20px 0;">$1,000</div>
+                            <div style="font-size: 0.9rem; color: #8892b0; line-height: 1.5;">
+                                One-Time Fee<br>
+                                <span style="color: #00d4ff; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <ul class="pricing-features-list">
+                                <li>Custom Website Design</li>
+                                <li>Mobile Responsive Build</li>
+                                <li>Basic SEO Setup</li>
+                                <li><strong style="color: #ff4d4d;">No Hosting</strong></li>
+                                <li><strong style="color: #ff4d4d;">No Maintenance</strong></li>
+                            </ul>
+                            <a href="start.html" class="cta-button" style="margin-top: auto;">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3 style="margin: 0; color: #e6f1ff; font-size: 1.5rem; font-family: 'Syne', sans-serif;">Standard</h3>
+                            <div class="price" style="font-size: 2.5rem; color: #00d4ff; font-weight: bold; margin: 20px 0;">$99<span style="font-size: 1.2rem;">/mo</span></div>
+                            <div style="font-size: 0.9rem; color: #8892b0; line-height: 1.5;">
+                                + $1,000 Upfront Build Fee<br>
+                                <span style="color: #00d4ff; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <ul class="pricing-features-list">
+                                <li>Custom Website Design</li>
+                                <li><strong>Includes Premium Hosting</strong></li>
+                                <li><strong>Up to 5 Changes/mo</strong></li>
+                                <li>Basic SEO Setup</li>
+                                <li>Standard Support</li>
+                            </ul>
+                            <a href="start.html" class="cta-button" style="margin-top: auto;">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="card-inner">
+                        <div class="card-front" style="border: 2px solid #00d4ff;">
+                            <div class="recommended-badge" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #00d4ff; color: #000; padding: 6px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase;">Recommended</div>
+                            <h3 style="margin: 0; color: #e6f1ff; font-size: 1.5rem; font-family: 'Syne', sans-serif;">Growth</h3>
+                            <div class="price" style="font-size: 2.5rem; color: #00d4ff; font-weight: bold; margin: 20px 0;">$199<span style="font-size: 1.2rem;">/mo</span></div>
+                            <div style="font-size: 0.9rem; color: #8892b0; line-height: 1.5;">
+                                + $1,000 Upfront Build Fee<br>
+                                <span style="color: #00d4ff; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                            </div>
+                        </div>
+                        <div class="card-back" style="border: 2px solid #00d4ff;">
+                            <ul class="pricing-features-list">
+                                <li>Custom Website Design</li>
+                                <li><strong>Includes Premium Hosting</strong></li>
+                                <li><strong>Up to 15 Changes/mo</strong></li>
+                                <li>Advanced SEO Setup</li>
+                                <li>Standard Support</li>
+                            </ul>
+                            <a href="start.html" class="cta-button" style="margin-top: auto;">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3 style="margin: 0; color: #e6f1ff; font-size: 1.5rem; font-family: 'Syne', sans-serif;">Premium</h3>
+                            <div class="price" style="font-size: 2.5rem; color: #00d4ff; font-weight: bold; margin: 20px 0;">$399<span style="font-size: 1.2rem;">/mo</span></div>
+                            <div style="font-size: 0.9rem; color: #8892b0; line-height: 1.5;">
+                                + $1,000 Upfront Build Fee<br>
+                                <span style="color: #00d4ff; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">$250 Non-Refundable Deposit</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <ul class="pricing-features-list">
+                                <li>Complex Custom Design</li>
+                                <li><strong>Includes Premium Hosting</strong></li>
+                                <li><strong>Unlimited Content Changes</strong></li>
+                                <li>E-Commerce Capabilities</li>
+                                <li><strong>Priority Support</strong></li>
+                            </ul>
+                            <a href="start.html" class="cta-button" style="margin-top: auto;">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <p style="text-align: center; font-size: 0.85rem; color: #8892b0; margin-top: 20px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
+        </section>
         <section id="templates-preview" class="section-container">
             <div class="tilt-effect" data-animate="pop-in" style="background-color: rgba(17, 34, 64, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 30px; padding: 60px 20px; text-align: center; backdrop-filter: blur(10px); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
                 
@@ -260,6 +306,7 @@
             </div>
         </div>
     </main> 
+
     <footer>
         <div style="margin-bottom: 15px;">
             <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
@@ -270,6 +317,38 @@
     </footer>
 
     <script src="main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            // Checks if GSAP is loaded before firing
+            if(typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                const stickySection = document.querySelector("#pricing");
+                const cards = gsap.utils.toArray("#pricing .card-inner");
+
+                // Pin the section
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: stickySection,
+                        start: "center center", 
+                        end: "+=1200",          
+                        pin: true,              
+                        scrub: 1,               
+                        anticipatePin: 1
+                    }
+                });
+
+                // Animate the cards flipping 3D
+                tl.to(cards, {
+                    rotateY: 180,               
+                    duration: 1,
+                    stagger: 0.25,              
+                    ease: "power1.inOut"
+                });
+            }
+        });
+    </script>
 
     <script>
         (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
