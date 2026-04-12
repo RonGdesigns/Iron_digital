@@ -158,21 +158,41 @@ document.addEventListener("DOMContentLoaded", () => {
         const previewVideos = document.querySelectorAll('.bento-card video');
         previewVideos.forEach(vid => { vid.playbackRate = 0.65; });
 
-        // G. Custom Select Dropdown
+        // G. Custom Select Dropdown & Auto-Fill Logic
         document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
             const trigger = wrapper.querySelector('.custom-select-trigger');
             const options = wrapper.querySelectorAll('.custom-option');
             const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
+            const triggerSpan = trigger ? trigger.querySelector('span') : null;
 
+            // 1. Check if the URL has a '?plan=' parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const planFromUrl = urlParams.get('plan');
+
+            if (planFromUrl && hiddenInput && triggerSpan) {
+                // Look through the options to find a match
+                options.forEach(option => {
+                    if (option.getAttribute('data-value') === planFromUrl) {
+                        // Auto-fill the form!
+                        triggerSpan.textContent = option.textContent;
+                        hiddenInput.value = planFromUrl;
+                        triggerSpan.style.color = "var(--text-main)";
+                    }
+                });
+            }
+
+            // 2. Standard Click Logic
             if(trigger) trigger.addEventListener('click', () => wrapper.classList.toggle('open'));
+            
             options.forEach(option => {
                 option.addEventListener('click', function() {
-                    trigger.querySelector('span').textContent = this.textContent;
+                    if (triggerSpan) triggerSpan.textContent = this.textContent;
                     if(hiddenInput) hiddenInput.value = this.getAttribute('data-value');
                     wrapper.classList.remove('open');
-                    trigger.querySelector('span').style.color = "var(--text-main)";
+                    if (triggerSpan) triggerSpan.style.color = "var(--text-main)";
                 });
             });
+            
             setTimeout(() => {
                 document.addEventListener('click', (e) => {
                     if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
