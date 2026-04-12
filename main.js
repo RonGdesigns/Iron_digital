@@ -25,7 +25,6 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
 
 document.addEventListener("DOMContentLoaded", () => {
     
-
     // ==========================================
     // 2. GLOBAL CURSOR TRACKING
     // ==========================================
@@ -185,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const cards = document.querySelectorAll('[data-animate="pop-in"]');
         cards.forEach((card, index) => {
             if (isMobile) {
-                // MOBILE: Clean, lightweight fade-in
                 gsap.fromTo(card, 
                     { opacity: 0 },
                     { opacity: 1, duration: 0.6, ease: "power2.out", 
@@ -193,7 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 );
             } else {
-                // DESKTOP: Full heavy pop-in
                 gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
                     { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
                       scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
@@ -221,6 +218,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     } 
+
+    // THE FIX: Start the engine on the very first page load!
+    initForge();
 
 });
 
