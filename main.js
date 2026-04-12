@@ -26,33 +26,13 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
 document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================
-    // 2. GLOBAL CURSOR TRACKING (Bulletproof Fix)
+    // 2. GLOBAL CURSOR TRACKING
     // ==========================================
     const cursor = document.querySelector('.custom-cursor');
-    
-    if (cursor) {
-        // 1. Force the CSS so it cannot hide or fly off-screen
-        cursor.style.position = 'fixed';
-        cursor.style.top = '0px';
-        cursor.style.left = '0px';
-        cursor.style.opacity = '1';          // Forces it to be visible!
-        cursor.style.display = 'block';
-        cursor.style.pointerEvents = 'none'; // Ensures you can click buttons through the cursor
-        cursor.style.zIndex = '99999';       // Puts it on the very top layer
-
-        // 2. Only show the custom cursor on Desktop screens (hides on mobile)
-        if (window.innerWidth > 768) {
-            window.addEventListener('mousemove', (e) => {
-                gsap.to(cursor, { 
-                    x: e.clientX, 
-                    y: e.clientY, 
-                    duration: 0.15, 
-                    ease: "power2.out" 
-                });
-            });
-        } else {
-            cursor.style.display = 'none'; // Keeps mobile clean
-        }
+    if (cursor && window.matchMedia("(pointer: fine)").matches) {
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+        });
     }
 
     // ==========================================
@@ -121,61 +101,57 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // E. Three.js Liquid Iron Canvas (Delayed to boost PageSpeed)
+        // E. Three.js Liquid Iron Canvas (Scaled down for mobile)
         if (typeof THREE !== 'undefined' && document.getElementById('iron-canvas')) {
+            const canvas = document.getElementById('iron-canvas');
+            canvas.innerHTML = ''; 
             
-            // DELAY FIX: Waits 500ms so the phone can draw the text immediately (Boosts LCP score)
-            setTimeout(() => {
-                const canvas = document.getElementById('iron-canvas');
-                canvas.innerHTML = ''; 
-                
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-                
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
 
-                const segments = isMobile ? 32 : 128; 
-                const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
-                
-                const material = new THREE.ShaderMaterial({
-                    uniforms: {
-                        uTime: { value: 0.0 },
-                        uColorMain: { value: new THREE.Color('#070e1a') },
-                        uColorAccent: { value: new THREE.Color('#00d4ff') }
-                    },
-                    vertexShader: `
-                        uniform float uTime; varying vec2 vUv; varying float vElevation;
-                        void main() {
-                            vUv = uv; vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-                            float elevation = sin(modelPosition.x * 2.0 + uTime) * 0.2 + sin(modelPosition.y * 1.5 + uTime * 0.8) * 0.2;
-                            modelPosition.z += elevation; vElevation = elevation;
-                            gl_Position = projectionMatrix * viewMatrix * modelPosition;
-                        }
-                    `,
-                    fragmentShader: `
-                        uniform vec3 uColorMain; uniform vec3 uColorAccent; varying float vElevation;
-                        void main() {
-                            float mixStrength = (vElevation + 0.4) * 0.8;
-                            vec3 finalColor = mix(uColorMain, uColorAccent, mixStrength);
-                            gl_FragColor = vec4(finalColor, 1.0);
-                        }
-                    `,
-                });
+            const segments = isMobile ? 32 : 128; 
+            const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
+            
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    uTime: { value: 0.0 },
+                    uColorMain: { value: new THREE.Color('#070e1a') },
+                    uColorAccent: { value: new THREE.Color('#00d4ff') }
+                },
+                vertexShader: `
+                    uniform float uTime; varying vec2 vUv; varying float vElevation;
+                    void main() {
+                        vUv = uv; vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+                        float elevation = sin(modelPosition.x * 2.0 + uTime) * 0.2 + sin(modelPosition.y * 1.5 + uTime * 0.8) * 0.2;
+                        modelPosition.z += elevation; vElevation = elevation;
+                        gl_Position = projectionMatrix * viewMatrix * modelPosition;
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 uColorMain; uniform vec3 uColorAccent; varying float vElevation;
+                    void main() {
+                        float mixStrength = (vElevation + 0.4) * 0.8;
+                        vec3 finalColor = mix(uColorMain, uColorAccent, mixStrength);
+                        gl_FragColor = vec4(finalColor, 1.0);
+                    }
+                `,
+            });
 
-                const plane = new THREE.Mesh(geometry, material);
-                plane.rotation.x = -Math.PI * 0.2; 
-                scene.add(plane); camera.position.z = 2;
+            const plane = new THREE.Mesh(geometry, material);
+            plane.rotation.x = -Math.PI * 0.2; 
+            scene.add(plane); camera.position.z = 2;
 
-                const clock = new THREE.Clock();
-                function animate() {
-                    material.uniforms.uTime.value = clock.getElapsedTime() * 0.4; 
-                    renderer.render(scene, camera);
-                    animationFrameId = requestAnimationFrame(animate); 
-                }
-                animate();
-            }, 500); 
+            const clock = new THREE.Clock();
+            function animate() {
+                material.uniforms.uTime.value = clock.getElapsedTime() * 0.4; 
+                renderer.render(scene, camera);
+                animationFrameId = requestAnimationFrame(animate); 
+            }
+            animate();
         }
 
         // F. Cinematic Video Slow-Mo
