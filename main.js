@@ -29,17 +29,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. THE CINEMATIC PRELOADER
     // ==========================================
     const preloader = document.querySelector('.preloader');
-    // Only run the preloader logic if the element actually exists in the HTML
-const counterElement = document.querySelector('.counter');
+const counter = document.querySelector('.counter');
 
-if (counterElement) {
-    // Your current preloader/countdown code goes here
-    // e.g., gsap.to(".counter", { ... })
-} else {
-    // If no preloader exists, just make sure the page is visible immediately
-    document.body.classList.add('loaded'); 
-    const preloader = document.querySelector('.preloader');
-    if (preloader) preloader.style.display = 'none';
+// The script checks if the counter exists first before trying to animate it
+if (counter && preloader) {
+    
+    // Put ALL of your GSAP preloader animations inside these brackets!
+    // Example:
+    // gsap.to(counter, { ... });
+    // gsap.to(preloader, { ... });
+
+}
+
+// ==========================================
+// Your Custom Cursor Code safely runs down here!
+// ==========================================
+const cursor = document.querySelector('.custom-cursor');
+if (cursor) {
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
 }
 
     // ==========================================
