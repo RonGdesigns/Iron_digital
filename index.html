@@ -24,15 +24,17 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" defer></script>
     <script src="https://unpkg.com/swup@4" defer></script>
 </head>
 
 <body>
+
     <div class="custom-cursor"></div>
 
     <nav>
         <a href="index.html" class="logo-wrapper">
-            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img" width="180" height="45" fetchpriority="high" decoding="sync">
+            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
             <div class="logo-text">
                 <span>IRON</span> 
                 <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
@@ -49,10 +51,7 @@
 
     <main id="swup" class="transition-fade">
         
-        <section class="hero" style="position: relative; overflow: hidden; z-index: 1;">
-            
-            <canvas id="iron-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3;"></canvas>
-            
+        <section class="hero" style="position: relative; z-index: 1;">
             <div style="position: relative; z-index: 2; pointer-events: none;">
                 <h1 class="kinetic-text">Elevating Your<br><span>Digital Presence</span></h1>
                 <p>Custom, modern websites tailored for business growth.</p>
@@ -79,7 +78,7 @@
                 </div>
             </div>
         </div>
-
+        
         <section id="templates-preview" class="section-container">
             <div class="tilt-effect" data-animate="pop-in" style="background-color: rgba(17, 34, 64, 0.6); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 30px; padding: 60px 20px; text-align: center; backdrop-filter: blur(10px); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
                 
@@ -183,6 +182,7 @@
             </div>
         </div>
     </main> 
+
     <footer>
         <div style="margin-bottom: 15px;">
             <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
@@ -192,12 +192,42 @@
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 
     <script>
-        setTimeout(function() {
-            (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-        }, 4000);
+        document.addEventListener("DOMContentLoaded", (event) => {
+            // Checks if GSAP is loaded before firing
+            if(typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                const stickySection = document.querySelector("#pricing");
+                const cards = gsap.utils.toArray("#pricing .card-inner");
+
+                // Pin the section
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: stickySection,
+                        start: "center center", 
+                        end: "+=1200",          
+                        pin: true,              
+                        scrub: 1,               
+                        anticipatePin: 1
+                    }
+                });
+
+                // Animate the cards flipping 3D
+                tl.to(cards, {
+                    rotateY: 180,               
+                    duration: 1,
+                    stagger: 0.25,              
+                    ease: "power1.inOut"
+                });
+            }
+        });
+    </script>
+
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="1BPyEgSSpnDXcPOQIHQW-";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
 </body>
 </html>
