@@ -113,7 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
 
-            const segments = isMobile ? 32 : 128; 
+            const isMobile = window.innerWidth <= 768;
+// Use 16 segments for mobile instead of 32/128
+            const segments = isMobile ? 16 : 128; 
             const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
             
             const material = new THREE.ShaderMaterial({
