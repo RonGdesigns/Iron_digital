@@ -15,11 +15,9 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" defer></script>
     <script src="https://unpkg.com/swup@4" defer></script>
     
     <style>
-        /* Specific tweaks for the standalone form page */
         body {
             display: flex;
             flex-direction: column;
@@ -33,7 +31,6 @@
             padding: 60px 20px;
         }
         
-        /* Premium Glassmorphism */
         .form-box {
             background-color: rgba(17, 34, 64, 0.6); 
             backdrop-filter: blur(15px); 
@@ -51,13 +48,25 @@
         .form-box h2 {
             color: #ffffff;
             margin-top: 0;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-family: 'Syne', sans-serif;
             text-transform: uppercase;
             text-align: center;
             margin-bottom: 30px;
         }
-        
-        @media (max-width: 768px) {
+
+        /* Ensuring the row fields match perfectly */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
             .form-box { padding: 30px 20px; }
         }
     </style>
@@ -69,7 +78,7 @@
 
     <nav>
         <a href="index.html" class="logo-wrapper">
-            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img">
+            <img src="iron-digital-logo.png" alt="Iron Digital Logo" class="logo-img" width="180" height="45">
             <div class="logo-text">
                 <span>IRON</span> 
                 <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
@@ -80,6 +89,8 @@
         </ul>
     </nav>
 
+    <canvas id="iron-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; pointer-events: none;"></canvas>
+
     <main id="swup" class="transition-fade">
         <div class="standalone-form-container">
             <div class="form-box">
@@ -88,17 +99,17 @@
                     
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
                     </div>
                     
-                    <div class="form-row" style="margin-bottom: 20px;">
-                        <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group" style="margin-bottom: 20px;">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-bottom: 20px;">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <input type="tel" id="phone" name="phone" placeholder="(313) 000-0000" required>
                         </div>
                     </div>
 
@@ -121,20 +132,21 @@
 
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="business-desc">Business Description & Goals</label>
-                        <textarea id="business-desc" name="business-desc" placeholder="Tell us about your business, your target audience, and what you want this website to achieve..." required></textarea>
+                        <textarea id="business-desc" name="business-desc" placeholder="Tell us about your business and goals..." required style="min-height: 120px;"></textarea>
                     </div>
                     
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0 0 15px 0; font-style: italic; text-align: center;">
                         *Upon submission, we will reach out to schedule your Discovery Call.
                     </p>
 
-                    <button type="submit" class="submit-btn">Start My Project</button>
+                    <button type="submit" class="submit-btn" style="width: 100%;">Start My Project</button>
                 </form>
             </div>
         </div>
     </main>
+
     <footer>
-        <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
+        <p style="margin: 0; text-align: center; padding: 20px; color: var(--text-muted);">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
     <script src="main.js"></script>
