@@ -26,13 +26,33 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
 document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================
-    // 2. GLOBAL CURSOR TRACKING
+    // 2. GLOBAL CURSOR TRACKING (Bulletproof Fix)
     // ==========================================
     const cursor = document.querySelector('.custom-cursor');
-    if (cursor && window.matchMedia("(pointer: fine)").matches) {
-        window.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
-        });
+    
+    if (cursor) {
+        // 1. Force the CSS so it cannot hide or fly off-screen
+        cursor.style.position = 'fixed';
+        cursor.style.top = '0px';
+        cursor.style.left = '0px';
+        cursor.style.opacity = '1';          // Forces it to be visible!
+        cursor.style.display = 'block';
+        cursor.style.pointerEvents = 'none'; // Ensures you can click buttons through the cursor
+        cursor.style.zIndex = '99999';       // Puts it on the very top layer
+
+        // 2. Only show the custom cursor on Desktop screens (hides on mobile)
+        if (window.innerWidth > 768) {
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, { 
+                    x: e.clientX, 
+                    y: e.clientY, 
+                    duration: 0.15, 
+                    ease: "power2.out" 
+                });
+            });
+        } else {
+            cursor.style.display = 'none'; // Keeps mobile clean
+        }
     }
 
     // ==========================================
