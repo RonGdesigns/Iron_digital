@@ -29,28 +29,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. THE CINEMATIC PRELOADER
     // ==========================================
     const preloader = document.querySelector('.preloader');
-const counter = document.querySelector('.counter');
-
-// The script checks if the counter exists first before trying to animate it
-if (counter && preloader) {
+    const counterElement = document.querySelector('.counter');
     
-    // Put ALL of your GSAP preloader animations inside these brackets!
-    // Example:
-    // gsap.to(counter, { ... });
-    // gsap.to(preloader, { ... });
-
-}
-
-// ==========================================
-// Your Custom Cursor Code safely runs down here!
-// ==========================================
-const cursor = document.querySelector('.custom-cursor');
-if (cursor) {
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
-}
+    if (preloader && counterElement) {
+        let count = { val: 0 };
+        gsap.to(count, {
+            val: 100,
+            duration: 1.8,
+            ease: "power2.inOut",
+            onUpdate: () => counterElement.innerText = Math.round(count.val).toString().padStart(3, '0'),
+            onComplete: () => {
+                gsap.to(preloader, {
+                    yPercent: -100, duration: 1, ease: "power4.inOut",
+                    onComplete: () => {
+                        preloader.style.display = "none";
+                        initForge(); 
+                    }
+                });
+            }
+        });
+    } else {
+        initForge();
+    }
 
     // ==========================================
     // 2. GLOBAL CURSOR TRACKING
