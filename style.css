@@ -583,7 +583,14 @@ video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
 }
 
 .about-image { flex: 1.5; width: 100%; max-width: 500px; margin: 0 auto; }
-.about-image img { width: 100%; max-width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.3); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); }
+.about-image img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: none; /* Border removed */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
 
 
 /* =========================================================================
