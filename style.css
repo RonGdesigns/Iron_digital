@@ -637,8 +637,14 @@ video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
 }
     
     .about-content-wrapper { flex-direction: column; }
-    .about-image { width: 100%; min-width: 0; max-width: 100%; margin-top: 30px; }
-    
+    .about-image img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
     .bento-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: 140px !important; gap: 12px !important; }
     .bento-card.feature-card { grid-column: span 2 !important; grid-row: span 2 !important; }
     .bento-card.wide-card { grid-column: span 2 !important; }
