@@ -5,7 +5,7 @@ let lenis;
 let animationFrameId; 
 let sfxHover, sfxClick;
 
-// THE AUDIO FIX: Using universally supported .mp3 formats
+// THE AUDIO FIX
 if (typeof Howl !== 'undefined') {
     sfxHover = new Howl({ src: ['https://cdn.pixabay.com/audio/2022/03/15/audio_a16a8d3db5.mp3'], volume: 0.15 });
     sfxClick = new Howl({ src: ['https://cdn.pixabay.com/audio/2022/03/15/audio_7314227f91.mp3'], volume: 0.4 });
@@ -24,7 +24,7 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
 }
 
 // ==========================================
-// CUSTOM MAGNETIC CURSOR (Swup-Safe)
+// CUSTOM MAGNETIC CURSOR (Vanilla - Conflict Free)
 // ==========================================
 document.addEventListener('mousemove', (e) => {
     const cursor = document.querySelector('.custom-cursor');
@@ -34,7 +34,6 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-// Add the expanding hover effect when touching links/buttons
 document.addEventListener('mouseover', (e) => {
     const cursor = document.querySelector('.custom-cursor');
     if (cursor && e.target.closest('a, button, .custom-select-trigger, .custom-option, .bento-card, .clickable-img, .pricing-card')) {
@@ -42,7 +41,6 @@ document.addEventListener('mouseover', (e) => {
     }
 });
 
-// Remove the expanding hover effect when leaving
 document.addEventListener('mouseout', (e) => {
     const cursor = document.querySelector('.custom-cursor');
     if (cursor && e.target.closest('a, button, .custom-select-trigger, .custom-option, .bento-card, .clickable-img, .pricing-card')) {
@@ -53,17 +51,7 @@ document.addEventListener('mouseout', (e) => {
 document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================
-    // 2. GLOBAL CURSOR TRACKING
-    // ==========================================
-    const cursor = document.querySelector('.custom-cursor');
-    if (cursor && window.matchMedia("(pointer: fine)").matches) {
-        window.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
-        });
-    }
-
-    // ==========================================
-    // 3. SEAMLESS PAGE TRANSITIONS (SWUP)
+    // SEAMLESS PAGE TRANSITIONS (SWUP)
     // ==========================================
     if (typeof Swup !== 'undefined') {
         const swup = new Swup();
@@ -73,15 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. THE FORGE ENGINE (Reboots on every page load)
+    // THE FORGE ENGINE (Reboots on every page load)
     // ==========================================
     function initForge() {
         
         if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.getAll().forEach(t => t.kill());
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
-        // Hardware detection: true if on phone/tablet
         const isMobile = window.innerWidth <= 768;
+        const cursor = document.querySelector('.custom-cursor');
 
         // B. Re-bind Hover States & Audio
         const interactables = document.querySelectorAll('a, button, .cta-button, .pricing-card, .custom-select-trigger, details summary, .bento-card');
@@ -89,16 +77,16 @@ document.addEventListener("DOMContentLoaded", () => {
             interactables.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.classList.add('hovering');
-                    if(sfxHover) sfxHover.play(); // Audio fires here
+                    if(sfxHover) sfxHover.play(); 
                 });
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
                 el.addEventListener('click', () => {
-                    if(sfxClick) sfxClick.play(); // Audio fires here
+                    if(sfxClick) sfxClick.play(); 
                 });
             });
         }
 
-        // C. Kinetic Scroll Velocity (Card Skew) - DISABLED ON MOBILE TO PREVENT LAG
+        // C. Kinetic Scroll Velocity (Card Skew)
         if (!isMobile) {
             let proxy = { skew: 0 },
                 skewSetter = gsap.quickSetter(".pricing-card, .hero h1", "skewY", "deg"),
@@ -115,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // D. Kinetic Variable Typography - DISABLED ON MOBILE TO PREVENT LAG
+        // D. Kinetic Variable Typography
         const kineticText = document.querySelector('.kinetic-text');
         if (kineticText && !isMobile) {
             ScrollTrigger.create({
@@ -128,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // E. Three.js Liquid Iron Canvas (Scaled down for mobile)
+        // E. Three.js Liquid Iron Canvas
         if (typeof THREE !== 'undefined' && document.getElementById('iron-canvas')) {
             const canvas = document.getElementById('iron-canvas');
             canvas.innerHTML = ''; 
@@ -140,8 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
 
-            const isMobile = window.innerWidth <= 768;
-// Use 16 segments for mobile instead of 32/128
             const segments = isMobile ? 16 : 128; 
             const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
             
@@ -187,14 +173,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const previewVideos = document.querySelectorAll('.bento-card video');
         previewVideos.forEach(vid => { vid.playbackRate = 0.65; });
 
-        // G. Custom Select Dropdown & Auto-Fill Logic (Swup Bulletproof)
+        // G. Custom Select Dropdown (CLEANED UP - No Duplicates)
         document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
             const trigger = wrapper.querySelector('.custom-select-trigger');
             const options = wrapper.querySelectorAll('.custom-option');
             const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
             const triggerSpan = trigger ? trigger.querySelector('span') : null;
 
-            // 1. Check if the URL has a '?plan=' parameter
             const urlParams = new URLSearchParams(window.location.search);
             const planFromUrl = urlParams.get('plan');
 
@@ -208,10 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // 2. Click Logic (Using onclick to prevent duplicate Swup listeners)
             if(trigger) {
                 trigger.onclick = (e) => {
-                    e.stopPropagation(); // Stops the click from hitting the background
+                    e.stopPropagation(); 
                     wrapper.classList.toggle('open');
                 };
             }
@@ -227,26 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-            // 2. Standard Click Logic
-            if(trigger) trigger.addEventListener('click', () => wrapper.classList.toggle('open'));
-            
-            options.forEach(option => {
-                option.addEventListener('click', function() {
-                    if (triggerSpan) triggerSpan.textContent = this.textContent;
-                    if(hiddenInput) hiddenInput.value = this.getAttribute('data-value');
-                    wrapper.classList.remove('open');
-                    if (triggerSpan) triggerSpan.style.color = "var(--text-main)";
-                });
-            });
-            
-            setTimeout(() => {
-                document.addEventListener('click', (e) => {
-                    if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
-                });
-            }, 100);
-        });
-
-        // H. Pop-in Animations (SIMPLIFIED ON MOBILE)
+        // H. Pop-in Animations
         const cards = document.querySelectorAll('[data-animate="pop-in"]');
         cards.forEach((card, index) => {
             if (isMobile) {
@@ -285,13 +250,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     } 
 
-    // THE FIX: Start the engine on the very first page load!
     initForge();
 
 });
 
 // ==========================================
-// 5. MODAL LOGIC (Images & Videos)
+// 5. MODAL & CLICK OUTSIDE LOGIC
 // ==========================================
 window.openModal = function(src) {
     const modal = document.getElementById("imageModal");
@@ -320,13 +284,11 @@ window.closeVideoModal = function() {
 }
 
 window.onclick = function(event) {
-    // 1. Close Modals
     const imageModal = document.getElementById("imageModal");
     const videoModal = document.getElementById("videoModal");
     if (event.target == imageModal) closeModal();
     if (event.target == videoModal) closeVideoModal();
 
-    // 2. Close Dropdowns if clicking anywhere else on the screen
     if (!event.target.closest('.custom-select-wrapper')) {
         document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('open'));
     }
