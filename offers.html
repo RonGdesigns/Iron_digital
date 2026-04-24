@@ -130,14 +130,18 @@
                         <label>Select Your Plan</label>
                         <div class="custom-select-wrapper">
                             <div class="custom-select-trigger">
-                                <span>Select an Option...</span>
+                                <span style="color: var(--text-main);">$100 Landing Page Special</span>
                                 <div class="arrow">▼</div>
                             </div>
                             <div class="custom-options">
-                                <span class="custom-option" data-value="starter">Starter Build Special($100)</span>
+                                <span class="custom-option" data-value="landing-special">$100 Landing Page Special</span>
+                                <span class="custom-option" data-value="starter">Starter Build ($1,000)</span>
+                                <span class="custom-option" data-value="standard">Standard Subscription ($99/mo)</span>
+                                <span class="custom-option" data-value="growth">Growth Subscription ($199/mo)</span>
+                                <span class="custom-option" data-value="premium">Premium Subscription ($399/mo)</span>
                             </div>
                         </div>
-                        <input type="hidden" id="project-type" name="project-type" required>
+                        <input type="hidden" id="project-type" name="project-type" value="landing-special" required>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 20px;">
