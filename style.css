@@ -436,6 +436,7 @@ nav a {
 
 .light-contact-form input[type="text"], 
 .light-contact-form input[type="email"],
+.light-contact-form input[type="tel"],
 .light-contact-form textarea { 
     width: 100%; 
     padding: 15px 20px; 
