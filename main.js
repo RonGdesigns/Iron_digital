@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const previewVideos = document.querySelectorAll('.bento-card video');
         previewVideos.forEach(vid => { vid.playbackRate = 0.65; });
 
-        // G. Custom Select Dropdown & Auto-Fill Logic
+        // G. Custom Select Dropdown & Auto-Fill Logic (Swup Bulletproof)
         document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
             const trigger = wrapper.querySelector('.custom-select-trigger');
             const options = wrapper.querySelectorAll('.custom-option');
@@ -172,16 +172,33 @@ document.addEventListener("DOMContentLoaded", () => {
             const planFromUrl = urlParams.get('plan');
 
             if (planFromUrl && hiddenInput && triggerSpan) {
-                // Look through the options to find a match
                 options.forEach(option => {
                     if (option.getAttribute('data-value') === planFromUrl) {
-                        // Auto-fill the form!
                         triggerSpan.textContent = option.textContent;
                         hiddenInput.value = planFromUrl;
                         triggerSpan.style.color = "var(--text-main)";
                     }
                 });
             }
+
+            // 2. Click Logic (Using onclick to prevent duplicate Swup listeners)
+            if(trigger) {
+                trigger.onclick = (e) => {
+                    e.stopPropagation(); // Stops the click from hitting the background
+                    wrapper.classList.toggle('open');
+                };
+            }
+            
+            options.forEach(option => {
+                option.onclick = (e) => {
+                    e.stopPropagation();
+                    if (triggerSpan) triggerSpan.textContent = e.target.textContent;
+                    if(hiddenInput) hiddenInput.value = e.target.getAttribute('data-value');
+                    wrapper.classList.remove('open');
+                    if (triggerSpan) triggerSpan.style.color = "var(--text-main)";
+                };
+            });
+        });
 
             // 2. Standard Click Logic
             if(trigger) trigger.addEventListener('click', () => wrapper.classList.toggle('open'));
@@ -276,8 +293,14 @@ window.closeVideoModal = function() {
 }
 
 window.onclick = function(event) {
+    // 1. Close Modals
     const imageModal = document.getElementById("imageModal");
     const videoModal = document.getElementById("videoModal");
     if (event.target == imageModal) closeModal();
     if (event.target == videoModal) closeVideoModal();
+
+    // 2. Close Dropdowns if clicking anywhere else on the screen
+    if (!event.target.closest('.custom-select-wrapper')) {
+        document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('open'));
+    }
 }
