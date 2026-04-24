@@ -720,3 +720,29 @@ html.is-animating .transition-fade {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
 }
+
+/* ==========================================
+   DESKTOP OVERRIDES & FIXES
+   ========================================== */
+
+/* 1. Force Pricing Cards into a single row on Desktop */
+@media (min-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        align-items: stretch;
+    }
+}
+
+/* 2. Dropdown Visibility Fix */
+.form-group {
+    position: relative;
+    overflow: visible !important;
+}
+
+.custom-select-wrapper {
+    z-index: 100 !important;
+}
+
+.custom-options {
+    z-index: 101 !important;
+}
