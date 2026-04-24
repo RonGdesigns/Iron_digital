@@ -23,6 +23,33 @@ if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
     gsap.ticker.lagSmoothing(0, 0);
 }
 
+// ==========================================
+// CUSTOM MAGNETIC CURSOR (Swup-Safe)
+// ==========================================
+document.addEventListener('mousemove', (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    if (cursor) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    }
+});
+
+// Add the expanding hover effect when touching links/buttons
+document.addEventListener('mouseover', (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    if (cursor && e.target.closest('a, button, .custom-select-trigger, .custom-option, .bento-card, .clickable-img, .pricing-card')) {
+        cursor.classList.add('hovering');
+    }
+});
+
+// Remove the expanding hover effect when leaving
+document.addEventListener('mouseout', (e) => {
+    const cursor = document.querySelector('.custom-cursor');
+    if (cursor && e.target.closest('a, button, .custom-select-trigger, .custom-option, .bento-card, .clickable-img, .pricing-card')) {
+        cursor.classList.remove('hovering');
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================
