@@ -255,8 +255,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
-// 5. MODAL & CLICK OUTSIDE LOGIC
+// 5. MODAL, GALLERY & CLICK OUTSIDE LOGIC
 // ==========================================
+
+// Global Tracker for Gallery
+window.currentCardIndex = 0;
+
+// Track clicks on any Bento Card to know where we are in the gallery
+document.addEventListener('click', (e) => {
+    const card = e.target.closest('.bento-card');
+    if (card) {
+        const cards = Array.from(document.querySelectorAll('.bento-card'));
+        window.currentCardIndex = cards.indexOf(card);
+    }
+});
+
 window.openModal = function(src) {
     const modal = document.getElementById("imageModal");
     if(modal) { modal.style.display = "flex"; document.getElementById("expandedImg").src = src; }
@@ -283,9 +296,32 @@ window.closeVideoModal = function() {
     }
 }
 
+// The Universal Next/Prev Logic
+window.changeMedia = function(direction) {
+    const cards = Array.from(document.querySelectorAll('.bento-card'));
+    if(cards.length === 0) return;
+
+    // Move index up or down
+    window.currentCardIndex += direction;
+
+    // Loop around if we hit the end or beginning
+    if (window.currentCardIndex < 0) window.currentCardIndex = cards.length - 1;
+    if (window.currentCardIndex >= cards.length) window.currentCardIndex = 0;
+
+    // Close the current modal
+    closeModal();
+    closeVideoModal();
+
+    // Small delay for a smooth transition, then virtually "click" the next card
+    setTimeout(() => {
+        cards[window.currentCardIndex].click();
+    }, 50);
+}
+
 window.onclick = function(event) {
     const imageModal = document.getElementById("imageModal");
     const videoModal = document.getElementById("videoModal");
+    // Close if clicking the dark background (not the image/arrows)
     if (event.target == imageModal) closeModal();
     if (event.target == videoModal) closeVideoModal();
 
