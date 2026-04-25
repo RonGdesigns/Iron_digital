@@ -56,14 +56,18 @@
     <div id="imageModal" class="modal">
         <span class="close-modal" onclick="closeModal()">&times;</span>
         
-        <button class="modal-nav-btn prev-btn" onclick="changeImage(-1)" aria-label="Previous image">&#10094;</button>
-        <button class="modal-nav-btn next-btn" onclick="changeImage(1)" aria-label="Next image">&#10095;</button>
+        <button class="modal-nav-btn prev-btn" onclick="changeMedia(-1)" aria-label="Previous">&#10094;</button>
+        <button class="modal-nav-btn next-btn" onclick="changeMedia(1)" aria-label="Next">&#10095;</button>
 
         <img class="modal-content" id="expandedImg" loading="lazy">
     </div>
 
     <div id="videoModal" class="modal">
         <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+        
+        <button class="modal-nav-btn prev-btn" onclick="changeMedia(-1)" aria-label="Previous">&#10094;</button>
+        <button class="modal-nav-btn next-btn" onclick="changeMedia(1)" aria-label="Next">&#10095;</button>
+        
         <video class="modal-content" id="expandedVideo" controls playsinline preload="none"></video>
     </div>
 
