@@ -209,7 +209,7 @@ nav a {
 /* Section Containers */
 .section-container { 
     padding: 80px 20px; 
-    max-width: 1200px; 
+    max-width: 1600px; 
     margin: 0 auto; 
 }
 
@@ -518,7 +518,7 @@ footer {
 }
 
 /* Bento Grid */
-.template-bento-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
+.template-bento-section { max-width: 1600px; margin: 0 auto 100px auto; padding: 0 20px; }
 
 .bento-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
