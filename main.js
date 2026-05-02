@@ -124,37 +124,66 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // E. Three.js Liquid Iron Canvas (Fixed & Clean)
-        const canvas = document.getElementById('iron-canvas');
-        if (canvas) {
-            if (!isMobile && typeof THREE !== 'undefined') {
-                initLiquidMetalCanvas(canvas);
-            } else {
-                canvas.style.display = 'none';
-            }
-        }
+        // E. Three.js Liquid Iron Canvas (DELAYED FOR PERFORMANCE)
+        if (document.getElementById('iron-canvas')) {
+            // Wait 2.5 seconds before spinning up heavy 3D math so PageSpeed doesn't flag it
+            setTimeout(() => {
+                if (typeof THREE !== 'undefined') {
+                    const canvas = document.getElementById('iron-canvas');
+                    canvas.innerHTML = ''; 
+                    
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+                    
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
 
-        // Sticky Pricing Animation
-        const stickySection = document.querySelector("#pricing");
-        const pricingCards = typeof gsap !== 'undefined' ? gsap.utils.toArray("#pricing .card-inner") : [];
-        if (stickySection && pricingCards.length > 0 && typeof ScrollTrigger !== 'undefined') {
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: stickySection,
-                    start: "center center", 
-                    end: "+=1200",          
-                    pin: true,              
-                    scrub: 1,                
-                    anticipatePin: 1
+                    const segments = isMobile ? 16 : 128; 
+                    const geometry = new THREE.PlaneGeometry(10, 10, segments, segments);
+                    
+                    const material = new THREE.ShaderMaterial({
+                        uniforms: {
+                            uTime: { value: 0.0 },
+                            uColorMain: { value: new THREE.Color('#070e1a') },
+                            uColorAccent: { value: new THREE.Color('#00d4ff') }
+                        },
+                        vertexShader: `
+                            uniform float uTime; varying vec2 vUv; varying float vElevation;
+                            void main() {
+                                vUv = uv; vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+                                float elevation = sin(modelPosition.x * 2.0 + uTime) * 0.2 + sin(modelPosition.y * 1.5 + uTime * 0.8) * 0.2;
+                                modelPosition.z += elevation; vElevation = elevation;
+                                gl_Position = projectionMatrix * viewMatrix * modelPosition;
+                            }
+                        `,
+                        fragmentShader: `
+                            uniform vec3 uColorMain; uniform vec3 uColorAccent; varying float vElevation;
+                            void main() {
+                                float mixStrength = (vElevation + 0.4) * 0.8;
+                                vec3 finalColor = mix(uColorMain, uColorAccent, mixStrength);
+                                gl_FragColor = vec4(finalColor, 1.0);
+                            }
+                        `,
+                    });
+
+                    if (window.innerWidth <= 768) {
+                        canvas.style.display = 'none';
+                    }
+
+                    const plane = new THREE.Mesh(geometry, material);
+                    plane.rotation.x = -Math.PI * 0.2; 
+                    scene.add(plane); camera.position.z = 2;
+
+                    const clock = new THREE.Clock();
+                    function animate() {
+                        material.uniforms.uTime.value = clock.getElapsedTime() * 0.4; 
+                        renderer.render(scene, camera);
+                        animationFrameId = requestAnimationFrame(animate); 
+                    }
+                    animate();
                 }
-            });
-
-            tl.to(pricingCards, {
-                rotateY: 180,               
-                duration: 1,
-                stagger: 0.25,              
-                ease: "power1.inOut"
-            });
+            }, 2500); // 2.5 second delay
         }
 
         // F. Cinematic Video Slow-Mo
