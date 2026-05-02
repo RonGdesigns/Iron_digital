@@ -329,3 +329,35 @@ window.onclick = function(event) {
         document.querySelectorAll('.custom-select-wrapper').forEach(w => w.classList.remove('open'));
     }
 }
+
+// ==========================================
+// PRE-FILL FORM BASED ON URL PARAMETER
+// ==========================================
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Check the URL for a "?plan=" parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPlan = urlParams.get('plan');
+
+    // 2. If a plan is found in the URL, update the form
+    if (selectedPlan) {
+        
+        // IMPORTANT: Change 'project-type' to whatever ID your <select> dropdown has on start.html
+        const formDropdown = document.getElementById('project-type'); 
+        
+        if (formDropdown) {
+            // Set the standard hidden form value
+            formDropdown.value = selectedPlan;
+
+            // If you are using a custom-styled dropdown (glassmorphism UI), update the visible text
+            const customSelectText = document.querySelector('.custom-select-trigger span');
+            if (customSelectText) {
+                // Change the text to look nice based on the URL
+                if (selectedPlan === 'landing-special') customSelectText.textContent = '$100 Landing Page Special';
+                if (selectedPlan === 'starter') customSelectText.textContent = 'Starter Build ($1,000)';
+                if (selectedPlan === 'standard') customSelectText.textContent = 'Standard Plan ($99/mo)';
+                if (selectedPlan === 'growth') customSelectText.textContent = 'Growth Plan ($199/mo)';
+                if (selectedPlan === 'premium') customSelectText.textContent = 'Premium Plan ($399/mo)';
+            }
+        }
+    }
+});
