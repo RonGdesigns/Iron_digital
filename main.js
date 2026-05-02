@@ -94,40 +94,153 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // C. Kinetic Scroll Velocity (Card Skew)
-        if (!isMobile && typeof gsap !== 'undefined') {
-            let proxy = { skew: 0 },
-                skewSetter = gsap.quickSetter(".pricing-card, .hero h1", "skewY", "deg"),
-                clamp = gsap.utils.clamp(-15, 15);
+        // F. Cinematic Video Slow-Mo (No layout math required, can run immediately)
+        const previewVideos = document.querySelectorAll('.bento-card video');
+        previewVideos.forEach(vid => { vid.playbackRate = 0.65; });
 
-            ScrollTrigger.create({
-                onUpdate: (self) => {
-                    let skew = clamp(self.getVelocity() / -100);
-                    if (Math.abs(skew) > Math.abs(proxy.skew)) {
-                        proxy.skew = skew;
-                        gsap.to(proxy, { skew: 0, duration: 0.8, ease: "power3", overwrite: true, onUpdate: () => skewSetter(proxy.skew) });
+        // G. Custom Select Dropdown (No layout math required)
+        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+            const trigger = wrapper.querySelector('.custom-select-trigger');
+            const options = wrapper.querySelectorAll('.custom-option');
+            const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
+            const triggerSpan = trigger ? trigger.querySelector('span') : null;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const planFromUrl = urlParams.get('plan');
+
+            if (planFromUrl && hiddenInput && triggerSpan) {
+                options.forEach(option => {
+                    if (option.getAttribute('data-value') === planFromUrl) {
+                        triggerSpan.textContent = option.textContent;
+                        hiddenInput.value = planFromUrl;
+                        triggerSpan.style.color = "var(--text-main)";
                     }
-                }
-            });
-        }
+                });
+            }
 
-        // D. Kinetic Variable Typography
-        const kineticText = document.querySelector('.kinetic-text');
-        if (kineticText && !isMobile && typeof gsap !== 'undefined') {
-            ScrollTrigger.create({
-                trigger: "body", start: "top top", end: "bottom bottom",
-                onUpdate: (self) => {
-                    let velocity = Math.abs(self.getVelocity());
-                    let newWeight = gsap.utils.clamp(400, 800, 800 - (velocity * 0.5));
-                    kineticText.style.fontVariationSettings = `"wght" ${newWeight}`;
-                }
+            if(trigger) {
+                trigger.onclick = (e) => {
+                    e.stopPropagation(); 
+                    wrapper.classList.toggle('open');
+                };
+            }
+            
+            options.forEach(option => {
+                option.onclick = (e) => {
+                    e.stopPropagation();
+                    if (triggerSpan) triggerSpan.textContent = e.target.textContent;
+                    if(hiddenInput) hiddenInput.value = e.target.getAttribute('data-value');
+                    wrapper.classList.remove('open');
+                    if (triggerSpan) triggerSpan.style.color = "var(--text-main)";
+                };
             });
-        }
+        });
 
-        // E. Three.js Liquid Iron Canvas (DYNAMIC INJECTION)
+
+        // =================================================================
+        // DELAYED LAYOUT MATH (Fixes the "Forced Reflow" PageSpeed Penalty)
+        // =================================================================
+        setTimeout(() => {
+            
+            // C. Kinetic Scroll Velocity (Card Skew)
+            if (!isMobile && typeof gsap !== 'undefined') {
+                let proxy = { skew: 0 },
+                    skewSetter = gsap.quickSetter(".pricing-card, .hero h1", "skewY", "deg"),
+                    clamp = gsap.utils.clamp(-15, 15);
+
+                ScrollTrigger.create({
+                    onUpdate: (self) => {
+                        let skew = clamp(self.getVelocity() / -100);
+                        if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                            proxy.skew = skew;
+                            gsap.to(proxy, { skew: 0, duration: 0.8, ease: "power3", overwrite: true, onUpdate: () => skewSetter(proxy.skew) });
+                        }
+                    }
+                });
+            }
+
+            // D. Kinetic Variable Typography
+            const kineticText = document.querySelector('.kinetic-text');
+            if (kineticText && !isMobile && typeof gsap !== 'undefined') {
+                ScrollTrigger.create({
+                    trigger: "body", start: "top top", end: "bottom bottom",
+                    onUpdate: (self) => {
+                        let velocity = Math.abs(self.getVelocity());
+                        let newWeight = gsap.utils.clamp(400, 800, 800 - (velocity * 0.5));
+                        kineticText.style.fontVariationSettings = `"wght" ${newWeight}`;
+                    }
+                });
+            }
+
+            // Sticky Pricing Animation
+            const stickySection = document.querySelector("#pricing");
+            const pricingCards = typeof gsap !== 'undefined' ? gsap.utils.toArray("#pricing .card-inner") : [];
+            if (stickySection && pricingCards.length > 0 && typeof ScrollTrigger !== 'undefined') {
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: stickySection,
+                        start: "center center", 
+                        end: "+=1200",          
+                        pin: true,              
+                        scrub: 1,                
+                        anticipatePin: 1
+                    }
+                });
+
+                tl.to(pricingCards, {
+                    rotateY: 180,               
+                    duration: 1,
+                    stagger: 0.25,              
+                    ease: "power1.inOut"
+                });
+            }
+
+            // H. Pop-in Animations
+            const cards = document.querySelectorAll('[data-animate="pop-in"]');
+            if (typeof gsap !== 'undefined') {
+                cards.forEach((card, index) => {
+                    if (isMobile) {
+                        gsap.fromTo(card, 
+                            { opacity: 0 },
+                            { opacity: 1, duration: 0.6, ease: "power2.out", 
+                              scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
+                            }
+                        );
+                    } else {
+                        gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
+                            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
+                              scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
+                            }
+                        );
+                    }
+                });
+            }
+
+            // I. 3D Tilt Effect
+            if (window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
+                document.querySelectorAll('.tilt-effect').forEach(element => {
+                    element.addEventListener('mousemove', (e) => {
+                        const rect = element.getBoundingClientRect();
+                        const x = e.clientX - rect.left; const y = e.clientY - rect.top;  
+                        const centerX = rect.width / 2; const centerY = rect.height / 2;
+                        gsap.to(element, {
+                            rotationX: ((y - centerY) / centerY) * -10,
+                            rotationY: ((x - centerX) / centerX) * 10,
+                            transformPerspective: 1000, ease: "power1.out", duration: 0.3
+                        });
+                    });
+                    element.addEventListener('mouseleave', () => {
+                        gsap.to(element, { rotationX: 0, rotationY: 0, ease: "power3.out", duration: 0.6 });
+                    });
+                });
+            }
+
+        }, 150); // <-- 150ms delay gives the browser time to paint the layout first
+
+
+        // E. Three.js Liquid Iron Canvas (DYNAMIC INJECTION - Keeps its 2.5s delay)
         if (document.getElementById('iron-canvas')) {
             setTimeout(() => {
-                // ONLY download and run Three.js if on Desktop
                 if (window.innerWidth > 768) {
                     const script = document.createElement('script');
                     script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
@@ -183,92 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     };
                     document.body.appendChild(script);
                 } else {
-                    // Make sure canvas is hidden on mobile
                     document.getElementById('iron-canvas').style.display = 'none';
                 }
             }, 2500); 
-        }
-
-        // F. Cinematic Video Slow-Mo
-        const previewVideos = document.querySelectorAll('.bento-card video');
-        previewVideos.forEach(vid => { vid.playbackRate = 0.65; });
-
-        // G. Custom Select Dropdown
-        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
-            const trigger = wrapper.querySelector('.custom-select-trigger');
-            const options = wrapper.querySelectorAll('.custom-option');
-            const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
-            const triggerSpan = trigger ? trigger.querySelector('span') : null;
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const planFromUrl = urlParams.get('plan');
-
-            if (planFromUrl && hiddenInput && triggerSpan) {
-                options.forEach(option => {
-                    if (option.getAttribute('data-value') === planFromUrl) {
-                        triggerSpan.textContent = option.textContent;
-                        hiddenInput.value = planFromUrl;
-                        triggerSpan.style.color = "var(--text-main)";
-                    }
-                });
-            }
-
-            if(trigger) {
-                trigger.onclick = (e) => {
-                    e.stopPropagation(); 
-                    wrapper.classList.toggle('open');
-                };
-            }
-            
-            options.forEach(option => {
-                option.onclick = (e) => {
-                    e.stopPropagation();
-                    if (triggerSpan) triggerSpan.textContent = e.target.textContent;
-                    if(hiddenInput) hiddenInput.value = e.target.getAttribute('data-value');
-                    wrapper.classList.remove('open');
-                    if (triggerSpan) triggerSpan.style.color = "var(--text-main)";
-                };
-            });
-        });
-
-        // H. Pop-in Animations
-        const cards = document.querySelectorAll('[data-animate="pop-in"]');
-        if (typeof gsap !== 'undefined') {
-            cards.forEach((card, index) => {
-                if (isMobile) {
-                    gsap.fromTo(card, 
-                        { opacity: 0 },
-                        { opacity: 1, duration: 0.6, ease: "power2.out", 
-                          scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
-                        }
-                    );
-                } else {
-                    gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
-                        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
-                          scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
-                        }
-                    );
-                }
-            });
-        }
-
-        // I. 3D Tilt Effect
-        if (window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
-            document.querySelectorAll('.tilt-effect').forEach(element => {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;  
-                    const centerX = rect.width / 2; const centerY = rect.height / 2;
-                    gsap.to(element, {
-                        rotationX: ((y - centerY) / centerY) * -10,
-                        rotationY: ((x - centerX) / centerX) * 10,
-                        transformPerspective: 1000, ease: "power1.out", duration: 0.3
-                    });
-                });
-                element.addEventListener('mouseleave', () => {
-                    gsap.to(element, { rotationX: 0, rotationY: 0, ease: "power3.out", duration: 0.6 });
-                });
-            });
         }
     } 
 
