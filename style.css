@@ -20,7 +20,7 @@ body {
     margin: 0;
     font-family: var(--font-body); 
     background-image: 
-        url('detroit-landmark-shadow.jpg'),
+        url('detroit-landmark-shadow.webp'),
         linear-gradient(to bottom, #070e1a 0%, #112240 50%, #1a365d 100%);
     background-blend-mode: multiply; 
     background-size: cover; 
