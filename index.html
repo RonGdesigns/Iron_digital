@@ -17,15 +17,13 @@
     <link rel="preload" as="style" href="style.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preload" as="image" href="iron-digital-logo.png" fetchpriority="high">
-
     <link rel="preload" href="https://fonts.gstatic.com/s/syne/v22/8vIX7w4s_Hpq28HMGkU.woff2" as="font" type="font/woff2" crossorigin>
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://irondigitalmi.com/">
     <meta property="og:title" content="Iron Digital | Detroit Digital Ecosystems">
     <meta property="og:description" content="Custom, modern websites tailored for business growth. Clean, responsive, and professional.">
-
-    </head>
+</head>
 
 <body>
 
@@ -45,7 +43,7 @@
             <li><a href="templates.html">Templates</a></li>
             <li><a href="testaments.html">Testaments</a></li>
             <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="start.html" class="nav-cta-button">Start a Project</a></li
+            <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
         </ul>
     </nav>
 
@@ -199,43 +197,10 @@
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
 
-    <script src="main.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            if(typeof gsap !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-
-                const stickySection = document.querySelector("#pricing");
-                const cards = gsap.utils.toArray("#pricing .card-inner");
-
-                if (stickySection && cards.length > 0) {
-                    let tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger: stickySection,
-                            start: "center center", 
-                            end: "+=1200",          
-                            pin: true,              
-                            scrub: 1,                
-                            anticipatePin: 1
-                        }
-                    });
-
-                    tl.to(cards, {
-                        rotateY: 180,               
-                        duration: 1,
-                        stagger: 0.25,              
-                        ease: "power1.inOut"
-                    });
-                }
-            }
-        });
-    </script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/swup@4" defer></script>
-    
     <script src="main.js" defer></script>
 
     <script>
