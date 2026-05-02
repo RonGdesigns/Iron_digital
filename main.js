@@ -11,15 +11,15 @@ if (typeof Howl !== 'undefined') {
     sfxClick = new Howl({ src: ['https://cdn.pixabay.com/audio/2022/03/15/audio_7314227f91.mp3'], volume: 0.4 });
 }
 
+// THE FORCED REFLOW FIX: Native RequestAnimationFrame instead of GSAP Ticker
 if (typeof Lenis !== 'undefined') {
     lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
         smoothWheel: true,
-        smoothTouch: false,
+        smoothTouch: false, // Prevents scroll jacking on mobile
     });
     
-    // Use native rAF instead of GSAP ticker to stop main-thread thrashing
     function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
