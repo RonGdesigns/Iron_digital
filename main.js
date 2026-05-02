@@ -116,28 +116,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // E. Three.js Liquid Iron Canvas (FIXED & DYNAMIC)
+        // E. Three.js Liquid Iron Canvas (Fixed & Clean)
         const canvas = document.getElementById('iron-canvas');
         if (canvas) {
-            if (!isMobile) {
-                // Desktop: Load Three.js dynamically so it doesn't block the initial page paint
-                if (typeof THREE === 'undefined') {
-                    const script = document.createElement('script');
-                    script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-                    script.onload = () => {
-                        initLiquidMetalCanvas(canvas);
-                    };
-                    document.body.appendChild(script);
-                } else {
-                    initLiquidMetalCanvas(canvas);
-                }
+            if (!isMobile && typeof THREE !== 'undefined') {
+                initLiquidMetalCanvas(canvas);
             } else {
-                // Mobile: Hide canvas to save main thread and fix LCP score
                 canvas.style.display = 'none';
             }
         }
 
-        // Moved from index.html: Sticky Pricing Animation
+        // Sticky Pricing Animation
         const stickySection = document.querySelector("#pricing");
         const pricingCards = typeof gsap !== 'undefined' ? gsap.utils.toArray("#pricing .card-inner") : [];
         if (stickySection && pricingCards.length > 0 && typeof ScrollTrigger !== 'undefined') {
@@ -305,10 +294,8 @@ function initLiquidMetalCanvas(canvas) {
 // 5. MODAL, GALLERY & CLICK OUTSIDE LOGIC
 // ==========================================
 
-// Global Tracker for Gallery
 window.currentCardIndex = 0;
 
-// Track clicks on any Bento Card to know where we are in the gallery
 document.addEventListener('click', (e) => {
     const card = e.target.closest('.bento-card');
     if (card) {
@@ -343,7 +330,6 @@ window.closeVideoModal = function() {
     }
 }
 
-// The Universal Next/Prev Logic
 window.changeMedia = function(direction) {
     const cards = Array.from(document.querySelectorAll('.bento-card'));
     if(cards.length === 0) return;
