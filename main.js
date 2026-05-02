@@ -156,6 +156,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 `,
             });
 
+            if (window.innerWidth > 768) {
+                initThreeJS(); // Whatever function starts your canvas
+            } else {
+                // Fallback: Just hide the canvas on mobile to save memory
+                const canvas = document.getElementById('iron-canvas');
+                if (canvas) canvas.style.display = 'none';
+            }
+
             const plane = new THREE.Mesh(geometry, material);
             plane.rotation.x = -Math.PI * 0.2; 
             scene.add(plane); camera.position.z = 2;
