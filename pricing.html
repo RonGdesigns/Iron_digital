@@ -13,13 +13,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/swup@4" defer></script>
+    <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
 
     <nav>
         <a href="index.html" class="logo-wrapper">
-            <img src="iron-digital-logo.webp" alt="Iron Digital Logo" class="logo-img" width="180" height="45" fetchpriority="high" decoding="sync">
+            <img src="iron-digital-logo.webp" alt="Iron Digital Logo" class="logo-img" width="180" height="45" fetchpriority="high">
             <div class="logo-text">
                 <span>IRON</span> 
                 <span style="color: var(--accent-blue); font-weight: 400;">DIGITAL</span>
@@ -39,7 +40,7 @@
             <li><a href="templates.html">Templates</a></li>
             <li><a href="testaments.html">Testaments</a></li>
             <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="start.html" class="nav-cta-button">Start a Project</a></li
+            <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
         </ul>
     </nav>
 
@@ -52,7 +53,6 @@
             <p class="section-subtitle" data-animate="pop-in">Transparent pricing designed for scale.</p>
 
             <div class="pricing-grid">
-                
                 <div class="pricing-card tilt-effect" data-animate="pop-in">
                     <h3>Starter Build</h3>
                     <div class="price">$1,000</div>
@@ -128,32 +128,20 @@
             <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 30px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
         </section>
 
-    </main> 
-    </div>
-            <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-top: 30px; font-style: italic;">*Upfront pricing is negotiable depending on service.</p>
-        </section>
-
-        <div class="section-container" style="padding-top: 80px; padding-bottom: 20px;" id="specials">
+        <section id="specials" class="section-container" style="padding-top: 80px; padding-bottom: 80px;">
             <h2 class="section-title">Specials</h2>
             <p class="section-subtitle">High-end digital foundations at an entry-level price point.</p>
-        </div>
-
-        <div class="section-container" style="padding-bottom: 80px;">
+            
             <div style="display: flex; justify-content: center; width: 100%;">
-                
                 <div class="pricing-card special-card tilt-effect" data-animate="pop-in" style="width: 100%; max-width: 500px; padding: 40px; box-sizing: border-box;">
                     <div class="special-badge">Limited Time Offer</div>
-                    
                     <h3 style="font-size: 2rem; margin-bottom: 5px;">Landing Page</h3>
                     <p style="color: var(--accent-blue); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Special Blueprint</p>
-                    
                     <div style="margin-bottom: 25px;">
                         <span style="font-size: 2.5rem; vertical-align: top; color: var(--accent-blue); font-weight: 700;">$</span>
                         <span style="font-size: 5rem; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; line-height: 1;">100</span>
                     </div>
-                    
                     <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--text-muted);">A high-performance, single-page digital landmark built to convert your traffic into leads.</p>
-                    
                     <ul style="list-style: none; padding: 0; text-align: left; margin: 0 auto 35px auto; max-width: 320px;">
                         <li style="margin-bottom: 15px; color: #fff;"><span style="color: var(--accent-blue); font-weight: bold; margin-right: 12px;">✔</span> Custom UI Blueprint</li>
                         <li style="margin-bottom: 15px; color: #fff;"><span style="color: var(--accent-blue); font-weight: bold; margin-right: 12px;">✔</span> Mobile-Responsive Design</li>
@@ -161,26 +149,21 @@
                         <li style="margin-bottom: 15px; color: #fff;"><span style="color: var(--accent-blue); font-weight: bold; margin-right: 12px;">✔</span> Basic SEO Structure</li>
                         <li style="margin-bottom: 15px; color: #fff;"><span style="color: var(--accent-blue); font-weight: bold; margin-right: 12px;">✔</span> 48-Hour Initial Draft</li>
                     </ul>
-
-                    <a href="start.html?plan=landing" class="cta-button" style="display: block; width: 100%; box-sizing: border-box; padding: 15px; font-size: 1.1rem; text-align: center; margin-top: 10px;">Claim Your Blueprint</a>
+                    <a href="start.html?plan=landing" class="cta-button" style="display: block; width: 100%; box-sizing: border-box; padding: 15px; font-size: 1.1rem; text-align: center;">Claim Your Blueprint</a>
                 </div>
-
             </div>
-        </div>
-    </div>
+        </section>
 
     </main> 
     
     <footer>
         <div style="margin-bottom: 15px;">
-            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;">Privacy Policy</a>
             <span style="color: #1a365d;">|</span>
-            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; transition: color 0.3s;">Terms of Service</a>
         </div>
         <p style="margin: 0;">&copy; 2026 Iron Digital. | Based in Detroit.</p>
     </footer>
-
-    <script src="main.js"></script>
 
     <script>
         setTimeout(function() {
@@ -189,4 +172,3 @@
     </script>
 </body>
 </html>
-
