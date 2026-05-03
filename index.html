@@ -855,7 +855,7 @@ html.is-animating .transition-fade {
                 <p>Custom, modern websites tailored for business growth.</p>
                 
                 <div class="hero-btns" style="pointer-events: auto; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-                    <a href="#contact" class="cta-button">Get A Quote &rarr;</a>
+                    <a href="start.html" class="cta-button">Get A Quote &rarr;</a>
                     <a href="https://pagespeed.web.dev/" target="_blank" rel="noopener" class="secondary-cta">Test Your Current Website</a>
                 </div>
             </div>
@@ -936,53 +936,6 @@ html.is-animating .transition-fade {
                 </details>
             </div>
         </section>
-
-        <div class="contact-wrapper" id="contact" data-animate="pop-in">
-            <div class="section-container" style="padding: 0 20px;">
-                <h2 class="section-title">Submit Your Project Request</h2>
-                
-                <form class="light-contact-form" action="https://formspree.io/f/xkopgbar" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Project Type</label>
-                        <div class="custom-select-wrapper">
-                            <div class="custom-select-trigger">
-                                <span>Select an Option</span>
-                                <div class="arrow">▼</div>
-                            </div>
-                            <div class="custom-options">
-                                <span class="custom-option" data-value="starter">Starter Build</span>
-                                <span class="custom-option" data-value="standard">Standard Subscription</span>
-                                <span class="custom-option" data-value="growth">Growth Subscription</span>
-                                <span class="custom-option" data-value="premium">Premium Subscription</span>
-                            </div>
-                        </div>
-                        <input type="hidden" id="project-type" name="project-type" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Project Details</label>
-                        <textarea id="message" name="message" placeholder="Tell us a bit about your business and goals..." required></textarea>
-                    </div>
-                    
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; font-style: italic; text-align: center;">
-                        *Have photos or design inspiration? We will grab those from you via email after you submit your request!
-                    </p>
-
-                    <button type="submit" class="submit-btn">Submit Request</button>
-                </form>
-            </div>
-        </div>
     </main> 
 
     <footer>
