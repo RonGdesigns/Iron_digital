@@ -196,25 +196,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // H. Pop-in Animations
-            const cards = document.querySelectorAll('[data-animate="pop-in"]');
-            if (typeof gsap !== 'undefined') {
-                cards.forEach((card, index) => {
-                    if (isMobile) {
-                        gsap.fromTo(card, 
-                            { opacity: 0 },
-                            { opacity: 1, duration: 0.6, ease: "power2.out", 
-                              scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
-                            }
-                        );
-                    } else {
-                        gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
-                            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
-                              scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
-                            }
-                        );
-                    }
-                });
-            }
+        const cards = document.querySelectorAll('[data-animate="pop-in"]');
+        if (typeof gsap !== 'undefined') {
+            cards.forEach((card, index) => {
+                // Instantly make it "visible" but kept at 0 opacity by GSAP
+                gsap.set(card, { visibility: 'visible' }); 
+
+                if (isMobile) {
+                    gsap.fromTo(card, 
+                        { opacity: 0 },
+                        { opacity: 1, duration: 0.6, ease: "power2.out", 
+                          scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
+                        }
+                    );
+                } else {
+                    gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
+                        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
+                          scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
+                        }
+                    );
+                }
+            });
+        }
 
             // I. 3D Tilt Effect
             if (window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
