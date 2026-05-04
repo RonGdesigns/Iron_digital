@@ -138,9 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // =================================================================
-        // DELAYED LAYOUT MATH (Fixes the "Forced Reflow" PageSpeed Penalty)
+        // SMOOTH TRANSITION ENGINE (Syncs with Browser Paint)
         // =================================================================
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             
             // C. Kinetic Scroll Velocity (Card Skew)
             if (!isMobile && typeof gsap !== 'undefined') {
@@ -195,29 +195,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // H. Pop-in Animations
-        const cards = document.querySelectorAll('[data-animate="pop-in"]');
-        if (typeof gsap !== 'undefined') {
-            cards.forEach((card, index) => {
-                // Instantly make it "visible" but kept at 0 opacity by GSAP
-                gsap.set(card, { visibility: 'visible' }); 
+            // H. Pop-in Animations (Now synced with CSS)
+            const cards = document.querySelectorAll('[data-animate="pop-in"]');
+            if (typeof gsap !== 'undefined') {
+                cards.forEach((card, index) => {
+                    // Turn visibility back on so GSAP can handle the opacity fade
+                    gsap.set(card, { visibility: 'visible' });
 
-                if (isMobile) {
-                    gsap.fromTo(card, 
-                        { opacity: 0 },
-                        { opacity: 1, duration: 0.6, ease: "power2.out", 
-                          scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
-                        }
-                    );
-                } else {
-                    gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.95 },
-                        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.1, 
-                          scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
-                        }
-                    );
-                }
-            });
-        }
+                    if (isMobile) {
+                        gsap.fromTo(card, 
+                            { opacity: 0 },
+                            { opacity: 1, duration: 0.6, ease: "power2.out", 
+                              scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
+                            }
+                        );
+                    } else {
+                        gsap.fromTo(card, { opacity: 0, y: 30, scale: 0.98 },
+                            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out", delay: (index % 4) * 0.08, 
+                              scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" }
+                            }
+                        );
+                    }
+                });
+            }
 
             // I. 3D Tilt Effect
             if (window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
@@ -238,8 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-        }, 150); // <-- 150ms delay gives the browser time to paint the layout first
-
+        }); // End requestAnimationFrame
 
         // E. Three.js Liquid Iron Canvas (DYNAMIC INJECTION - Keeps its 2.5s delay)
         if (document.getElementById('iron-canvas')) {
