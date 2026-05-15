@@ -126,7 +126,7 @@ nav a {
     background-color: var(--accent-blue);
     color: #000 !important;
     padding: 10px 20px;
-    border-radius: 25px;
+    border-radius: 0px;
     font-weight: bold;
     text-decoration: none;
     transition: background-color 0.3s, transform 0.2s;
@@ -156,7 +156,7 @@ nav a {
     color: #000;
     padding: 15px 35px;
     border: none;
-    border-radius: 30px;
+    border-radius: 0px;
     font-size: 1.1rem;
     font-weight: bold;
     text-decoration: none;
@@ -241,7 +241,7 @@ nav a {
     background-attachment: fixed; 
     backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px); 
-    border-radius: 35px; 
+    border-radius: 2px; 
     padding: 40px 20px; 
     text-align: center; 
     border: 1px solid rgba(255, 255, 255, 0.15); 
@@ -265,7 +265,7 @@ nav a {
     background-color: var(--accent-blue); 
     color: #000; 
     padding: 6px 20px; 
-    border-radius: 20px;
+    border-radius: 0px;
     font-size: 0.85rem; 
     font-weight: bold; 
     text-transform: uppercase; 
@@ -311,7 +311,7 @@ nav a {
 
 .service-card {
     background-color: var(--bg-panel); 
-    border-radius: 20px; 
+    border-radius: 2px; 
     padding: 40px 30px; 
     text-align: left;
     border: 1px solid #1a365d; 
@@ -339,7 +339,7 @@ nav a {
     display: inline-block; 
     background: rgba(0, 212, 255, 0.1); 
     padding: 15px; 
-    border-radius: 12px; 
+    border-radius: 0px; 
     border: 1px solid rgba(0, 212, 255, 0.2); 
 }
 
@@ -369,7 +369,7 @@ nav a {
 .faq-item { 
     background-color: var(--bg-panel); 
     border: 1px solid #1a365d; 
-    border-radius: 12px; 
+    border-radius: 2px; 
     overflow: hidden; 
 }
 
@@ -444,7 +444,7 @@ nav a {
     background-color: rgba(17, 34, 64, 0.6); 
     color: #ffffff; 
     border: 1px solid rgba(0, 212, 255, 0.2); 
-    border-radius: 15px; 
+    border-radius: 0px; 
     font-size: 1rem; 
     box-sizing: border-box; 
     font-family: inherit; 
@@ -475,7 +475,7 @@ nav a {
     padding: 15px 20px;
     background-color: rgba(17, 34, 64, 0.6); 
     border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 15px; color: rgba(230, 241, 255, 0.4); 
+    border-radius: 0px; color: rgba(230, 241, 255, 0.4); 
     cursor: pointer; transition: all 0.3s; font-size: 1rem; font-family: inherit;
 }
 
@@ -489,7 +489,7 @@ nav a {
 .custom-options {
     position: absolute; display: block; top: 100%; left: 0; right: 0;
     background-color: rgba(17, 34, 64, 0.95); backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 15px;
+    border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 0px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-top: 8px; opacity: 0;
     visibility: hidden; pointer-events: none; transition: all 0.3s ease; z-index: 10;
 }
@@ -501,13 +501,13 @@ nav a {
 .custom-option { 
     display: block; padding: 15px 20px; color: var(--text-main); cursor: pointer; transition: background 0.2s; 
 }
-.custom-option:first-child { border-radius: 15px 15px 0 0; }
-.custom-option:last-child { border-radius: 0 0 15px 15px; }
+.custom-option:first-child { border-radius: 0px; }
+.custom-option:last-child { border-radius: 0px; }
 
 /* Submit Button */
 .light-contact-form .submit-btn { 
     background-color: var(--accent-blue); color: #000000; padding: 18px; 
-    border: none; border-radius: 40px; font-size: 1.2rem; font-weight: bold; 
+    border: none; border-radius: 0px; font-size: 1.2rem; font-weight: bold; 
     text-transform: uppercase; cursor: pointer; transition: background-color 0.3s, transform 0.2s; 
     width: 100%; margin-top: 10px; 
 }
@@ -529,7 +529,7 @@ footer {
 }
 
 .bento-card {
-    background-color: var(--bg-panel); border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
+    background-color: var(--bg-panel); border-radius: 2px; border: 1px solid rgba(0, 212, 255, 0.15);
     position: relative; overflow: hidden; display: flex; flex-direction: column;
     justify-content: flex-end; padding: 25px; transform-style: preserve-3d;
     perspective: 1000px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -590,7 +590,7 @@ footer {
     padding: 15px 20px;
     cursor: pointer;
     z-index: 2002;
-    border-radius: 12px;
+    border-radius: 0px;
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
 }
@@ -613,7 +613,7 @@ footer {
 
 .modal-content, #videoModal .modal-content { 
     width: auto !important; height: auto !important; max-width: 90vw !important; max-height: 90vh !important; 
-    border-radius: 12px; box-shadow: 0 0 50px rgba(0, 212, 255, 0.2); background-color: #000; object-fit: contain; 
+    border-radius: 0px; box-shadow: 0 0 50px rgba(0, 212, 255, 0.2); background-color: #000; object-fit: contain; 
 }
 
 video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
@@ -634,7 +634,7 @@ video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
     width: 100%;
     max-width: 100%;
     height: auto;
-    border-radius: 12px;
+    border-radius: 0px;
     border: none; /* Border removed */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
@@ -695,7 +695,7 @@ video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
     width: 100%;
     max-width: 100%;
     height: auto;
-    border-radius: 12px;
+    border-radius: 0px;
     border: none;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
@@ -753,7 +753,7 @@ html.is-animating .transition-fade {
     border: 1px solid rgba(0, 212, 255, 0.4);
     color: #ffffff;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 0px;
     font-weight: 600;
     font-size: 0.95rem;
     transition: all 0.3s ease;
