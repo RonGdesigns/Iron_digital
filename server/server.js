@@ -61,9 +61,10 @@ const TIMELINE_LABELS = {
 };
 
 const BUDGET_LABELS = {
+  under_1k: 'Under $1,000',
+  under_2500: 'Under $2,500',
   under_5k: 'Under $5,000',
-  '5k_15k': '$5,000 – $15,000',
-  '15k_plus': '$15,000+',
+  '5k_plus': '$5,000+',
 };
 
 // ── POST /send ────────────────────────────────────────────
