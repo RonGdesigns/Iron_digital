@@ -178,64 +178,66 @@ function buildPayload(formData) {
   };
 }
 
+const PATH_LABELS = {
+  website: 'Track: Professional Website Architecture',
+  system: 'Track: Business Operations System & Automation',
+  
+  // Website Branch
+  a1_leadgen: 'Objective: Service & Lead Generation',
+  a1_ecomm: 'Objective: E-Commerce & Retail',
+  a1_saas: 'Objective: Web Application / SaaS',
+  a1_authority: 'Objective: Brand Authority & Portfolio',
+  
+  a2_leadgen_bounce: 'Friction: High Traffic, Low Conversion',
+  a2_leadgen_quality: 'Friction: Low Quality Leads',
+  a2_leadgen_zero: 'Friction: Starting from Zero',
+  
+  a2_ecomm_abandon: 'Friction: Abandoned Carts / Poor CR',
+  a2_ecomm_sync: 'Friction: Inventory & Fulfillment Sync',
+  a2_ecomm_zero: 'Friction: Brand New Store',
+  
+  a2_saas_mvp: 'Phase: Rapid MVP for Funding/Users',
+  a2_saas_scale: 'Phase: Scaling & Refactoring Existing App',
+  
+  a2_auth_investors: 'Audience: Investors & Stakeholders',
+  a2_auth_b2b: 'Audience: Enterprise B2B Clients',
+  
+  a3_leadgen_crm_yes: 'Integration: Connect to Existing CRM',
+  a3_leadgen_crm_no: 'Integration: Standalone Lead Routing',
+  
+  a3_ecomm_shopify: 'Platform: Shopify',
+  a3_ecomm_woo: 'Platform: WooCommerce / WordPress',
+  a3_ecomm_custom: 'Platform: Custom / Headless Commerce',
+  
+  a3_saas_design_yes: 'Readiness: UI/UX Designs Ready',
+  a3_saas_design_no: 'Readiness: Requires UI/UX Design',
+  
+  a3_assets_ready: 'Readiness: Content & Branding Ready',
+  a3_assets_needed: 'Readiness: Requires Copy/Brand Creation',
+  
+  // Systems Branch
+  b1_team: 'Operational State: Scaling an Existing Team',
+  b1_solo: 'Operational State: Solo Operator / Fractional',
+  b1_product: 'Operational State: Building a New Software Product',
+  
+  b2_team_silos: 'Bottleneck: Disconnected Data Silos',
+  b2_team_support: 'Bottleneck: Client Support & Onboarding',
+  
+  b2_solo_leads: 'Bottleneck: Lead Generation & Follow-up',
+  b2_solo_admin: 'Bottleneck: Fulfillment & Admin',
+  
+  b2_product_concept: 'Phase: Conceptual Idea',
+  b2_product_mvp: 'Phase: MVP / Prototype Built',
+  
+  b3_scope_low: 'API Scope: Standalone Tool (Low Complexity)',
+  b3_scope_high: 'API Scope: Complex Integrations (4+ APIs)'
+};
+
 function buildDoneSummary() {
-  const labels = {
-    website: 'Track: Professional Website Architecture',
-    system: 'Track: Business Operations System & Automation',
-    
-    // Website Branch
-    a1_leadgen: 'Objective: Service & Lead Generation',
-    a1_ecomm: 'Objective: E-Commerce & Retail',
-    a1_saas: 'Objective: Web Application / SaaS',
-    a1_authority: 'Objective: Brand Authority & Portfolio',
-    
-    a2_leadgen_bounce: 'Friction: High Traffic, Low Conversion',
-    a2_leadgen_quality: 'Friction: Low Quality Leads',
-    a2_leadgen_zero: 'Friction: Starting from Zero',
-    
-    a2_ecomm_abandon: 'Friction: Abandoned Carts / Poor CR',
-    a2_ecomm_sync: 'Friction: Inventory & Fulfillment Sync',
-    a2_ecomm_zero: 'Friction: Brand New Store',
-    
-    a2_saas_mvp: 'Phase: Rapid MVP for Funding/Users',
-    a2_saas_scale: 'Phase: Scaling & Refactoring Existing App',
-    
-    a2_auth_investors: 'Audience: Investors & Stakeholders',
-    a2_auth_b2b: 'Audience: Enterprise B2B Clients',
-    
-    a3_leadgen_crm_yes: 'Integration: Connect to Existing CRM',
-    a3_leadgen_crm_no: 'Integration: Standalone Lead Routing',
-    
-    a3_ecomm_shopify: 'Platform: Shopify',
-    a3_ecomm_woo: 'Platform: WooCommerce / WordPress',
-    a3_ecomm_custom: 'Platform: Custom / Headless Commerce',
-    
-    a3_saas_design_yes: 'Readiness: UI/UX Designs Ready',
-    a3_saas_design_no: 'Readiness: Requires UI/UX Design',
-    
-    a3_assets_ready: 'Readiness: Content & Branding Ready',
-    a3_assets_needed: 'Readiness: Requires Copy/Brand Creation',
-    
-    // Systems Branch
-    b1_team: 'Operational State: Scaling an Existing Team',
-    b1_solo: 'Operational State: Solo Operator / Fractional',
-    b1_product: 'Operational State: Building a New Software Product',
-    
-    b2_team_silos: 'Bottleneck: Disconnected Data Silos',
-    b2_team_support: 'Bottleneck: Client Support & Onboarding',
-    
-    b2_solo_leads: 'Bottleneck: Lead Generation & Follow-up',
-    b2_solo_admin: 'Bottleneck: Fulfillment & Admin',
-    
-    b2_product_concept: 'Phase: Conceptual Idea',
-    b2_product_mvp: 'Phase: MVP / Prototype Built',
-    
-    b3_scope_low: 'API Scope: Standalone Tool (Low Complexity)',
-    b3_scope_high: 'API Scope: Complex Integrations (4+ APIs)'
-  };
+  
   return intentPayload.answers
-    .filter(a => labels[a.value])
-    .map(a => `<div class="done-summary-item">${labels[a.value]}</div>`)
+    .filter(a => PATH_LABELS[a.value])
+    .map(a => `<div class="done-summary-item">${PATH_LABELS[a.value]}</div>`)
     .join('') || '<div class="done-summary-item">Discovery complete — strategy is being compiled.</div>';
 }
 
@@ -267,7 +269,7 @@ async function handleSubmit(e) {
   // Serialize answers array for the server
   const serverPayload = {
     ...payload,
-    answers: JSON.stringify(payload.answers.map(a => a.value)),
+    answers: JSON.stringify(payload.answers.map(a => PATH_LABELS[a.value] || a.value)),
   };
 
   try {
