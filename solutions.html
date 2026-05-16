@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Suite | Iron Digital MI</title>
+  <meta name="description"
+    content="High-performance web applications and AI-automated workflows designed to scale business operations globally." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" href="https://irondigitalmi.com/favicon.ico" />
+  <link rel="icon" type="image/png" href="https://irondigitalmi.com/favicon.png" />
+  <link rel="apple-touch-icon" href="https://irondigitalmi.com/favicon.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@400..800&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://unpkg.com/swup@4" defer></script>
+</head>
+
+<body>
+  <div class="custom-cursor"></div>
+
+  <nav>
+    <a href="index.html" class="logo-wrapper">
+      <img src="iron-digital-logo.webp" alt="Iron Digital Logo" class="logo-img" width="180" height="45" />
+      <div class="logo-text">
+        <span>IRON</span>
+        <span style="color: var(--accent-blue); font-weight: 400">DIGITAL</span>
+      </div>
+    </a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="solutions.html">Business Suite</a></li>
+      <li><a href="templates.html">Templates</a></li>
+      <li><a href="testaments.html">Testaments</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
+    </ul>
+  </nav>
+
+  <canvas id="iron-canvas" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        opacity: 0.3;
+        pointer-events: none;
+      "></canvas>
+
+  <main id="swup" class="transition-fade">
+    <section class="section-container" style="padding-top: 120px">
+      <h1 class="section-title">Business Suite</h1>
+      <p class="section-subtitle">
+        Engineered tools and AI-augmented systems built for modern scale.
+      </p>
+
+      <div class="bento-grid">
+
+        <div class="bento-card feature-card " onclick="window.open('https://grantflow.irondigitalmi.com/', '_blank')"
+          style="cursor: pointer">
+          <img src="grantflow.webp" alt="Grant Flow Dashboard" loading="lazy" style="
+                object-fit: cover !important;
+                object-position: top center;
+                width: 100%;
+                height: 100%;
+              " />
+          <div style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                  to top,
+                  rgba(7, 14, 26, 0.95) 0%,
+                  transparent 80%
+                );
+                z-index: 2;
+                pointer-events: none;
+              "></div>
+          <div class="bento-text-content" style="position: relative; z-index: 3">
+            <h3>Grant Flow</h3>
+            <p>
+              AI-powered grant writing and pipeline management engineered for non-profits.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="bento-card feature-card " onclick="window.open('https://reputate.irondigitalmi.com/', '_blank')"
+          style="cursor: pointer">
+          <img src="reputate.webp" alt="Reputate Application Dashboard" loading="lazy" style="
+                object-fit: cover !important;
+                object-position: top center;
+                width: 100%;
+                height: 100%;
+              " />
+          <div style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                  to top,
+                  rgba(7, 14, 26, 0.95) 0%,
+                  transparent 80%
+                );
+                z-index: 2;
+                pointer-events: none;
+              "></div>
+          <div class="bento-text-content" style="position: relative; z-index: 3">
+            <h3>Reputate</h3>
+            <p>
+              Automated reputation management and tracking platform built for
+              modern brands.
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-card feature-card " onclick="window.open('https://sortingsource.com', '_blank')"
+          style="cursor: pointer">
+          <img src="sorting-source-preview.webp" alt="Sorting Source B2B Lead Generation" loading="lazy" />
+          <div style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                  to top,
+                  rgba(7, 14, 26, 0.95) 0%,
+                  transparent 80%
+                );
+                z-index: 2;
+                pointer-events: none;
+              "></div>
+          <div class="bento-text-content" style="position: relative; z-index: 3">
+            <h3>Sorting Source</h3>
+            <p>
+              B2B lead generation and automated outreach platform designed for
+              software sales.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="bento-card wide-card " onclick="window.location.href = 'start.html'" style="
+              cursor: pointer;
+              border: 1px dashed rgba(0, 212, 255, 0.4);
+              background: rgba(17, 34, 64, 0.4);
+            ">
+          <div class="bento-text-content">
+            <h3>Outgrown Your Tools? Let's Build Your Own.</h3>
+            <p>
+              If off-the-shelf software isn't cutting it, let us know. We
+              architect and develop tailored, high-performance software
+              solutions to completely eliminate your operational headaches.
+              You bring the problem; we craft the solution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-container" style="text-align: center">
+      <h2 class="section-title">Need a Custom Tool?</h2>
+      <p class="section-subtitle">
+        We don't just build websites; we engineer the systems that run your
+        business.
+      </p>
+      <a href="start.html" class="cta-button">Request a Custom Build &rarr;</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Iron Digital MI. | Engineered in Detroit.</p>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start a Project | Iron Digital</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="shortcut icon" href="https://irondigitalmi.com/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://irondigitalmi.com/favicon.png"
+    />
+    <link rel="apple-touch-icon" href="https://irondigitalmi.com/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Syne:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+      defer
+    ></script>
+    <script
+      src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script src="https://unpkg.com/swup@4" defer></script>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      /* Pushes footer to bottom */
+      main {
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .standalone-form-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+
+      .form-box {
+        background-color: rgba(17, 34, 64, 0.6);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        padding: 50px;
+        border-radius: 2px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .form-box h2 {
+        color: #ffffff;
+        margin-top: 0;
+        font-size: 2.2rem;
+        font-family: "Syne", sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .form-box {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="custom-cursor"></div>
+
+    <nav>
+      <a href="index.html" class="logo-wrapper">
+        <img
+          src="iron-digital-logo.webp"
+          alt="Iron Digital Logo"
+          class="logo-img"
+        />
+        <div class="logo-text">
+          <span>IRON</span>
+          <span style="color: var(--accent-blue); font-weight: 400"
+            >DIGITAL</span
+          >
+        </div>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="solutions.html">Business Suite</a></li>
+        <li><a href="templates.html">Templates</a></li>
+        <li><a href="testaments.html">Testaments</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="start.html" class="nav-cta-button">Start a Project</a></li>
+      </ul>
+    </nav>
+
+    <canvas
+      id="iron-canvas"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        opacity: 0.3;
+        pointer-events: none;
+      "
+    ></canvas>
+
+    <main id="swup" class="transition-fade">
+      <div class="standalone-form-container">
+        <div class="form-box">
+          <h2>Project Request</h2>
+          <form id="project-form" class="light-contact-form" novalidate>
+            <div class="form-group" style="margin-bottom: 20px">
+              <label for="name">Your Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group" style="margin-bottom: 20px">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="john@example.com"
+                  required
+                />
+              </div>
+              <div class="form-group" style="margin-bottom: 20px">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="(313) 000-0000"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px">
+              <label>Select Your Plan</label>
+              <div class="custom-select-wrapper">
+                <div class="custom-select-trigger">
+                  <span>Select an Option...</span>
+                  <div class="arrow">▼</div>
+                </div>
+                <div class="custom-options">
+                  <span class="custom-option" data-value="landing"
+                    >Landing Page Special ($100)</span
+                  >
+                  <span class="custom-option" data-value="starter"
+                    >Starter Build ($1,000)</span
+                  >
+                  <span class="custom-option" data-value="standard"
+                    >Standard Subscription ($99/mo)</span
+                  >
+                  <span class="custom-option" data-value="growth"
+                    >Growth Subscription ($199/mo)</span
+                  >
+                  <span class="custom-option" data-value="premium"
+                    >Premium Subscription ($399/mo)</span
+                  >
+                  <span class="custom-option" data-value="custom"
+                    >Custom Software / Workflow Build</span
+                  >
+                </div>
+              </div>
+              <input
+                type="hidden"
+                id="project-type"
+                name="project-type"
+                required
+              />
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px">
+              <label for="business-desc">Business Description & Goals</label>
+              <textarea
+                id="business-desc"
+                name="business-desc"
+                placeholder="Tell us about your business and goals..."
+                required
+                style="min-height: 120px"
+              ></textarea>
+            </div>
+
+            <p
+              style="
+                font-size: 0.85rem;
+                color: var(--text-muted);
+                margin: 0 0 15px 0;
+                font-style: italic;
+                text-align: center;
+              "
+            >
+              *Upon submission, we will reach out to schedule your Discovery
+              Call.
+            </p>
+
+            <button type="submit" class="submit-btn" id="project-submit-btn" style="width: 100%">
+              Start My Project
+            </button>
+
+            <div id="project-form-message" style="
+              display: none;
+              margin-top: 18px;
+              padding: 14px 20px;
+              font-size: 0.9rem;
+              font-family: 'Courier New', monospace;
+              letter-spacing: 0.04em;
+              text-align: center;
+            "></div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      style="
+        text-align: center;
+        padding: 40px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      "
+    >
+      <p style="margin: 0; color: var(--text-muted)">
+        &copy; 2026 Iron Digital. | Based in Detroit.
+      </p>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+      (function () {
+        const form    = document.getElementById('project-form');
+        const btn     = document.getElementById('project-submit-btn');
+        const msgEl   = document.getElementById('project-form-message');
+
+        const SERVER_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:3001/send-project'
+          : 'https://YOUR-SERVER-URL.railway.app/send-project'; // ← replace after deploy
+
+        function showMsg(text, success) {
+          msgEl.style.display = 'block';
+          msgEl.style.color   = success ? '#00d4ff' : '#e05555';
+          msgEl.style.border  = `1px solid ${success ? 'rgba(0,212,255,0.3)' : 'rgba(224,85,85,0.3)'}`;
+          msgEl.textContent   = text;
+        }
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const projectType = document.getElementById('project-type').value;
+          if (!projectType) {
+            showMsg('[ ERROR ] Please select a plan before submitting.', false);
+            return;
+          }
+
+          btn.disabled       = true;
+          btn.textContent    = 'Transmitting…';
+          msgEl.style.display = 'none';
+
+          const body = {
+            name:            form.querySelector('[name="name"]').value.trim(),
+            email:           form.querySelector('[name="email"]').value.trim(),
+            phone:           form.querySelector('[name="phone"]').value.trim(),
+            'project-type':  projectType,
+            'business-desc': form.querySelector('[name="business-desc"]').value.trim(),
+          };
+
+          try {
+            const res  = await fetch(SERVER_URL, {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify(body),
+            });
+            const data = await res.json();
+            if (!data.ok) throw new Error(data.error || 'Server error');
+            showMsg('[ TRANSMITTED ] Request received. We will be in contact within 24 hours.', true);
+            form.reset();
+            document.querySelector('.custom-select-trigger span').textContent = 'Select an Option...';
+            btn.textContent = 'Request Sent ✓';
+          } catch (err) {
+            console.error(err);
+            showMsg('[ ERROR ] Transmission failed. Please email us directly at contact@irondigitalmi.com', false);
+            btn.disabled    = false;
+            btn.textContent = 'Start My Project';
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

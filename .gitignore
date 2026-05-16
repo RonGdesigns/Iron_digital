@@ -1,0 +1,15 @@
+# Credentials — NEVER commit these
+server/.env
+
+# Dependencies
+node_modules/
+server/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp scripts
+update_onboarding.js
+inject_svgs.js
+rename_solutions.js
