@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // I. 3D Tilt Effect
             if (window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
-                document.querySelectorAll('. ').forEach(element => {
+                document.querySelectorAll('.bento-card').forEach(element => {
                     element.addEventListener('mousemove', (e) => {
                         const rect = element.getBoundingClientRect();
                         const x = e.clientX - rect.left; const y = e.clientY - rect.top;  
