@@ -205,7 +205,7 @@ function buildDoneSummary() {
 }
 
 async function handleSubmit(e) {
-  e.preventDefault();
+  if (e && e.preventDefault) e.preventDefault();
   const form = document.getElementById('capture-form');
   let allValid = true;
 
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const form = document.getElementById('capture-form');
-  if (form) form.addEventListener('submit', handleSubmit);
+  // Form submission is now handled directly via onsubmit in the HTML
 
   const restartBtn = document.getElementById('btn-restart');
   if (restartBtn) restartBtn.addEventListener('click', resetFunnel);
