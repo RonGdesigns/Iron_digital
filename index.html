@@ -173,7 +173,7 @@
         background-color: var(--accent-blue);
         color: #000 !important;
         padding: 10px 20px;
-        border-radius: 25px;
+        border-radius: 0px;
         font-weight: bold;
         text-decoration: none;
         transition:
@@ -205,7 +205,7 @@
         color: #000;
         padding: 15px 35px;
         border: none;
-        border-radius: 30px;
+        border-radius: 0px;
         font-size: 1.1rem;
         font-weight: bold;
         text-decoration: none;
@@ -298,7 +298,7 @@
         background-attachment: fixed;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border-radius: 35px;
+        border-radius: 2px;
         padding: 40px 20px;
         text-align: center;
         border: 1px solid rgba(255, 255, 255, 0.15);
@@ -325,7 +325,7 @@
         background-color: var(--accent-blue);
         color: #000;
         padding: 6px 20px;
-        border-radius: 20px;
+        border-radius: 0px;
         font-size: 0.85rem;
         font-weight: bold;
         text-transform: uppercase;
@@ -371,7 +371,7 @@
 
       .service-card {
         background-color: var(--bg-panel);
-        border-radius: 20px;
+        border-radius: 2px;
         padding: 40px 30px;
         text-align: left;
         border: 1px solid #1a365d;
@@ -399,7 +399,7 @@
         display: inline-block;
         background: rgba(0, 212, 255, 0.1);
         padding: 15px;
-        border-radius: 12px;
+        border-radius: 0px;
         border: 1px solid rgba(0, 212, 255, 0.2);
       }
 
@@ -429,7 +429,7 @@
       .faq-item {
         background-color: var(--bg-panel);
         border: 1px solid #1a365d;
-        border-radius: 12px;
+        border-radius: 2px;
         overflow: hidden;
       }
 
@@ -517,7 +517,7 @@
         background-color: rgba(17, 34, 64, 0.6);
         color: #ffffff;
         border: 1px solid rgba(0, 212, 255, 0.2);
-        border-radius: 15px;
+        border-radius: 0px;
         font-size: 1rem;
         box-sizing: border-box;
         font-family: inherit;
@@ -559,7 +559,7 @@
         padding: 15px 20px;
         background-color: rgba(17, 34, 64, 0.6);
         border: 1px solid rgba(0, 212, 255, 0.2);
-        border-radius: 15px;
+        border-radius: 0px;
         color: rgba(230, 241, 255, 0.4);
         cursor: pointer;
         transition: all 0.3s;
@@ -591,7 +591,7 @@
         background-color: rgba(17, 34, 64, 0.95);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 212, 255, 0.2);
-        border-radius: 15px;
+        border-radius: 0px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         margin-top: 8px;
         opacity: 0;
@@ -617,11 +617,11 @@
       }
 
       .custom-option:first-child {
-        border-radius: 15px 15px 0 0;
+        border-radius: 0px;
       }
 
       .custom-option:last-child {
-        border-radius: 0 0 15px 15px;
+        border-radius: 0px;
       }
 
       /* Submit Button */
@@ -630,7 +630,7 @@
         color: #000000;
         padding: 18px;
         border: none;
-        border-radius: 40px;
+        border-radius: 0px;
         font-size: 1.2rem;
         font-weight: bold;
         text-transform: uppercase;
@@ -670,7 +670,7 @@
 
       .bento-card {
         background-color: var(--bg-panel);
-        border-radius: 20px;
+        border-radius: 2px;
         border: 1px solid rgba(0, 212, 255, 0.15);
         position: relative;
         overflow: hidden;
@@ -722,7 +722,7 @@
         position: relative;
         z-index: 3;
         pointer-events: none;
-        transform: translateZ(30px);
+        /* no translateZ - tilt effect removed */
       }
 
       .bento-text-content h3 {
@@ -744,7 +744,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) translateZ(40px);
+        transform: translate(-50%, -50%);
         background: rgba(0, 0, 0, 0.6);
         border: 2px solid var(--accent-blue);
         color: var(--accent-blue);
@@ -804,7 +804,7 @@
         padding: 15px 20px;
         cursor: pointer;
         z-index: 2002;
-        border-radius: 12px;
+        border-radius: 0px;
         backdrop-filter: blur(5px);
         transition: all 0.3s ease;
       }
@@ -845,7 +845,7 @@
         height: auto !important;
         max-width: 90vw !important;
         max-height: 90vh !important;
-        border-radius: 12px;
+        border-radius: 0px;
         box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);
         background-color: #000;
         object-fit: contain;
@@ -891,7 +891,7 @@
         width: 100%;
         max-width: 100%;
         height: auto;
-        border-radius: 12px;
+        border-radius: 2px;
         border: none;
         /* Border removed */
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
@@ -957,7 +957,7 @@
         .bento-card.feature-card:hover .bento-play-btn {
           background: var(--accent-blue);
           color: #000;
-          transform: translate(-50%, -50%) translateZ(50px) scale(1.1);
+          transform: translate(-50%, -50%) scale(1.1);
         }
 
         .close-modal:hover {
@@ -1043,7 +1043,7 @@
           width: 100%;
           max-width: 100%;
           height: auto;
-          border-radius: 12px;
+          border-radius: 0px;
           border: none;
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
@@ -1127,7 +1127,7 @@
         border: 1px solid rgba(0, 212, 255, 0.4);
         color: #ffffff;
         text-decoration: none;
-        border-radius: 50px;
+        border-radius: 0px;
         font-weight: 600;
         font-size: 0.95rem;
         transition: all 0.3s ease;
@@ -1285,7 +1285,7 @@
           style="
             background-color: rgba(17, 34, 64, 0.6);
             border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 30px;
+            border-radius: 2px;
             padding: 60px 20px;
             text-align: center;
             backdrop-filter: blur(10px);
