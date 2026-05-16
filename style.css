@@ -531,8 +531,8 @@ footer {
 .bento-card {
     background-color: var(--bg-panel); border-radius: 2px; border: 1px solid rgba(0, 212, 255, 0.15);
     position: relative; overflow: hidden; display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 25px; transform-style: preserve-3d;
-    perspective: 1000px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    justify-content: flex-end; padding: 25px;
+    cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .bento-card img, .bento-card video {
@@ -554,12 +554,12 @@ footer {
     z-index: 2; pointer-events: none;
 }
 
-.bento-text-content { position: relative; z-index: 3; pointer-events: none; transform: translateZ(30px); }
+.bento-text-content { position: relative; z-index: 3; pointer-events: none; }
 .bento-text-content h3 { color: var(--accent-blue); font-size: 2rem; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
 .bento-text-content p { color: #fff; margin: 0; font-size: 1rem; }
 
 .bento-play-btn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(40px);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.6); border: 2px solid var(--accent-blue); color: var(--accent-blue);
     border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
     font-size: 1.5rem; z-index: 3; transition: background 0.3s, color 0.3s, transform 0.3s;
@@ -657,7 +657,7 @@ video.modal-content { outline: none; border: 1px solid var(--accent-blue); }
     .custom-option:hover { background-color: rgba(0, 212, 255, 0.15); color: var(--accent-blue); }
     .light-contact-form .submit-btn:hover { background-color: #0fb2d8; transform: translateY(-2px); }
     .bento-card:hover img, .bento-card:hover video { transform: scale(1.05); }
-    .bento-card.feature-card:hover .bento-play-btn { background: var(--accent-blue); color: #000; transform: translate(-50%, -50%) translateZ(50px) scale(1.1); }
+    .bento-card.feature-card:hover .bento-play-btn { background: var(--accent-blue); color: #000; transform: translate(-50%, -50%) scale(1.1); }
     .close-modal:hover { color: var(--accent-blue); transform: scale(1.1); }
 }
 

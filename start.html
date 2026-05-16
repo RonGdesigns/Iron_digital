@@ -150,11 +150,7 @@
       <div class="standalone-form-container">
         <div class="form-box">
           <h2>Project Request</h2>
-          <form
-            class="light-contact-form"
-            action="https://formspree.io/f/xkopgbar"
-            method="POST"
-          >
+          <form id="project-form" class="light-contact-form" novalidate>
             <div class="form-group" style="margin-bottom: 20px">
               <label for="name">Your Name</label>
               <input
@@ -249,9 +245,19 @@
               Call.
             </p>
 
-            <button type="submit" class="submit-btn" style="width: 100%">
+            <button type="submit" class="submit-btn" id="project-submit-btn" style="width: 100%">
               Start My Project
             </button>
+
+            <div id="project-form-message" style="
+              display: none;
+              margin-top: 18px;
+              padding: 14px 20px;
+              font-size: 0.9rem;
+              font-family: 'Courier New', monospace;
+              letter-spacing: 0.04em;
+              text-align: center;
+            "></div>
           </form>
         </div>
       </div>
@@ -270,5 +276,64 @@
     </footer>
 
     <script src="main.js"></script>
+    <script>
+      (function () {
+        const form    = document.getElementById('project-form');
+        const btn     = document.getElementById('project-submit-btn');
+        const msgEl   = document.getElementById('project-form-message');
+
+        const SERVER_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:3001/send-project'
+          : 'https://YOUR-SERVER-URL.railway.app/send-project'; // ← replace after deploy
+
+        function showMsg(text, success) {
+          msgEl.style.display = 'block';
+          msgEl.style.color   = success ? '#00d4ff' : '#e05555';
+          msgEl.style.border  = `1px solid ${success ? 'rgba(0,212,255,0.3)' : 'rgba(224,85,85,0.3)'}`;
+          msgEl.textContent   = text;
+        }
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const projectType = document.getElementById('project-type').value;
+          if (!projectType) {
+            showMsg('[ ERROR ] Please select a plan before submitting.', false);
+            return;
+          }
+
+          btn.disabled       = true;
+          btn.textContent    = 'Transmitting…';
+          msgEl.style.display = 'none';
+
+          const body = {
+            name:            form.querySelector('[name="name"]').value.trim(),
+            email:           form.querySelector('[name="email"]').value.trim(),
+            phone:           form.querySelector('[name="phone"]').value.trim(),
+            'project-type':  projectType,
+            'business-desc': form.querySelector('[name="business-desc"]').value.trim(),
+          };
+
+          try {
+            const res  = await fetch(SERVER_URL, {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify(body),
+            });
+            const data = await res.json();
+            if (!data.ok) throw new Error(data.error || 'Server error');
+            showMsg('[ TRANSMITTED ] Request received. We will be in contact within 24 hours.', true);
+            form.reset();
+            document.querySelector('.custom-select-trigger span').textContent = 'Select an Option...';
+            btn.textContent = 'Request Sent ✓';
+          } catch (err) {
+            console.error(err);
+            showMsg('[ ERROR ] Transmission failed. Please email us directly at contact@irondigitalmi.com', false);
+            btn.disabled    = false;
+            btn.textContent = 'Start My Project';
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
