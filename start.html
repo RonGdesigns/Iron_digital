@@ -261,6 +261,77 @@
           </form>
         </div>
       </div>
+
+      <script>
+        var SERVER_URL_PROJECT = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:3001/send-project'
+          : 'https://iron-digital-server.onrender.com/send-project';
+
+        function showProjectMsg(text, success) {
+          var msgEl = document.getElementById('project-form-message');
+          msgEl.style.display = 'block';
+          msgEl.style.color   = success ? '#00d4ff' : '#e05555';
+          msgEl.style.border  = 'dotted 1px ' + (success ? 'rgba(0,212,255,0.3)' : 'rgba(224,85,85,0.3)');
+          msgEl.textContent   = text;
+        }
+
+        function handleProjectSubmit(e) {
+          if (e && e.preventDefault) e.preventDefault();
+          if (e && e.stopPropagation) e.stopPropagation();
+
+          var form        = document.getElementById('project-form');
+          var btn         = document.getElementById('project-submit-btn');
+          var projectType = document.getElementById('project-type').value;
+
+          if (!projectType) {
+            showProjectMsg('[ ERROR ] Please select a plan before submitting.', false);
+            return false;
+          }
+
+          btn.disabled    = true;
+          btn.textContent = 'Transmitting\u2026';
+          document.getElementById('project-form-message').style.display = 'none';
+
+          var body = JSON.stringify({
+            name:            form.querySelector('[name="name"]').value.trim(),
+            email:           form.querySelector('[name="email"]').value.trim(),
+            phone:           form.querySelector('[name="phone"]').value.trim(),
+            'project-type':  projectType,
+            'business-desc': form.querySelector('[name="business-desc"]').value.trim(),
+          });
+
+          var controller = new AbortController();
+          var timeout    = setTimeout(function() { controller.abort(); }, 30000);
+
+          fetch(SERVER_URL_PROJECT, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    body,
+            signal:  controller.signal,
+          })
+          .then(function(res) {
+            clearTimeout(timeout);
+            return res.json();
+          })
+          .then(function(data) {
+            if (!data.ok) throw new Error(data.error || 'Server error');
+            showProjectMsg('[ TRANSMITTED ] Request received. We will be in contact within 24 hours.', true);
+            form.reset();
+            var trigger = document.querySelector('.custom-select-trigger span');
+            if (trigger) trigger.textContent = 'Select an Option...';
+            btn.textContent = 'Request Sent \u2713';
+          })
+          .catch(function(err) {
+            clearTimeout(timeout);
+            console.error(err);
+            showProjectMsg('[ ERROR ] Transmission failed. Please email us directly at contact@irondigitalmi.com', false);
+            btn.disabled    = false;
+            btn.textContent = 'Start My Project';
+          });
+
+          return false;
+        }
+      </script>
     </main>
 
     <footer
@@ -275,69 +346,6 @@
       </p>
     </footer>
 
-    <script>
-      const SERVER_URL_PROJECT = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-        ? 'http://localhost:3001/send-project'
-        : 'https://iron-digital-server.onrender.com/send-project';
-
-      function showProjectMsg(text, success) {
-        const msgEl = document.getElementById('project-form-message');
-        msgEl.style.display = 'block';
-        msgEl.style.color   = success ? '#00d4ff' : '#e05555';
-        msgEl.style.border  = `1px solid ${success ? 'rgba(0,212,255,0.3)' : 'rgba(224,85,85,0.3)'}`;
-        msgEl.textContent   = text;
-      }
-
-      async function handleProjectSubmit(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const form        = document.getElementById('project-form');
-        const btn         = document.getElementById('project-submit-btn');
-        const projectType = document.getElementById('project-type').value;
-
-        if (!projectType) {
-          showProjectMsg('[ ERROR ] Please select a plan before submitting.', false);
-          return false;
-        }
-
-        btn.disabled    = true;
-        btn.textContent = 'Transmitting…';
-        document.getElementById('project-form-message').style.display = 'none';
-
-        const body = {
-          name:            form.querySelector('[name="name"]').value.trim(),
-          email:           form.querySelector('[name="email"]').value.trim(),
-          phone:           form.querySelector('[name="phone"]').value.trim(),
-          'project-type':  projectType,
-          'business-desc': form.querySelector('[name="business-desc"]').value.trim(),
-        };
-
-        try {
-          const controller = new AbortController();
-          const timeout    = setTimeout(() => controller.abort(), 30000);
-          const res        = await fetch(SERVER_URL_PROJECT, {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(body),
-            signal:  controller.signal,
-          });
-          clearTimeout(timeout);
-          const data = await res.json();
-          if (!data.ok) throw new Error(data.error || 'Server error');
-          showProjectMsg('[ TRANSMITTED ] Request received. We will be in contact within 24 hours.', true);
-          form.reset();
-          document.querySelector('.custom-select-trigger span').textContent = 'Select an Option...';
-          btn.textContent = 'Request Sent ✓';
-        } catch (err) {
-          console.error(err);
-          showProjectMsg('[ ERROR ] Transmission failed. Please email us directly at contact@irondigitalmi.com', false);
-          btn.disabled    = false;
-          btn.textContent = 'Start My Project';
-        }
-        return false;
-      }
-    </script>
     <script src="main.js"></script>
   </body>
 </html>
