@@ -1,33 +1,23 @@
 require('dotenv').config();
-const express = require('express');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
+const express    = require('express');
+const cors       = require('cors');
+const { Resend } = require('resend');
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+const app    = express();
+const PORT   = process.env.PORT || 3001;
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ── Middleware ────────────────────────────────────────────
 app.use(express.json());
 app.use(cors({
   origin: [
     'https://irondigitalmi.com',
-    'http://127.0.0.1:5500',  // Live Server dev
+    'https://www.irondigitalmi.com',
+    'http://127.0.0.1:5500',
     'http://localhost:5500',
     'http://localhost:3000',
   ]
 }));
-
-// ── Nodemailer Transport ──────────────────────────────────
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-  connectionTimeout: 10000,  // fail after 10s if can't connect
-  greetingTimeout:   10000,
-  socketTimeout:     15000,
-});
 
 // ── Helpers ───────────────────────────────────────────────
 const TRACK_LABELS = {
@@ -158,7 +148,14 @@ app.post('/send', async (req, res) => {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    const { error } = await resend.emails.send({
+      from: 'Iron Digital Lead Engine <onboarding@resend.dev>',
+      to: [process.env.NOTIFY_EMAIL],
+      replyTo: email,
+      subject: `[${tier}] ${company_name} — ${TRACK_LABELS[track] || track} · Score: ${score}`,
+      html,
+    });
+    if (error) throw new Error(error.message);
     console.log(`✅ Lead sent: ${company_name} (${email}) — Score: ${score}`);
     res.json({ ok: true });
   } catch (err) {
@@ -232,7 +229,14 @@ app.post('/send-project', async (req, res) => {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    const { error } = await resend.emails.send({
+      from: 'Iron Digital Project Intake <onboarding@resend.dev>',
+      to: [process.env.NOTIFY_EMAIL],
+      replyTo: email,
+      subject: `[PROJECT] ${name} — ${planLabel}`,
+      html,
+    });
+    if (error) throw new Error(error.message);
     console.log(`✅ Project request sent: ${name} (${email}) — ${planLabel}`);
     res.json({ ok: true });
   } catch (err) {
@@ -241,19 +245,18 @@ app.post('/send-project', async (req, res) => {
   }
 });
 
-// ── /test-email  (diagnostic — remove after confirming it works) ─
 app.get('/test-email', async (_, res) => {
   try {
-    await transporter.verify();
-    await transporter.sendMail({
-      from: `"Iron Digital Test" <${process.env.GMAIL_USER}>`,
-      to: process.env.NOTIFY_EMAIL || process.env.GMAIL_USER,
-      subject: '[Iron Digital] ✅ Server email test',
-      text: `SMTP connection verified. Server is healthy.\n\nGMAIL_USER: ${process.env.GMAIL_USER}\nNOTIFY_EMAIL: ${process.env.NOTIFY_EMAIL}`,
+    const { error } = await resend.emails.send({
+      from: 'Iron Digital Test <onboarding@resend.dev>',
+      to: [process.env.NOTIFY_EMAIL],
+      subject: '[Iron Digital] Server email test',
+      text: `Resend connection verified. Server is healthy. NOTIFY_EMAIL: ${process.env.NOTIFY_EMAIL}`,
     });
-    res.json({ ok: true, message: 'Test email sent successfully.' });
+    if (error) throw new Error(error.message);
+    res.json({ ok: true, message: 'Test email sent via Resend.' });
   } catch (err) {
-    res.status(500).json({ ok: false, error: err.message, code: err.code });
+    res.status(500).json({ ok: false, error: err.message });
   }
 });
 
