@@ -389,11 +389,13 @@ h3 {
 
 .choice-body strong {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--text-main);
   line-height: 1.15;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .choice-body span {
