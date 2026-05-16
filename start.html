@@ -21,23 +21,6 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
-      defer
-    ></script>
-    <script
-      src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-      defer
-    ></script>
-    <script src="https://unpkg.com/swup@4" defer></script>
 
     <style>
       body {
@@ -346,6 +329,16 @@
       </p>
     </footer>
 
-    <script src="main.js"></script>
+    <script>
+      // Cursor only — no Swup/GSAP needed on this page
+      (function() {
+        var cursor = document.querySelector('.custom-cursor');
+        if (!cursor) return;
+        document.addEventListener('mousemove', function(e) {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top  = e.clientY + 'px';
+        });
+      })();
+    </script>
   </body>
 </html>
