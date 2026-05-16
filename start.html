@@ -330,13 +330,59 @@
     </footer>
 
     <script>
-      // Cursor only — no Swup/GSAP needed on this page
+      // Cursor and Custom Select — no Swup/GSAP needed on this page
       (function() {
         var cursor = document.querySelector('.custom-cursor');
-        if (!cursor) return;
-        document.addEventListener('mousemove', function(e) {
-          cursor.style.left = e.clientX + 'px';
-          cursor.style.top  = e.clientY + 'px';
+        if (cursor) {
+          document.addEventListener('mousemove', function(e) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top  = e.clientY + 'px';
+          });
+        }
+
+        // Custom Select Logic
+        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+            const trigger = wrapper.querySelector('.custom-select-trigger');
+            const options = wrapper.querySelectorAll('.custom-option');
+            const hiddenInput = wrapper.parentElement.querySelector('input[type="hidden"]');
+            const triggerSpan = trigger ? trigger.querySelector('span') : null;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const planFromUrl = urlParams.get('plan');
+
+            if (planFromUrl && hiddenInput && triggerSpan) {
+                options.forEach(option => {
+                    if (option.getAttribute('data-value') === planFromUrl) {
+                        triggerSpan.textContent = option.textContent;
+                        hiddenInput.value = planFromUrl;
+                        triggerSpan.style.color = "var(--text-main)";
+                    }
+                });
+            }
+
+            if(trigger) {
+                trigger.onclick = (e) => {
+                    e.stopPropagation(); 
+                    wrapper.classList.toggle('open');
+                };
+            }
+            
+            options.forEach(option => {
+                option.onclick = (e) => {
+                    e.stopPropagation();
+                    if (triggerSpan) triggerSpan.textContent = e.target.textContent;
+                    if (hiddenInput) hiddenInput.value = e.target.getAttribute('data-value');
+                    wrapper.classList.remove('open');
+                    if (triggerSpan) triggerSpan.style.color = "var(--text-main)";
+                };
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener('click', (e) => {
+              if (!wrapper.contains(e.target)) {
+                wrapper.classList.remove('open');
+              }
+            });
         });
       })();
     </script>
