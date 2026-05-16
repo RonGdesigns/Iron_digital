@@ -141,8 +141,14 @@ const ERR_IDS = {
 };
 
 function validateField(input) {
-  // Skip validation for select fields, native 'required' handles it
-  if (input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') return input.value !== "";
+  if (input.tagName === 'SELECT') {
+    const valid = input.value !== "";
+    input.classList.toggle('is-invalid', !valid);
+    const errEl = document.getElementById(`err-${input.name}`);
+    if (errEl) errEl.textContent = valid ? '' : 'Please select an option.';
+    return valid;
+  }
+  if (input.tagName === 'TEXTAREA') return true;
 
   const rule = VALIDATORS[input.name];
   const errEl = document.getElementById(ERR_IDS[input.name]);
@@ -302,15 +308,11 @@ function transitionToDone(payload) {
 
   if (summary) summary.innerHTML = buildDoneSummary();
 
-  if (payload.score_tier === 'HIGH' || payload.budget === '15k_plus') {
-    if (msg) msg.textContent =
-      `We've flagged your file as a Priority Tier 1 engagement, ${payload.first_name}. ` +
-      `A senior Iron Digital MI strategist will be in contact shortly. ` +
-      `Don't wait — lock in your strategy call now.`;
-    if (calBtn) calBtn.style.display = 'inline-flex';
-  } else {
-    if (calBtn) calBtn.style.display = 'none';
-  }
+  if (msg) msg.textContent =
+      `Your blueprint has been securely transmitted, ${payload.first_name}. ` +
+      `An Iron Digital MI strategist will review your architecture shortly. ` +
+      `To expedite the process, lock in your strategy call now.`;
+  if (calBtn) calBtn.style.display = 'inline-flex';
 
   goToStep('step-done');
 }
