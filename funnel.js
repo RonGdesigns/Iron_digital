@@ -130,16 +130,18 @@ const VALIDATORS = {
   last_name: { regex: /^[A-Za-z '\-]{2,50}$/, msg: 'Enter a valid last name.' },
   email: { regex: /^[^\s@]+@[^@\s]+\.[^@\s]{2,}$/, msg: 'Enter a valid corporate email.' },
   company_name: { regex: /^.{2,120}$/, msg: 'Enter your company name.' },
+  phone: { regex: /^[\d\s\(\)\-\+]{7,20}$/, msg: 'Enter a valid phone number.' },
 };
 
 const ERR_IDS = {
   first_name: 'err-first', last_name: 'err-last',
   email: 'err-email', company_name: 'err-company',
+  phone: 'err-phone',
 };
 
 function validateField(input) {
   // Skip validation for select fields, native 'required' handles it
-  if (input.tagName === 'SELECT') return input.value !== "";
+  if (input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') return input.value !== "";
 
   const rule = VALIDATORS[input.name];
   const errEl = document.getElementById(ERR_IDS[input.name]);
@@ -160,9 +162,11 @@ function buildPayload(formData) {
     first_name: formData.get('first_name').trim(),
     last_name: formData.get('last_name').trim(),
     email: formData.get('email').trim().toLowerCase(),
+    phone: formData.get('phone') ? formData.get('phone').trim() : '',
     company_name: formData.get('company_name').trim(),
     timeline: formData.get('timeline'),
     budget: formData.get('budget'),
+    additional_info: formData.get('additional_info') ? formData.get('additional_info').trim() : '',
     track: intentPayload.track,
     answers: intentPayload.answers,
     lead_score: intentPayload.score,

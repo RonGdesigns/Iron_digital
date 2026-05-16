@@ -70,8 +70,8 @@ const BUDGET_LABELS = {
 // ── POST /send ────────────────────────────────────────────
 app.post('/send', async (req, res) => {
   const {
-    first_name, last_name, email, company_name,
-    timeline, budget, track, answers, lead_score,
+    first_name, last_name, email, phone, company_name,
+    timeline, budget, additional_info, track, answers, lead_score,
   } = req.body;
 
   // Basic server-side validation
@@ -92,6 +92,14 @@ app.post('/send', async (req, res) => {
   const answersHtml = parsedAnswers
     .map(a => `<li><strong>${ANSWER_LABELS[a] || a}</strong></li>`)
     .join('');
+
+  const phoneRow = phone ? `<tr><td style="padding:6px 0;color:#8892b0;font-size:12px;">Phone</td><td><a href="tel:${phone}" style="color:#00d4ff;">${phone}</a></td></tr>` : '';
+  const additionalInfoSection = additional_info ? `
+      <!-- Additional Info -->
+      <div style="padding:28px 36px;border-bottom:1px solid #1a365d;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:#00d4ff;margin-bottom:16px;">Additional Details</div>
+        <p style="margin:0;color:#e6f1ff;font-size:14px;line-height:1.6;">${additional_info.replace(/\n/g, '<br>')}</p>
+      </div>` : '';
 
   const html = `
     <div style="font-family:'Segoe UI',sans-serif;max-width:620px;margin:0 auto;background:#070e1a;color:#e6f1ff;padding:0;border:1px solid #1a365d;">
@@ -118,6 +126,7 @@ app.post('/send', async (req, res) => {
         <table style="width:100%;border-collapse:collapse;">
           <tr><td style="padding:6px 0;color:#8892b0;font-size:12px;width:140px;">Name</td><td style="font-weight:600;">${first_name} ${last_name}</td></tr>
           <tr><td style="padding:6px 0;color:#8892b0;font-size:12px;">Email</td><td><a href="mailto:${email}" style="color:#00d4ff;">${email}</a></td></tr>
+          ${phoneRow}
           <tr><td style="padding:6px 0;color:#8892b0;font-size:12px;">Company</td><td style="font-weight:600;">${company_name}</td></tr>
           <tr><td style="padding:6px 0;color:#8892b0;font-size:12px;">Timeline</td><td>${TIMELINE_LABELS[timeline] || timeline}</td></tr>
           <tr><td style="padding:6px 0;color:#8892b0;font-size:12px;">Budget</td><td>${BUDGET_LABELS[budget] || budget}</td></tr>
@@ -132,6 +141,8 @@ app.post('/send', async (req, res) => {
           ${answersHtml}
         </ul>
       </div>
+
+      ${additionalInfoSection}
 
       <!-- Footer -->
       <div style="padding:20px 36px;background:#050a13;font-size:11px;color:#4a5d7c;text-align:center;">

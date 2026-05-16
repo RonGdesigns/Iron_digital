@@ -526,11 +526,19 @@
               </div>
             </div>
 
-            <div class="form-field">
-              <label class="field-label" for="input-email">Corporate Email</label>
-              <input type="email" id="input-email" name="email" class="field-input" placeholder="marcus@yourcompany.com"
-                required />
-              <span class="field-error" id="err-email"></span>
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label class="field-label" for="input-email">Corporate Email</label>
+                <input type="email" id="input-email" name="email" class="field-input" placeholder="marcus@yourcompany.com"
+                  required />
+                <span class="field-error" id="err-email"></span>
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="input-phone">Phone Number</label>
+                <input type="tel" id="input-phone" name="phone" class="field-input" placeholder="(555) 123-4567"
+                  required />
+                <span class="field-error" id="err-phone"></span>
+              </div>
             </div>
 
             <div class="form-field">
@@ -562,11 +570,16 @@
               </div>
             </div>
 
+            <div class="form-field" style="margin-top: 16px;">
+              <label class="field-label" for="input-additional">Additional Information (Optional)</label>
+              <textarea id="input-additional" name="additional_info" class="field-input" placeholder="Any specific requirements or questions?" style="min-height: 80px; resize: vertical;"></textarea>
+            </div>
+
             <input type="hidden" id="payload-track" name="track" />
             <input type="hidden" id="payload-answers" name="answers" />
             <input type="hidden" id="payload-score" name="lead_score" />
 
-            <button type="submit" class="btn-submit" id="btn-submit" style="margin-top: 16px;">
+            <button type="submit" class="btn-submit" id="btn-submit" style="margin-top: 24px;">
               <span class="btn-submit-text">Calculate My Strategy</span>
               <span class="btn-submit-icon" aria-hidden="true">→</span>
             </button>
