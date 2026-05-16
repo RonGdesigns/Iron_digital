@@ -227,7 +227,7 @@ async function handleSubmit(e) {
   // In production, change this to your Railway/Render URL
   const SERVER_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:3001/send'
-    : 'https://YOUR-SERVER-URL.railway.app/send'; // ← replace after deploy
+    : 'https://iron-digital-server.onrender.com/send';
 
   // Serialize answers array for the server
   const serverPayload = {

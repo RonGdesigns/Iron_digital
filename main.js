@@ -94,7 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // F. Cinematic Video Slow-Mo - skipped: videos are now lazy-loaded on click for speed
+        // F. Cinematic Video Slow-Mo (No layout math required, can run immediately)
+        const previewVideos = document.querySelectorAll('.bento-card video');
+        previewVideos.forEach(vid => { vid.playbackRate = 0.65; });
 
         // G. Custom Select Dropdown (No layout math required)
         document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
@@ -217,7 +219,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // I. 3D Tilt Effect - Removed (tilt-effect class no longer used)
+            // I. 3D Tilt Effect
+            if (window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
+                document.querySelectorAll('. ').forEach(element => {
+                    element.addEventListener('mousemove', (e) => {
+                        const rect = element.getBoundingClientRect();
+                        const x = e.clientX - rect.left; const y = e.clientY - rect.top;  
+                        const centerX = rect.width / 2; const centerY = rect.height / 2;
+                        gsap.to(element, {
+                            rotationX: ((y - centerY) / centerY) * -10,
+                            rotationY: ((x - centerX) / centerX) * 10,
+                            transformPerspective: 1000, ease: "power1.out", duration: 0.3
+                        });
+                    });
+                    element.addEventListener('mouseleave', () => {
+                        gsap.to(element, { rotationX: 0, rotationY: 0, ease: "power3.out", duration: 0.6 });
+                    });
+                });
+            }
 
         }); // End requestAnimationFrame
 
