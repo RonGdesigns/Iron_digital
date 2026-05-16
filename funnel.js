@@ -236,11 +236,15 @@ async function handleSubmit(e) {
   };
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000); // 30s max
     const res = await fetch(SERVER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(serverPayload),
+      signal: controller.signal,
     });
+    clearTimeout(timeout);
     const data = await res.json();
     if (!data.ok) throw new Error(data.error || 'Server error');
     transitionToDone(payload);

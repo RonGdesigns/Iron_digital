@@ -24,6 +24,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_APP_PASSWORD,
   },
+  connectionTimeout: 10000,  // fail after 10s if can't connect
+  greetingTimeout:   10000,
+  socketTimeout:     15000,
 });
 
 // ── Helpers ───────────────────────────────────────────────
