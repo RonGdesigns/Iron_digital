@@ -241,6 +241,22 @@ app.post('/send-project', async (req, res) => {
   }
 });
 
+// ── /test-email  (diagnostic — remove after confirming it works) ─
+app.get('/test-email', async (_, res) => {
+  try {
+    await transporter.verify();
+    await transporter.sendMail({
+      from: `"Iron Digital Test" <${process.env.GMAIL_USER}>`,
+      to: process.env.NOTIFY_EMAIL || process.env.GMAIL_USER,
+      subject: '[Iron Digital] ✅ Server email test',
+      text: `SMTP connection verified. Server is healthy.\n\nGMAIL_USER: ${process.env.GMAIL_USER}\nNOTIFY_EMAIL: ${process.env.NOTIFY_EMAIL}`,
+    });
+    res.json({ ok: true, message: 'Test email sent successfully.' });
+  } catch (err) {
+    res.status(500).json({ ok: false, error: err.message, code: err.code });
+  }
+});
+
 // ── Health Check ──────────────────────────────────────────
 app.get('/health', (_, res) => res.json({ status: 'ok' }));
 
