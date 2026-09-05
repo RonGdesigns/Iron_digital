@@ -7,6 +7,8 @@ const app    = express();
 const PORT   = process.env.PORT || 3001;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+app.use('/detroit-hub', require('./detroit-hub').router());
+
 // ── Middleware ────────────────────────────────────────────
 app.use(express.json());
 app.use(cors({
@@ -278,3 +280,4 @@ app.get('/health', (_, res) => res.json({ status: 'ok' }));
 app.listen(PORT, () => {
   console.log(`Iron Digital Lead Server running on port ${PORT}`);
 });
+
