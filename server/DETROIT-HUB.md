@@ -1,20 +1,15 @@
-# Detroit Hub email integration
+# Detroit Hub change reports
 
-`server.js` mounts `detroit-hub.js` before the existing Iron Digital CORS middleware, so existing intake routes keep their behavior.
+Detroit Hub uses **beehiiv for newsletters** and **Resend for change reports**. This server handles reports only; it does not create subscriber lists or send weekend broadcasts.
 
-The new routes reuse `RESEND_API_KEY` and `NOTIFY_EMAIL`. The owner approved sender `contact@irondigitalmi.com` and newsletter footer `313 Park Ave, Detroit, MI 48226`. Set optional `HUB_FROM_EMAIL` / `HUB_POSTAL_ADDRESS` to override, `HUB_CONFIRM_SECRET` for a separate signing secret, or `HUB_NEWSLETTER_ENABLED=false` to pause the newsletter. Never place the API key in Detroit Hub's static files.
+`server.js` mounts `detroit-hub.js` separately from the existing Iron Digital intake routes. It reuses `RESEND_API_KEY` and the existing `NOTIFY_EMAIL` recipient. The approved sender is `contact@irondigitalmi.com`; `HUB_FROM_EMAIL` can override it. Only Resend email-sending access is needed.
 
-The newsletter requires a Resend key with Contacts, Segments, Topics and Broadcasts access. The first signup creates/reuses a separate Detroit Hub segment/topic. Existing business contacts are never added automatically. Double confirmation and provider unsubscribe handling are built in. Reports are sent only to the existing notification recipient, as plain text, for manual review.
+`POST /detroit-hub/report` validates event paths and report fields, sends plain text to the fixed notification recipient, and sets the optional reporter address as Reply-To. Origin checks, a honeypot, per-IP/global rate limits, and idempotency remain in place. Reports require manual review; they never modify event listings directly.
 
-The weekly send endpoint accepts only a signed GitHub OIDC token for RonGdesigns/detroit-hub, immutable repo ID 1356662651, owner ID 139249566, master, and `.github/workflows/weekend.yml`. That companion site workflow runs on Thursday mornings and offers an editor-only preview. No shared cron password is needed. A separate named broadcast per weekend prevents repeat scheduled sends.
+`GET /detroit-hub/config` advertises report availability and `newsletterProvider: beehiiv`. The retired `/subscribe`, `/confirm` and `/weekend-send` routes return 410 without sending email or changing any contacts. No existing subscriber records are deleted or migrated by this cleanup. Newsletter preferences are managed in beehiiv.
 
-Run `npm ci --ignore-scripts && npm test` in this directory. Tests use a local HTTP server and mocked Resend responses, and verify real RSA JWT signatures. No real email is sent by tests.
+Run `npm ci --ignore-scripts` and `npm test` in this directory. Five tests cover validation, recipient routing, idempotency, failures, spam limits and retired newsletter routes. Tests use a local HTTP server with mocked Resend responses; they send no real mail.
 
-After merging and Render redeploying:
+After merging and Render deploying, check `/detroit-hub/config`, submit a clearly labeled test report on Detroit Hub, and verify inbox delivery. The site PR is https://github.com/RonGdesigns/detroit-hub/pull/7.
 
-1. Check `https://iron-digital-server.onrender.com/detroit-hub/config`.
-2. Submit a labeled test report on an event page; verify delivery to the existing notification inbox.
-3. Merge the companion Detroit Hub PR and run **Send the Detroit weekend guide** with **preview** checked. Check the approved sender and footer.
-4. Test signup with an address you control, confirmation, and unsubscribe before promoting the list.
-
-Rate limits are in memory for the current single-instance Render deployment (150 total public requests/hour; 10/client/hour; 2 confirmation emails/address/hour). With `RENDER` set, the last proxy-supplied forwarded address is used; locally the socket is used. Multiple instances need shared rate limiting before scaling. The public form fails honestly if Render or Resend is unavailable.
+The limiter uses memory for the current single Render instance: 150 public requests/hour and 10/client/hour. With `RENDER` set, the last proxy-supplied forwarded address is used; locally the socket is used. Multiple instances need shared limiting before scaling. The form fails honestly if Render or Resend is unavailable.
