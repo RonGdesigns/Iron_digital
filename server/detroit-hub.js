@@ -4,6 +4,7 @@ const SITE = 'https://thedethub.com';
 const ORIGINS = new Set([SITE, 'https://www.thedethub.com', 'http://127.0.0.1:8000', 'http://localhost:8000']);
 const EMAIL = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/;
 const REASONS = {canceled:'Canceled', time:'Date or time', price:'Price or tickets', location:'Location', other:'Other detail'};
+const PACKAGES = {founding:'Founding local sponsor — $200 / 30 days',event:'Featured event — $50 / 7 days',unsure:'Help me choose'};
 function fail(message, status=400) { return Object.assign(new Error(message), {status}); }
 function text(value, max, min=0) {
   if (value == null && min === 0) return '';
@@ -22,6 +23,17 @@ function report(body) {
   const source=text(body.source,500);
   if (source) { let u; try { u=new URL(source); } catch (_) { throw fail('Enter a valid announcement link.'); } if (!['https:','http:'].includes(u.protocol) || u.username || u.password) throw fail('Enter an http or https announcement link.'); }
   return {path,title,details,source,email:email(body.email),reason:REASONS[body.reason]};
+}
+function sponsor(body) {
+  if (!Object.hasOwn(PACKAGES, body.package)) throw fail('Choose a placement.');
+  const business=text(body.business,120,1), name=text(body.name,100,1);
+  if (/[\r\n]/.test(business+name)) throw fail('Use one line for your name and business.');
+  const businessUrl=text(body.businessUrl,500,8);
+  let u; try { u=new URL(businessUrl); } catch (_) { throw fail('Enter a valid business or event website.'); }
+  if (!['http:','https:'].includes(u.protocol) || !u.hostname || u.username || u.password) throw fail('Enter an http or https business or event website.');
+  const startDate=text(body.startDate,10);
+  if (startDate && (!/^\d{4}-\d{2}-\d{2}$/.test(startDate) || !Number.isFinite(Date.parse(startDate)) || new Date(startDate).toISOString().slice(0,10)!==startDate)) throw fail('Enter a valid preferred date.');
+  return {business,name,businessUrl,startDate,email:email(body.email,true),package:PACKAGES[body.package],details:text(body.details,2000,10)};
 }
 function router({env=process.env, fetcher=fetch, now=()=>Date.now(), requestDelay=550}={}) {
   const route=express.Router();
@@ -64,7 +76,21 @@ function router({env=process.env, fetcher=fetch, now=()=>Date.now(), requestDela
     if(req.body?.website) return false;
     return true;
   }
-  route.get('/config',(_req,res)=>res.json({ok:true,report:!!key && !!recipient,subscribe:false,newsletterProvider:'beehiiv'}));
+  route.get('/config',(_req,res)=>res.json({ok:true,report:!!key && !!recipient,sponsor:!!key && !!recipient,subscribe:false,newsletterProvider:'beehiiv'}));
+  route.post('/sponsor',handle(async(req,res)=>{
+    if(!key||!recipient) throw fail('Online inquiries are unavailable. Please email Detroit Hub.',503);
+    if(!publicRequest(req)) return res.json({ok:true,message:'Thank you. Your inquiry has been received for review.'});
+    const r=sponsor(req.body||{}), id=text(req.body.requestId,80,16);
+    if(!/^[a-zA-Z0-9-]+$/.test(id)) throw fail('Invalid request identifier.');
+    const message={from:'Detroit Hub <'+sender+'>',to:[recipient],reply_to:r.email,
+      subject:'[Detroit Hub sponsorship] '+r.business,
+      text:['Sponsorship inquiry only. No payment or placement has been confirmed.',
+        'Business: '+r.business,'Contact: '+r.name,'Email: '+r.email,'Website: '+r.businessUrl,
+        'Requested offer: '+r.package,'Preferred start: '+(r.startDate||'Flexible'),
+        'Promotion details: '+r.details,'Inquiry reference: '+id].join('\n\n')};
+    await resend('/emails','POST',message,'hub-sponsor/'+id);
+    res.json({ok:true,message:'Thank you. Your inquiry has been emailed to Detroit Hub. We will reply to discuss availability; no placement is booked yet.'});
+  }));
   route.post('/report',handle(async(req,res)=>{
     if(!key||!recipient) throw fail('Online reports are unavailable. Please email the editor.',503);
     if(!publicRequest(req)) return res.json({ok:true,message:'Thank you. Your report has been received for review.'});
@@ -85,4 +111,4 @@ function router({env=process.env, fetcher=fetch, now=()=>Date.now(), requestDela
   });
   return route;
 }
-module.exports={router,report};
+module.exports={router,report,sponsor};
